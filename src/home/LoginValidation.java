@@ -62,6 +62,7 @@ public class LoginValidation extends HttpServlet {
 					response.sendRedirect("mainpage.jsp");
 				}
 			}
+			response.sendRedirect("index.jsp");
 		}catch (Exception e){
 			e.printStackTrace();
 		}		
