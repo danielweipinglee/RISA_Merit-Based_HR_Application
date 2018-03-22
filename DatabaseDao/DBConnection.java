@@ -17,8 +17,7 @@ public class DBConnection {
 			Class.forName("com.mysql.jdbc.Driver");
 			
 			// get a hold of the driver class
-		
-			connect = DriverManager.getConnection(url, "root", "Under18S");
+			connect = DriverManager.getConnection(url, "root", "??????");
 		 } 
 		catch (ClassNotFoundException e) {
 			 
@@ -27,9 +26,8 @@ public class DBConnection {
 			 
 		 } 
 		if (connect != null) {
-			 System.out.println("Connection was succeful");
-		 }
-		 
+			 System.out.println("Connection was successful");
+		 }	 
 		 return connect;
 	}
 

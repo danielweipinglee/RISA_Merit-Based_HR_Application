@@ -28,7 +28,7 @@ public class DatabaseDao {
 		try {
 			Connection connection = DBConnection.getconnectionToDatabase();
 			
-			String selectString = "SELECT R.ID, StudentPassword, Username FROM risa_hr.studentpassword R ,risa_hr.student S " +
+			String selectString = "SELECT R.ID, UserPassword, Username FROM risa_hr.userPassword R ,risa_hr.student S " + 
 					"where R.ID = S.ID";
 			
 			Statement statement = connection.createStatement();
@@ -38,7 +38,7 @@ public class DatabaseDao {
 			while(set.next()) {
 				dataset = new DataSet();
 				dataset.setId(set.getInt("ID"));
-				dataset.setPassword(set.getString("StudentPassword"));
+				dataset.setPassword(set.getString("UserPassword"));
 				dataset.setUserName(set.getString("Username"));
 				datasets.add(dataset);
 			} 
