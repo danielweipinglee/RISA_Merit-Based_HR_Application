@@ -11,16 +11,18 @@ import Data.DataSet;
 
 public class DatabaseDao {
 	
-	private List<DataSet> datasets ;
+	// List of all the row that were retrieved from the database.
+	private List<DataSet> mDatasets ;
 	
 	public DatabaseDao(){
-		datasets = new ArrayList<>();
+		mDatasets = new ArrayList<>();
 	};
 	
 	public List<DataSet> getData() {
-		return datasets;
+		return mDatasets;
 	}
 	
+	// Executes the select query and then stores it into mDatasets.
 	public void getInfomation(){
 		
 		DataSet dataset = null;
@@ -40,7 +42,7 @@ public class DatabaseDao {
 				dataset.setId(set.getInt("ID"));
 				dataset.setPassword(set.getString("UserPassword"));
 				dataset.setUserName(set.getString("Username"));
-				datasets.add(dataset);
+				mDatasets.add(dataset);
 			} 
 		}	
 		catch (SQLException e) {
