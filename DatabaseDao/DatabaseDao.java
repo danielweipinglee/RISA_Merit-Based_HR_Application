@@ -30,8 +30,9 @@ public class DatabaseDao {
 		try {
 			Connection connection = DBConnection.getconnectionToDatabase();
 			
-			String selectString = "SELECT R.ID, UserPassword, Username FROM risa_hr.userPassword R ,risa_hr.student S " + 
-					"where R.ID = S.ID";
+			String selectString = "SELECT  student.ID,  userpassword.UserPassword, student.Username, accountstatus.Status from userpassword \n" + 
+					"Join student on userpassword.ID=student.ID\n" + 
+					"join accountstatus on accountstatus.ID = student.ID;";
 			
 			Statement statement = connection.createStatement();
 			
@@ -42,6 +43,7 @@ public class DatabaseDao {
 				dataset.setId(set.getInt("ID"));
 				dataset.setPassword(set.getString("UserPassword"));
 				dataset.setUserName(set.getString("Username"));
+				dataset.setStatus(set.getString("Status"));
 				mDatasets.add(dataset);
 			} 
 		}	

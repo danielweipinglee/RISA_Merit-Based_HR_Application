@@ -20,6 +20,9 @@ import Regex.ValidationRegex;
 /**
  * Servlet implementation class LoginValidation
  */
+
+//TODO Delete all printIn method calls
+
 @WebServlet("/LoginValidation")
 public class LoginValidation extends HttpServlet {
 
@@ -35,24 +38,38 @@ public class LoginValidation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ValidationRegex validationRegex = new ValidationRegex();
+
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-		System.out.println(userName  + " " + password);
+		String AccountType[] = {"Active","Active CEO","Deleted","Admin"};
 		DatabaseDao dao = new DatabaseDao();
 		dao.getInfomation();
+		boolean found = false;
+		
 		for( DataSet data : dao.getData()) {
-			if(userName.equals(data.getUserName()) && password.equals(data.getPassword())) {
-				response.sendRedirect("mainpage.jsp");
-				System.out.println("done");
-			}
-			else {
-			System.out.println(data.getId() + " " + data.getPassword() +" " + data.getUserName() );
-			System.out.println(validationRegex.isValidPassword(data.getPassword()));
-			response.getWriter().append("Served at: ").append(request.getContextPath());
-			}
-		}		
+			if(userName.equals(data.getUserName()) && password.equals(data.getPassword()) ) {
+				if(AccountType[0].equals(data.getStatus())) {
+					System.out.println("done" + found);
+					found = true;
+					response.sendRedirect("mainpage.jsp");	
+				}
+				else if(AccountType[1].equals(data.getStatus())) {
+					//TODO Go to Active CEO page.
+					
+				}
+				else if(AccountType[2].equals(data.getStatus()))
+					response.sendRedirect("index_invalid.jsp");
+			
+				} else {
+					//TODO Go to Admin Page.
+				}
+			//Delete
+			System.out.println(data.getId() + " " + data.getPassword() +" " + data.getUserName() + " " + data.getStatus() );
+		}
+		
+		if(!found) {
+			response.sendRedirect("index_invalid.jsp");
+		}
 	}
 
 
@@ -65,7 +82,7 @@ public class LoginValidation extends HttpServlet {
 
 			Connection conn = DBConnection.getconnectionToDatabase();
 			Statement myStmt = conn.createStatement();
-			ResultSet myRs = myStmt.executeQuery("update risa_hr.userPassword" + 
+			ResultSet myRs = myStmt.executeQuery("update risa_hr.userPassword" + var + 
 					"Set ?" + 
 					"where ID = 1");
 			

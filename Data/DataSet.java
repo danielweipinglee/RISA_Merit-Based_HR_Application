@@ -5,7 +5,14 @@ public class DataSet {
 	private int id;
 	private String password;
 	private String userName;
+	private String status;
 
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getId() {
 		return id;
 	}
