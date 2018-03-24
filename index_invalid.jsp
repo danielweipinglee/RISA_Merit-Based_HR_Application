@@ -48,7 +48,7 @@
     <input type="text" placeholder="Enter last name" name="password" id="password" required>
     
     <label for="uname"><b>Email</b></label>
-    <input type="text" placeholder="Enter email address" name="uname" id="text1" required>
+    <input type="text" placeholder="Enter email address" name="email" id="text1" required>
     
  	<label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter username" name="uname" id="text1" required>
@@ -58,6 +58,12 @@
   	
   	<label for="psw"><b>Re-enter Password</b></label>
     <input type="password" placeholder="Re-enter password" name="psw" id="text2" required>
+    
+    <label for="psw"><b>Risa Unique Code</b></label>
+    <input type="text" placeholder="Unique Code" name="ucode" id="text2" required>
+    
+    <label for="psw"><b>Security question</b></label>
+    <input type="text" placeholder="Security question" name="security_question" id="text2" required>
   	
   	<button type="submit" >Register</button>
   	

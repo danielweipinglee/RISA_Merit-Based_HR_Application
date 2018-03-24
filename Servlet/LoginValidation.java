@@ -41,7 +41,7 @@ public class LoginValidation extends HttpServlet {
 
 		String userName = request.getParameter("username");
 		String password = request.getParameter("password");
-		String AccountType[] = {"Active","Active CEO","Deleted","Admin"};
+		String AccountType[] = {"Active","Active_CEO","Deleted","Admin"};
 		DatabaseDao dao = new DatabaseDao();
 		dao.getInfomation();
 		boolean found = false;
