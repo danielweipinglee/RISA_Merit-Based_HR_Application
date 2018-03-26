@@ -2,11 +2,9 @@ package Servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,9 +38,9 @@ public class LoginValidation extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String userName = request.getParameter("username");
-		String password = request.getParameter("password");
-		String AccountType[] = {"Active","Active_CEO","Deleted","Admin"};
+		String userName = request.getParameter("username").trim();
+		String password = request.getParameter("password").trim();
+		String AccountType[] = {"Active","Active_CEO","Deleted","Admin","Active_Hr", "Active_Employee"};
 		DBLoginIn loginIn = new DBLoginIn();
 		
 		try {
@@ -51,13 +49,16 @@ public class LoginValidation extends HttpServlet {
 				if(AccountType[0].equals(loginIn.getmAccountType())) {
 					response.sendRedirect("mainpage.jsp");	
 				}
-				else if(AccountType[1].equals(loginIn.getmAccountType())) {
+				else if(AccountType[1].equals(loginIn.getmAccountType()) || AccountType[4].equals(loginIn.getmAccountType()) ) {
 					//TODO Go to Active CEO page.
+					System.out.println("Active_CEO or hr");
 				}
-				else if(AccountType[2].equals(loginIn.getmAccountType())) {
-					response.sendRedirect("index_invalid.jsp");
+
+				else if(AccountType[5].equals(loginIn.getmAccountType())) {
+					response.sendRedirect("Employee");
 				} else {
 					//TODO Go to Admin Page.
+					System.out.println("Admin");
 				}
 			}
 			else {

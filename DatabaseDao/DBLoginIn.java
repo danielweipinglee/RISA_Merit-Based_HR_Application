@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 public class DBLoginIn {
 	
@@ -37,7 +34,9 @@ public class DBLoginIn {
 	public void getInfomation(String userName, String password) throws SQLException{
 		
 		PreparedStatement preparedStmt = null;
+		PreparedStatement preparedStmt2 = null;
 		Connection connection = null;
+
 		
 		try {
 			connection = DBConnection.getconnectionToDatabase();
@@ -46,7 +45,12 @@ public class DBLoginIn {
 					"Join student on userpassword.ID=student.ID " + 
 					"join accountstatus on accountstatus.ID = student.ID;";
 			
-			preparedStmt = connection.prepareStatement(selectQuery);			
+			String selectQuery2 = "SELECT  admin.ID, admin.Username, " + 
+					"accountstatus.Status, userpassword.UserPassword from admin " + 
+					"join accountstatus on accountstatus.ID = admin.AccountStatus_ID " + 
+					"join userpassword on userpassword.ID = admin.UserPassword_ID";
+					
+			preparedStmt = connection.prepareStatement(selectQuery);
 			ResultSet set = preparedStmt.executeQuery();
 
 			while(set.next()) {
@@ -57,7 +61,20 @@ public class DBLoginIn {
 					mId = set.getInt("ID");
 					mAccountType = set.getString("Status");
 					mFound = true;
-					System.out.println(mAccountType);
+				}
+			}
+
+			preparedStmt2 = connection.prepareStatement(selectQuery2);
+			ResultSet set2 = preparedStmt2.executeQuery();
+			while(set2.next()) {
+				System.out.println("set");
+				mPassword = set2.getString("UserPassword");
+				mUserName = set2.getString("Username");
+
+				if(mUserName.equals(userName) && mPassword.equals(password)) {
+					mId = set2.getInt("ID");
+					mAccountType = set2.getString("Status");			
+					mFound = true;
 				}
 			}
 		}	
@@ -65,6 +82,7 @@ public class DBLoginIn {
 		catch (SQLException e) {
 		//TODO write an Exception
 		}
+		
 		finally {
 
 			if (preparedStmt != null) {
