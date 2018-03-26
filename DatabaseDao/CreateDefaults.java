@@ -9,38 +9,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import Data.DataSet;
-
 public class CreateDefaults {
 
-	
-	// List of all the row that were retrieved from the database.
 	public CreateDefaults() {
 		// TODO Auto-generated constructor stub
 	};
-	
 	// Executes the select query and then stores it into mDatasets.
-	public void getInfomation(){
+	public void getInfomation() throws SQLException{
 		
+		PreparedStatement preparedStmt = null;
+		Connection connection = null;
 
 		try {
-			Connection connection = DBConnection.getconnectionToDatabase();
+			connection = DBConnection.getconnectionToDatabase();
 			
-			String updateQuery = "update userpassword Set SecurityAnswer= ? " + 
-					"where ID = ? ";
-			String updateQuery2 = "update student Set LegalFirstName = ?, LegalLastName=?" + 
-					"where ID = ?";
+			String insertQuery = "insert into risa_hr.student " +
+					"values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
-		    PreparedStatement preparedStmt = connection.prepareStatement(updateQuery);
-		    preparedStmt.setString(1, "random");
-		    preparedStmt.setInt(2, 2);
+			preparedStmt = connection.prepareStatement(insertQuery);
+			preparedStmt.setInt(1, 7);
+			preparedStmt.setInt(1, 00000000);
+			preparedStmt.setString(2, "N/A");
+			preparedStmt.setString(3, "N/A");
+			preparedStmt.setString(2, "N/A");
+			preparedStmt.setString(3, "N/A");
+			preparedStmt.setString(2, "N/A");
+			preparedStmt.setString(3, "N/A");
+			preparedStmt.setInt(1, 11);
+			preparedStmt.setString(2, "N/A");
+			preparedStmt.setInt(1, 11);
 
-		    preparedStmt.executeUpdate();
-			//TODO another PreparedStatment
-		    
-		    connection.close();
+			preparedStmt.executeUpdate();
 	
 		}	
 		catch (SQLException e) {
 		
+		}
+		finally {
+
+			if (preparedStmt != null) {
+				preparedStmt.close();
+			}
+
+			if (connection != null) {
+				connection.close();
+			}
+		}
 	}
+}
+		
+		
