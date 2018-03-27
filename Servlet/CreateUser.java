@@ -30,6 +30,18 @@ public class CreateUser extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String firstName = "fisrtName";
+		String lastName = "lastName";
+		int uniqueCode = 11111111;
+		
+		CreateDefaults createAccount = new CreateDefaults();
+		
+		try {
+			createAccount.getInfomation(firstName, lastName, uniqueCode);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	/**
