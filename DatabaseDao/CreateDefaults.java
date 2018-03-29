@@ -13,51 +13,98 @@ public class CreateDefaults {
 	// Executes the select query and then stores it into mDatasets.
 	public void getInfomation(String firstName, String lastName, int code) throws SQLException{
 		
-		PreparedStatement preparedStmt = null;
-		PreparedStatement preparedStmt2 = null;
+		PreparedStatement studentStmt = null;
+		PreparedStatement countStmt = null;
+		PreparedStatement countStmt2 = null;
+		PreparedStatement countStmt3 = null;
+		PreparedStatement collegeStmt = null;
+		PreparedStatement certificationStmt = null;
+		
 		Connection connection = null;
 
 		try {
 			connection = DBConnection.getconnectionToDatabase();
-			String CountQuery = "select count(ID) as CountTotal from risa_hr.student";
-			String insertQuery = "insert into risa_hr.student " +
-					"values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String countStudent = "select count(ID) as CountTotal from risa_hr.student";
+			String countCollege = "select count(ID) as CountTotal from risa_hr.studentcollege";
+			String countCertification = "select count(ID) as CountTotal from risa_hr.studentcertification";
+			String studentQuery = "insert into risa_hr.student " +
+									"values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String collegeQuery = "insert risa_hr.studentcollege values(?, ?, ?, ?, ?, ?, ?, ?)";
+			String certificationQuery = "insert risa_hr.studentcertification values(?, ?, ?, ?, ?)"; 
 			
-			//String insert risa_hr.userpassword values(8, 'asdfasfas', 'asdfafas', 3)
-			preparedStmt2 = connection.prepareStatement(CountQuery);
-			ResultSet set = preparedStmt2.executeQuery();
-			set.next();
+			countStmt = connection.prepareStatement(countStudent);
+			ResultSet countSet = countStmt.executeQuery();
+			countSet.next();
+			int studentID = countSet.getInt("CountTotal") + 1;
 			
+			countStmt2 = connection.prepareStatement(countCollege);
+			ResultSet countSet2 = countStmt2.executeQuery();
+			countSet2.next();
+			int collegeID = countSet2.getInt("CountTotal") + 1;
 			
-			int count = set.getInt("CountTotal") + 1;
-			System.out.println(count);
-			preparedStmt = connection.prepareStatement(insertQuery);
+			countStmt3 = connection.prepareStatement(countCertification);
+			ResultSet countSet3 = countStmt3.executeQuery();
+			countSet3.next();
+			int certificationID = countSet3.getInt("CountTotal") + 1;
+						
+			
+			studentStmt = connection.prepareStatement(studentQuery);
+			studentStmt.setInt(1, studentID);
+			studentStmt.setInt(2, code);
+			studentStmt.setString(3, firstName);
+			studentStmt.setString(4, lastName);
+			studentStmt.setString(5, "N/A");
+			studentStmt.setString(6, "N/A");
+			studentStmt.setString(7, "N/A");
+			studentStmt.setString(8, "N/A");
+			studentStmt.setInt(9, 0);
+			studentStmt.setString(10, "N/A");
+			studentStmt.setInt(11, 1);
+			studentStmt.setInt(12, 0);
+			studentStmt.executeUpdate();
 
-			preparedStmt.setInt(1, count);
-			preparedStmt.setInt(2, code);
-			preparedStmt.setString(3, firstName);
-			preparedStmt.setString(4, lastName);
-			preparedStmt.setString(5, "N/A");
-			preparedStmt.setString(6, "N/A");
-			preparedStmt.setString(7, "N/A");
-			preparedStmt.setString(8, "N/A");
-			preparedStmt.setInt(9, count);
-			preparedStmt.setString(10, "N/A");
-			preparedStmt.setInt(11, 2);
-			System.out.println("insert");
-			preparedStmt.executeUpdate();
-	
+			collegeStmt = connection.prepareStatement(collegeQuery);
+			collegeStmt.setInt(1, collegeID);
+			collegeStmt.setInt(2, studentID);
+			collegeStmt.setInt(3, 0);
+			collegeStmt.setInt(4, 0);
+			collegeStmt.setInt(5, 0);
+			collegeStmt.setInt(6, 0);
+			collegeStmt.setString(7, "N/A");
+			collegeStmt.setString(8, "0000");
+			collegeStmt.executeUpdate();
+			
+			certificationStmt = connection.prepareStatement(certificationQuery);
+			certificationStmt.setInt(1, certificationID);
+			certificationStmt.setInt(2, 0);
+			certificationStmt.setString(3, "0000");
+			certificationStmt.setInt(4,studentID);
+			certificationStmt.setInt(5, 0);
+			certificationStmt.executeUpdate();
+		
 		}	
 		catch (SQLException e) {
 		
 		}
 		finally {
 
-			if (preparedStmt != null) {
-				preparedStmt.close();
+			if (studentStmt != null) {
+				studentStmt.close();
 			}
-			if (preparedStmt2 != null) {
-				preparedStmt.close();
+			if (countStmt != null) {
+				countStmt.close();
+			}
+			if (countStmt2 != null) {
+				countStmt2.close();
+			}
+			if (countStmt3 != null) {
+				countStmt3.close();
+			}
+			if (collegeStmt != null) {
+				collegeStmt.close();
+			}
+			if (certificationStmt != null) {
+				certificationStmt.close();
 			}
 			if (connection != null) {
 				connection.close();
