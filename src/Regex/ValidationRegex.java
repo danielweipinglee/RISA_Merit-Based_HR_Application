@@ -1,0 +1,29 @@
+package Regex;
+import java.util.regex.*;  
+
+public class ValidationRegex {
+	
+	private Pattern password;
+	private Pattern email;
+	
+	public ValidationRegex() {
+		/* (?=.{10}) Implies that the password has to be at least 10 char.
+		 * (?=.*\\p{Upper}) Implies that the password has to at least have 1 Uppercase char.
+		 * (?=.*\\p{Lower}) Implies that the password has to at least have 1 Lowercase char.
+		 * (?=.*\\d) Implies that the password has to at least have 1 number.
+		 * \\w+ Implies that the string can have any characters that are in [a-zA-Z_0-9].
+		 * @(ttu)\\.(edu) Implies that the end of the string has to be @ttu.edu
+		 */
+		this.password = Pattern.compile("^(?=.{10})(?=.*\\p{Upper})(?=.*\\p{Lower})(?=.*\\d)\\w+");
+		this.email = Pattern.compile("^\\w+\\.\\w+@(ttu)\\.(edu)");
+	}
+	
+	// password
+	public boolean isValidPassword(String UserPassword) {
+		return password.matcher(UserPassword).matches(); 
+	}
+	// email
+	public boolean isValidEmail(String Useremail) {
+		return email.matcher(Useremail).matches();
+	}
+}
