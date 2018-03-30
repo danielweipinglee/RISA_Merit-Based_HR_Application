@@ -37,18 +37,17 @@ public class DBLoginIn {
 		PreparedStatement preparedStmt2 = null;
 		Connection connection = null;
 
-		
+		System.out.println(userName);
 		try {
 			connection = DBConnection.getconnectionToDatabase();
 			
-			String selectQuery = "SELECT  student.ID,  userpassword.UserPassword, student.Username, accountstatus.Status from userpassword " + 
-					"Join student on userpassword.ID=student.ID " + 
-					"join accountstatus on accountstatus.ID = student.ID;";
+			String selectQuery = "SELECT  student.ID,  userpassword.UserPassword, student.Username, accountstatus.Status from student " +
+					"inner Join userpassword on userpassword.ID=student.UserPassword_ID " +
+					"inner join accountstatus on accountstatus.ID = student.AccountStatus_ID";
 			
-			String selectQuery2 = "SELECT  admin.ID, admin.Username, " + 
-					"accountstatus.Status, userpassword.UserPassword from admin " + 
-					"join accountstatus on accountstatus.ID = admin.AccountStatus_ID " + 
-					"join userpassword on userpassword.ID = admin.UserPassword_ID";
+			String selectQuery2 = "SELECT  admin.ID,  userpassword.UserPassword, admin.Username, accountstatus.Status from admin " +
+					"inner Join userpassword on userpassword.ID=admin.UserPassword_ID " +
+					"inner join accountstatus on accountstatus.ID = admin.AccountStatus_ID";
 					
 			preparedStmt = connection.prepareStatement(selectQuery);
 			ResultSet set = preparedStmt.executeQuery();
@@ -61,6 +60,7 @@ public class DBLoginIn {
 					mId = set.getInt("ID");
 					mAccountType = set.getString("Status");
 					mFound = true;
+					System.out.println(mUserName);
 				}
 			}
 
