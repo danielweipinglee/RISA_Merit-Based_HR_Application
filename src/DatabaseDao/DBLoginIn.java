@@ -40,8 +40,6 @@ public class DBLoginIn {
 		
 		try {
 			connection = DBConnection.getconnectionToDatabase();
-			System.out.println(userName);
-			System.out.println(password);
 			
 			String selectQuery = "SELECT  userpassword.*, student.*, accountstatus.* from student " +
 					"inner Join userpassword on userpassword.ID=student.UserPassword_ID " +
@@ -49,8 +47,8 @@ public class DBLoginIn {
 			
 			String selectQuery2 = "SELECT  admin.ID, admin.Username, " + 
 					"accountstatus.Status, userpassword.UserPassword from admin " + 
-					"join accountstatus on accountstatus.ID = admin.AccountStatus_ID " + 
-					"join userpassword on userpassword.ID = admin.UserPassword_ID";
+					"inner join accountstatus on accountstatus.ID = admin.AccountStatus_ID " + 
+					"inner join userpassword on userpassword.ID = admin.UserPassword_ID";
 					
 			preparedStmt = connection.prepareStatement(selectQuery);
 			ResultSet set = preparedStmt.executeQuery();
@@ -68,7 +66,6 @@ public class DBLoginIn {
 			preparedStmt2 = connection.prepareStatement(selectQuery2);
 			ResultSet set2 = preparedStmt2.executeQuery();
 			while(set2.next()) {
-				System.out.println("set");
 				mPassword = set2.getString("UserPassword");
 				mUserName = set2.getString("Username");
 

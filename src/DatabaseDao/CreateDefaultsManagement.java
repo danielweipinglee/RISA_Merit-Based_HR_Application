@@ -19,6 +19,7 @@ public class CreateDefaultsManagement {
 		PreparedStatement organizationStmt = null;
 
 		Connection connection = null;
+		
 
 		try {
 			connection = DBConnection.getconnectionToDatabase();
@@ -27,6 +28,7 @@ public class CreateDefaultsManagement {
 			String adminQuery = "insert into admin values(?, ?, ?, ?, ?, ?, ?, ?)"; 
 			String prganizationQuery = "insert into risa_hr.organization values(?,?)";
 
+			
 			countStmt = connection.prepareStatement(countAdmin);
 			ResultSet countSet = countStmt.executeQuery();
 			countSet.next();
@@ -42,8 +44,8 @@ public class CreateDefaultsManagement {
 			adminStmt.setString(2, code);
 			adminStmt.setString(3, firstName);
 			adminStmt.setString(4, lastName);
-			adminStmt.setInt(5, 1);
-			adminStmt.setInt(6, 7);
+			adminStmt.setInt(5, 0);
+			adminStmt.setInt(6, 0);
 			adminStmt.setString(7, "N/A");
 			adminStmt.setInt(8, 3);
 			adminStmt.executeUpdate();

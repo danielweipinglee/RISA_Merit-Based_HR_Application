@@ -1,20 +1,18 @@
 package Servlet;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DatabaseDao.DBConnection;
 import DatabaseDao.DBLoginIn;
 import Regex.ValidationRegex;
+import Register.RegisterStudent;
 
 /**
  * Servlet implementation class LoginValidation
@@ -51,7 +49,7 @@ public class LoginValidation extends HttpServlet {
 				}
 				else if(AccountType[1].equals(loginIn.getmAccountType()) || AccountType[4].equals(loginIn.getmAccountType()) ) {
 					//TODO Go to Active CEO page.
-					System.out.println("Active_CEO or hr");
+					response.sendRedirect("CEO_Main.jsp");
 				}
 
 				else if(AccountType[5].equals(loginIn.getmAccountType())) {
@@ -69,34 +67,12 @@ public class LoginValidation extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
-
-
-	protected int getQuestionID(String squestion) {//to get the security question id from the selected value
-		int id = 0;
-		try {
-			String sql = "select ID from securityquestion where SecurityQuestion = ?;";
-			Connection conn = DBConnection.getconnectionToDatabase();
-			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, squestion);
-			
-		    ResultSet resultset = statement.executeQuery();
-		    while ( resultset.next() )
-		    {
-		      id =  resultset.getInt("ID") ;
-		    }
-		    resultset.close();
-		    statement.close();
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-		}	
-		return id;
-	}
 		/**
 		 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 		 */
-		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+		protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			String exists = null;
+			
 				try {
 				String fname = request.getParameter("fname");
 				String lname = request.getParameter("lname");
@@ -104,51 +80,55 @@ public class LoginValidation extends HttpServlet {
 				String username = request.getParameter("username");
 				String password = request.getParameter("password");
 				String password2 = request.getParameter("password2");
-				String risacode = request.getParameter("risacode");
 				String answer = request.getParameter("answer");
+				String risacode = request.getParameter("risacode");
+				String risaposition = request.getParameter("risaposition");
 				String squestion = request.getParameter("securityquestion");
-				int squestionID = getQuestionID(squestion); //need id from selected question
-
+				
 				ValidationRegex check = new ValidationRegex();
-				if (check.isValidEmail(email) && check.isValidPassword(password) && password.equals(password2)) {
-
-					 String sql = "update risa_hr.student, risa_hr.userpassword " + 
-							"set student.Email = ?, " +
-							"student.Username = ?, " + 
-							"userpassword.UserPassword = ?, " +
-							"userpassword.SecurityAnswer = ?, "  +
-							"userpassword.SecurityQuestion_ID = ? " + 
-							"where student.RISACode = ? " + 
-							"and student.LegalFirstName = ? " + 
-							"and student.LegalLastName = ? " +
-							"and userpassword.ID = student.ID;";
-
-					Connection conn = DBConnection.getconnectionToDatabase();
-					PreparedStatement statement = conn.prepareStatement(sql);
-					
-					statement.setString(1, email);
-					statement.setString(2, username);
-					statement.setString(3, password);
-					statement.setString(4, answer);
-					statement.setInt(5, squestionID);
-					statement.setString(6, risacode);
-					statement.setString(7, fname);
-					statement.setString(8, lname);
-					
-					
-					statement.executeUpdate();
-					statement.close();
-					
-					 
-					response.sendRedirect("index.jsp");	
+				RegisterStudent registerStudent = new RegisterStudent();
+				exists = registerStudent.AccountExists(fname,lname,risacode);
+				int squestionID = registerStudent.getQuestionID(squestion);
+			    
+			    if(exists == null) {
+					request.setAttribute("errorMsg", "Risa code with first and last name not found.");
+					request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);	
+			    }
+				
+			    else if(check.isValidEmail(email) == false) {
+					request.setAttribute("errorMsg", "Please enter a valid email address. TTU email should be used.");
+					request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
+	            }
+				else if(check.isValidPassword(password) == false) {
+					request.setAttribute("errorMsg", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 8 characters long.");
+					request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
 				}
+				else if(!password.equals(password2)) {
+					request.setAttribute("errorMsg", "Passwords entered are different from one another.");
+					request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
+				}
+				else if(squestion.equals("Default")) {
+					request.setAttribute("errorMsg", "No security question selected.");
+					request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);					
+				}
+	
 				else {
-					response.sendRedirect("register_invalid.jsp");	
+
+					registerStudent.insertThenUpdate(fname,lname,email,username,password,answer,
+							risacode,risaposition,squestion,squestionID);
+					
+					if(registerStudent.isSuccess()) {
+						request.setAttribute("success", "Successfully Registered.");
+						RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+				        rd.forward(request, response);
+					}
+					else {
+						request.setAttribute("errorMsg", "Error Occured. Please try again later.");
+						request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
+					}
 				}
-				
-				}catch (Exception e){
-					e.printStackTrace();
-				} 
-				
+		
+				}catch (SQLException e){
+				} 		
 		}	
-	}
+}

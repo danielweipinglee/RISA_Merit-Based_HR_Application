@@ -21,7 +21,7 @@ public class CreateDefaults {
 		PreparedStatement certificationStmt = null;
 		
 		Connection connection = null;
-		System.out.println(firstName);
+		
 
 		try {
 			connection = DBConnection.getconnectionToDatabase();
