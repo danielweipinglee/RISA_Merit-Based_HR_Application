@@ -37,17 +37,20 @@ public class DBLoginIn {
 		PreparedStatement preparedStmt2 = null;
 		Connection connection = null;
 
-		System.out.println(userName);
+		
 		try {
 			connection = DBConnection.getconnectionToDatabase();
+			System.out.println(userName);
+			System.out.println(password);
 			
-			String selectQuery = "SELECT  student.ID,  userpassword.UserPassword, student.Username, accountstatus.Status from student " +
+			String selectQuery = "SELECT  userpassword.*, student.*, accountstatus.* from student " +
 					"inner Join userpassword on userpassword.ID=student.UserPassword_ID " +
 					"inner join accountstatus on accountstatus.ID = student.AccountStatus_ID";
 			
-			String selectQuery2 = "SELECT  admin.ID,  userpassword.UserPassword, admin.Username, accountstatus.Status from admin " +
-					"inner Join userpassword on userpassword.ID=admin.UserPassword_ID " +
-					"inner join accountstatus on accountstatus.ID = admin.AccountStatus_ID";
+			String selectQuery2 = "SELECT  admin.ID, admin.Username, " + 
+					"accountstatus.Status, userpassword.UserPassword from admin " + 
+					"join accountstatus on accountstatus.ID = admin.AccountStatus_ID " + 
+					"join userpassword on userpassword.ID = admin.UserPassword_ID";
 					
 			preparedStmt = connection.prepareStatement(selectQuery);
 			ResultSet set = preparedStmt.executeQuery();
@@ -55,12 +58,10 @@ public class DBLoginIn {
 			while(set.next()) {
 				mPassword = set.getString("UserPassword");
 				mUserName = set.getString("Username");
-				
 				if(mUserName.equals(userName) && mPassword.equals(password)) {
 					mId = set.getInt("ID");
 					mAccountType = set.getString("Status");
 					mFound = true;
-					System.out.println(mUserName);
 				}
 			}
 

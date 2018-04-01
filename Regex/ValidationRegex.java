@@ -15,7 +15,7 @@ public class ValidationRegex {
 		 * @(ttu)\\.(edu) Implies that the end of the string has to be @ttu.edu
 		 */
 		this.password = Pattern.compile("^(?=.{10})(?=.*\\p{Upper})(?=.*\\p{Lower})(?=.*\\d)\\w+");
-		this.email = Pattern.compile("^\\w+\\.\\w+@(ttu)\\.(edu)");
+		this.email = Pattern.compile("^\\w+\\.?\\w+@(ttu)\\.(edu)");
 	}
 	
 	// password

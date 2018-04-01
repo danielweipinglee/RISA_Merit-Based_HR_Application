@@ -11,7 +11,7 @@ public class CreateDefaults {
 		// TODO Auto-generated constructor stub
 	};
 	// Executes the select query and then stores it into mDatasets.
-	public void getInfomation(String firstName, String lastName, int code) throws SQLException{
+	public void getInfomation(String firstName, String lastName, String code) throws SQLException{
 		
 		PreparedStatement studentStmt = null;
 		PreparedStatement countStmt = null;
@@ -21,6 +21,7 @@ public class CreateDefaults {
 		PreparedStatement certificationStmt = null;
 		
 		Connection connection = null;
+		System.out.println(firstName);
 
 		try {
 			connection = DBConnection.getconnectionToDatabase();
@@ -46,11 +47,10 @@ public class CreateDefaults {
 			ResultSet countSet3 = countStmt3.executeQuery();
 			countSet3.next();
 			int certificationID = countSet3.getInt("CountTotal") + 1;
-						
-			
+									
 			studentStmt = connection.prepareStatement(studentQuery);
 			studentStmt.setInt(1, studentID);
-			studentStmt.setInt(2, code);
+			studentStmt.setString(2, code);
 			studentStmt.setString(3, firstName);
 			studentStmt.setString(4, lastName);
 			studentStmt.setString(5, "N/A");
