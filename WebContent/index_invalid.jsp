@@ -16,8 +16,7 @@
     <img src="images/Black.png" alt="pic" class="pic">
   </div>
   <div class="container">
-  <label><b>The information you input is invalid. </b></label>
-
+  	<label><b>The information you input is invalid. </b></label>
     <label for="uname"><b>Username</b></label>
     <input type="text" placeholder="Enter username" name="username" id="username" required>
 
@@ -31,20 +30,22 @@
   </div>
   <div class="container">
   	<center><span class="message">Not Registered? <a href="#">Register</a></span><br/><br/>
-  	<span class="forgetID">Forgot <a href="#">ID or Password?</a></span></center>
+  	<span class="forgetID">HR or CEO? <a href="RegisterHRCEO.jsp">Register Here</a></span><br/><br/>
+  	<span class="forgetID">Employer? <a href="RegisterEmployer.jsp">Register Here</a></span><br/><br/>
+  	<span class="forgetID">Forgot <a href="forgotpassword1.jsp">ID or Password?</a></span></center>
   </div>
-  </form>
-  
+  </form> 
   
   <form class="register-form" method="post" action="LoginValidation">
-  
-  <div class="container-main">
+  <div class="imgcontainer">
     <img src="images/Black.png" alt="pic" class="pic">
   </div>
   <div class="container">
-	<label><b>The information you input is invalid. Email should be ttu email. Password needs at least one
-	lower and uppercase letter with at least one number. </b></label><br>
-	
+
+		
+    <label for="psw"><b>Risa Unique Code</b></label>
+    <input type="text" placeholder="Unique code" name="risacode" id="risacode" required>
+    
   	<label for="uname"><b>First Name</b></label>
     <input type="text" placeholder="Enter first name" name="fname" id="fname" required>
     
@@ -63,8 +64,8 @@
   	<label for="psw"><b>Re-enter Password</b></label>
     <input type="password" placeholder="Re-enter password" name="password2" id="password2" required>
     
-    <label for="psw"><b>Risa Unique Code</b></label>
-    <input type="text" placeholder="Unique code" name="risacode" id="risacode" required>
+    <label for="position"><b>Risa Position</b></label>
+    <input type="text" placeholder="Enter Risa position" name="risaposition" id="risaposition" required>
     
     <label for="psw"><b>Security question</b></label>
     
@@ -107,8 +108,8 @@
   <script>
   $('.message a').click(function(){	
 	  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-  });
-  
+  }); 
+
   </script>
 
 </body>
