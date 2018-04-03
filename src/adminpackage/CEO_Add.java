@@ -37,7 +37,7 @@ public class CEO_Add extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String firstName = request.getParameter("legalLastName");
+		String firstName = request.getParameter("legalFirstName");
 		String lastName = request.getParameter("legalLastName");
 		String uniqueCode = request.getParameter("risaCode");
 		CreateDefaults createAccount = new CreateDefaults();
