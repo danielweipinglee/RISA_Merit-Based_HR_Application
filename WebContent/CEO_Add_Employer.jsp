@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="DatabaseDao.DBConnection" import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,7 +18,7 @@
     		<li><a href="CEO_View.jsp">View</a></li>
     		<li><a href="CEO_Update.jsp">Update</a></li>
     		<li><a href="CEO_Add.jsp">Add Student</a></li>
-    		<li><a href="CEO_Add_HR.jsp">Add HR</a></li>
+
     	</ul>
     </nav>
 	</div>		
@@ -30,19 +30,41 @@
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-      <h3>Employer Information</h3>
+      <h3>Create Account Information</h3>
     </div>
 
     <form class="w3-container" method="post" action="CEO_Add_Management" Id="employer">
       <p>
       <input class="w3-input" type="text"name="legalFirstName" id="EmployerlegalFirstName" required>
-      <label>Employer First Name</label></p>
+      <label>First Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="legalLastName" id="EmployerlegalLastName" required>
-      <label>Employer Last Name</label></p>
+      <label>Last Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="risaCode" id="EmployerRISACode" required>
-      <label>Employer RIS Code</label></p>
+      <label>RIS Code</label></p>
+      
+                </b><br>
+	<%
+    try{//for the dropdown menu
+    	Connection conn = DBConnection.getconnectionToDatabase();
+        Statement statement = conn.createStatement() ;
+        ResultSet resultset =statement.executeQuery("SELECT * FROM risa_hr.accountstatus " +
+        		"WHERE Status LIKE 'Active_%' or Status LIKE 'admin';");
+	%>
+	<br>
+    <select name="Status">
+    <%  while(resultset.next()){ %>
+            <option><%= resultset.getString("Status")%></option>
+    <% } %>
+    </select>
+	<br>
+	<%
+       }catch(Exception e){
+          out.println(e);
+       }
+	%>
+	<br>
       
       <button type="submit" class="w3-button w3-red">Add Employer</button>
     </form>

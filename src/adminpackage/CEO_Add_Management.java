@@ -1,6 +1,8 @@
 package adminpackage;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,6 +66,17 @@ public class CEO_Add_Management extends HttpServlet {
 				statusID = 5;
 			}
 			createAccount.InputManagement(firstName, lastName, uniqueCode, statusID);
+
+
+			if(createAccount.isSuccessful()) {
+					request.setAttribute("success", "Successfully Registered");
+					RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
+			        rd.forward(request, response);
+			}
+			else {
+					request.setAttribute("errorMsg", "Error Occured. Please try again later.");
+					request.getRequestDispatcher("/CEO_Add_Employer.jsp").forward(request, response);
+			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception

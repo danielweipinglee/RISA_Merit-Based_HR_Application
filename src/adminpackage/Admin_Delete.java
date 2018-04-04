@@ -44,7 +44,6 @@ public class Admin_Delete {
 		PreparedStatement Stmt = null;
 		String exists = null;
 		Connection conn = null;
-		System.out.println(fname + " " + lname +" " + risacode);
 		try {
 			conn = DBConnection.getconnectionToDatabase();
 			Stmt = conn.prepareStatement("SELECT RISACode FROM risa_hr.student where RISACode = ? "

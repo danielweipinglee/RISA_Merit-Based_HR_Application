@@ -18,7 +18,6 @@
     		<li><a href="admin_View.jsp">View</a></li>
     		<li><a href="admin_Update.jsp">Update</a></li>
     		<li><a href="admin_Add.jsp">Add Student</a></li>
-    		<li><a href="admin_Add_Employer.jsp">Add Employer</a></li>
     		<li><a href="admin_Delete_Student.jsp">Delete Student Account</a></li>
     		<li><a href="admin_Delete_CEOandHRandEmployer.jsp">Delete CEO, HR, or Employer Account</a></li>
     	</ul>
@@ -32,19 +31,19 @@
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-      <h3>HR Information</h3>
+      <h3>Create Non-Student Account Information</h3>
     </div>
 
     <form class="w3-container" method="post" action="CEO_Add_Management">
       <p>
       <input class="w3-input" type="text"name="legalFirstName" id="HRlegalFirstName" required>
-      <label>HR First Name</label></p>
+      <label>First Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="legalLastName" id="HRlegalLastName" required>
-      <label>HR Last Name</label></p>
+      <label>Last Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="risaCode" id="HRRISACode" required>
-      <label>HR RIS Code</label></p>
+      <label>RIS Code</label></p>
       
           </b><br>
 	<%

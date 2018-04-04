@@ -7,9 +7,15 @@ import java.sql.ResultSet;
 
 public class CreateDefaults {
 
+	private boolean successful = false;
+	
 	public CreateDefaults() {
 		// TODO Auto-generated constructor stub
 	};
+	
+	public boolean isSuccessful() {
+		return successful;
+	}
 	// Executes the select query and then stores it into mDatasets.
 	public void getInfomation(String firstName, String lastName, String code) throws SQLException{
 		
@@ -81,6 +87,8 @@ public class CreateDefaults {
 			certificationStmt.setInt(4,studentID);
 			certificationStmt.setInt(5, 0);
 			certificationStmt.executeUpdate();
+			
+			successful = true;
 		
 		}	
 		catch (SQLException e) {

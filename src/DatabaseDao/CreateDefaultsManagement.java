@@ -6,10 +6,15 @@ import java.sql.ResultSet;
 
 public class CreateDefaultsManagement {
 
+	private boolean successful = false;
 	public CreateDefaultsManagement() {
 			// TODO Auto-generated constructor stub
 		};
-
+		
+	
+	public boolean isSuccessful() {
+		return successful;
+	}
 	// Executes the select query and then stores it into mDatasets.
 	public void InputManagement(String firstName, String lastName, String code, int statusID) throws SQLException {
 
@@ -54,6 +59,8 @@ public class CreateDefaultsManagement {
 			organizationStmt.setInt(1, organizationID);
 			organizationStmt.setString(2, "N/A");
 			organizationStmt.executeUpdate();
+			
+			successful = true;
 
 
 		} catch (SQLException e) {

@@ -18,7 +18,6 @@
     		<a href="CEO_View.jsp">View /</a>
     		<a href="CEO_Update.jsp">Update /</a>
     		<a href="CEO_Add.jsp">Add Student /</a>
-    		<a href="CEO_Add_HR.jsp">Add HR /</a>
     		<a href="CEO_Add_Employer.jsp">Add Employer</a>
     	</ul>
     </nav>
