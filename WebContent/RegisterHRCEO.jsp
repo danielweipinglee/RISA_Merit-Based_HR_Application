@@ -10,32 +10,29 @@
 <body>
 <body background="images/background.png">
 <div class="container-main">
-  <form class="login-form" method="post" action="RegisterHRCEO">
+  <form class="login-form" method="post" action="RegisterHRCEOServlet">
   <div class="imgcontainer">
     <img src="images/Black.png" alt="pic" class="pic">
   </div>
   <div class="container">
-
+	<div style="color: #FF0000;">${error}</div><br>
   	<label for="psw"><b>Risa Unique Code</b></label>
-    <input type="text" placeholder="Unique code" name="risacode" id="risacode" required>
+    <input type="text" placeholder="Unique code" name="risacode" id="risacode" value="<%=request.getParameter("risacode")!=null?request.getParameter("risacode"):""%>" required>
     
      <label for="psw"><b>Select Role</b></label><br/>
-     <select>
-	  <option value="HR">HR</option>
-	  <option value="CEO">CEO</option>
+     <select name="role" id="role" name="role">
+	  <option value="Active_HR">Active_HR</option>
+	  <option value="Active_CEO">Active_CEO</option>
 	</select><br/><br/>
     
     <label for="uname"><b>First Name</b></label>
-    <input type="text" placeholder="Enter first name" name="fname" id="fname" required>
+    <input type="text" placeholder="Enter first name" name="fname" id="fname" value="<%=request.getParameter("fname")!=null?request.getParameter("fname"):""%>" required> 
     
     <label for="uname"><b>Last Name</b></label>
-    <input type="text" placeholder="Enter last name" name="lname" id="lname" required>
+    <input type="text" placeholder="Enter last name" name="lname" id="lname" value="<%=request.getParameter("lname")!=null?request.getParameter("lname"):""%>" required>
     
     <label for="uname"><b>Email</b></label>
-    <input type="text" placeholder="Enter email address" name="email" id="email" required>
-    
- 	<label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter username" name="username" id="username" required>
+    <input type="text" placeholder="Enter email address" name="email" id="email" value="<%=request.getParameter("email")!=null?request.getParameter("email"):""%>" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter password" name="password" id="password" required>
@@ -67,6 +64,9 @@
 	<br>
 	<label for="psw"><b>Security question answer</b></label>
   	<input type="text" placeholder="Security question answer" name="answer" id="answer" required>
+  	
+  	<label for="psw"><b>Enter organization</b></label>
+  	<input type="text" placeholder="Enter organization" name="organization" id="organization" value="<%=request.getParameter("organization")!=null?request.getParameter("organization"):""%>" required>
   	
   	<button type="submit" >Register</button>
   	
