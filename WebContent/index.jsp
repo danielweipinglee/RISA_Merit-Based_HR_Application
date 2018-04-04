@@ -31,6 +31,7 @@
   <div class="container">
   	<center><span class="message">Not Registered? <a href="#">Register</a></span><br/><br/>
   	<span class="forgetID">HR or CEO? <a href="RegisterHRCEO.jsp">Register Here</a></span><br/><br/>
+  	<span class="forgetID">Employer? <a href="RegisterEmployer.jsp">Register Here</a></span><br/><br/>
   	<span class="forgetID">Forgot <a href="forgotpassword1.jsp">ID or Password?</a></span></center>
   </div>
   </form> 

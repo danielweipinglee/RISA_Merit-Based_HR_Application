@@ -40,6 +40,8 @@ public class CEO_Add extends HttpServlet {
 		String firstName = request.getParameter("legalFirstName");
 		String lastName = request.getParameter("legalLastName");
 		String uniqueCode = request.getParameter("risaCode");
+		String string = (String)request.getAttribute("employer");
+		System.out.println(string);
 		CreateDefaults createAccount = new CreateDefaults();
 		
 		try {

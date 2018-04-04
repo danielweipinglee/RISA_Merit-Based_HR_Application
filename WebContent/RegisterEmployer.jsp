@@ -10,21 +10,20 @@
 <body>
 <body background="images/background.png">
 <div class="container-main">
-  <form class="login-form" method="post" action="RegisterHRCEOServlet">
+  <form class="login-form" method="post" action="RegisterEmployerServlet">
   <div class="imgcontainer">
     <img src="images/Black.png" alt="pic" class="pic">
   </div>
   <div class="container">
-	<div style="color: #FF0000;">${error}</div><br>
+	<div style="color: #FF0000;">${EmployerError}</div><br>
   	<label for="psw"><b>Risa Unique Code</b></label>
     <input type="text" placeholder="Unique code" name="risacode" id="risacode" value="<%=request.getParameter("risacode")!=null?request.getParameter("risacode"):""%>" required>
     
-     <label for="psw"><b>Select Role</b></label><br/>
-     <select name="role" id="role" name="role">
-	  <option value="Active_HR">Active_HR</option>
-	  <option value="Active_CEO">Active_CEO</option>
+	<label for="psw"><b>Select Role</b></label><br/>
+	<select name="role" id="role" name="role">
+	<option value="Active_Employer">Active_Employer</option>
 	</select><br/><br/>
-    
+	
     <label for="uname"><b>First Name</b></label>
     <input type="text" placeholder="Enter first name" name="fname" id="fname" value="<%=request.getParameter("fname")!=null?request.getParameter("fname"):""%>" required> 
     

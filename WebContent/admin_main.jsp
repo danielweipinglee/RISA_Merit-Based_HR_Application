@@ -15,11 +15,14 @@
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<a href="CEO_View.jsp">View /</a>
-    		<a href="CEO_Update.jsp">Update /</a>
-    		<a href="CEO_Add.jsp">Add Student /</a>
-    		<a href="CEO_Add_HR.jsp">Add HR /</a>
-    		<a href="CEO_Add_Employer.jsp">Add Employer</a>
+    		<li><a href="admin_View.jsp">View /</a></li>
+    		<li><a href="admin_Update.jsp">Update /</a></li>
+    		<li><a href="admin_Add.jsp">Add Student /</a></li>
+    		<li><a href="admin_Add_HR.jsp">Add HR /</a></li>
+    		<li><a href="admin_Add_Employer.jsp">Add Employer</a></li>
+    		<li><a href="admin_Delete_Student.jsp">Delete Student Account</a></li>
+    		<li><a href="admin_Delete_CEOandHRandEmployer.jsp">Delete CEO, HR, or Employer Account</a></li>
+    		
     	</ul>
     </nav>
 	</div>		
@@ -31,11 +34,10 @@
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-    <h1>Hi CEO, How are you doing?</h1>  
+    <h1>You are admin now, How are you doing?</h1>  
     Today's date: <%= (new java.util.Date()).toLocaleString()%> 
     
   </div>
-  
 </div>
 
 

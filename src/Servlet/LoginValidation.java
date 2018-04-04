@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DatabaseDao.DBLoginIn;
 import Regex.ValidationRegex;
@@ -38,8 +39,11 @@ public class LoginValidation extends HttpServlet {
 
 		String userName = request.getParameter("username").trim();
 		String password = request.getParameter("password").trim();
-		String AccountType[] = {"Active","Active_CEO","Deleted","Admin","Active_Hr", "Active_Employee"};
+		String AccountType[] = {"Active","Active_CEO","Deleted","admin","Active_Hr", "Active_Employee"};
 		DBLoginIn loginIn = new DBLoginIn();
+		
+		HttpSession session = request.getSession();
+		    session.setAttribute("UserName", userName);
 		
 		try {
 			loginIn.getInfomation(userName, password);
@@ -53,10 +57,15 @@ public class LoginValidation extends HttpServlet {
 				}
 
 				else if(AccountType[5].equals(loginIn.getmAccountType())) {
-					response.sendRedirect("Employee");
-				} else {
+					response.sendRedirect("mainpage.jsp");
+				} 
+				else if(AccountType[2].equals(loginIn.getmAccountType())){
+					response.sendRedirect("index_invalid.jsp");
+				} 
+				
+				else if(AccountType[3].equals(loginIn.getmAccountType())){
 					//TODO Go to Admin Page.
-					System.out.println("Admin");
+					response.sendRedirect("admin_main.jsp");
 				}
 			}
 			else {

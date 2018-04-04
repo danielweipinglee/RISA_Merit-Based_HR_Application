@@ -11,7 +11,7 @@ public class CreateDefaultsManagement {
 		};
 
 	// Executes the select query and then stores it into mDatasets.
-	public void InputManagement(String firstName, String lastName, String code) throws SQLException {
+	public void InputManagement(String firstName, String lastName, String code, int statusID) throws SQLException {
 
 		PreparedStatement adminStmt = null;
 		PreparedStatement countStmt = null;
@@ -47,7 +47,7 @@ public class CreateDefaultsManagement {
 			adminStmt.setInt(5, 0);
 			adminStmt.setInt(6, 0);
 			adminStmt.setString(7, "N/A");
-			adminStmt.setInt(8, 3);
+			adminStmt.setInt(8, statusID);
 			adminStmt.executeUpdate();
 
 			organizationStmt = connection.prepareStatement(prganizationQuery);

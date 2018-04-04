@@ -38,14 +38,32 @@ public class CEO_Add_Management extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		String Status [] = {"Active_CEO", "Active_HR", "admin", "Active_Employer"}; 
 		String firstName = request.getParameter("legalFirstName");
 		String lastName = request.getParameter("legalLastName");
 		String uniqueCode = request.getParameter("risaCode");
+		String status = request.getParameter("Status");
+		System.out.println(status);
+		int statusID = -1;
 
+	
 		CreateDefaultsManagement createAccount = new CreateDefaultsManagement();
 		
 		try {
-			createAccount.InputManagement(firstName, lastName, uniqueCode);
+			
+			if(status.equals("Active_CEO")) {
+				statusID = 0;
+			}
+			else if(status.equals("admin")) {
+				statusID = 3;
+			}
+			else if(status.equals("Active_HR")) {
+				statusID = 4;
+			}
+			else if(status.equals("Active_Employer")) {
+				statusID = 5;
+			}
+			createAccount.InputManagement(firstName, lastName, uniqueCode, statusID);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
