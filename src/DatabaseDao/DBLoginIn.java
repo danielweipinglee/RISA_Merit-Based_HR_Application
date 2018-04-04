@@ -21,6 +21,9 @@ public class DBLoginIn {
 	public boolean getFound() {
 		return mFound;
 	}
+	public String getStatus() {
+		return mAccountType;
+	}
 
 	public DBLoginIn(){
 		mId = -1;

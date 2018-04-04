@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DatabaseDao.CreateDefaults;
 import DatabaseDao.CreateDefaultsManagement;
@@ -45,11 +46,12 @@ public class CEO_Add_Management extends HttpServlet {
 		String lastName = request.getParameter("legalLastName");
 		String uniqueCode = request.getParameter("risaCode");
 		String status = request.getParameter("Status");
-		System.out.println(status);
 		int statusID = -1;
 
 	
 		CreateDefaultsManagement createAccount = new CreateDefaultsManagement();
+		HttpSession session = request.getSession(false);
+		String statusType = (String) session.getAttribute("Status");
 		
 		try {
 			
@@ -68,16 +70,32 @@ public class CEO_Add_Management extends HttpServlet {
 			createAccount.InputManagement(firstName, lastName, uniqueCode, statusID);
 
 
-			if(createAccount.isSuccessful()) {
-					request.setAttribute("success", "Successfully Registered");
+			if(statusType.equals("Active_CEO")) {			
+				
+				
+				if(createAccount.isSuccessful()) {
+					request.setAttribute("success", "Successfully Registered.");
 					RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
 			        rd.forward(request, response);
-			}
-			else {
+				}
+				else {
 					request.setAttribute("errorMsg", "Error Occured. Please try again later.");
-					request.getRequestDispatcher("/CEO_Add_Employer.jsp").forward(request, response);
+					request.getRequestDispatcher("/CEO_Add.jsp").forward(request, response);
+					}
+				}	
+			if(status.equals("admin")) {			
+				
+				System.out.println(status);
+				if(createAccount.isSuccessful()) {
+					request.setAttribute("success", "Successfully Registered.");
+					RequestDispatcher rd = request.getRequestDispatcher("/admin_main.jsp");
+			        rd.forward(request, response);
+				}
+				else {
+					request.setAttribute("errorMsg", "Error Occured. Please try again later.");
+					request.getRequestDispatcher("/admin_Add.jsp").forward(request, response);
+				}
 			}
-			
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
