@@ -8,17 +8,18 @@
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
 </head>
 <body>
-
 <header>
 	<div class="container">
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="Student_View.jsp">View</a></li>
-    		<li><a href="Student_Edit.jsp">Update</a></li>
+    		<li><a href="Employer_View.jsp">View</a></li>
+    		<li><a href="Employer_Sort.jsp">Sort</a></li>
+    		<li><a href="Employer_Search.jsp">Search</a></li>
     	</ul>
     </nav>
 	</div>		
+	
 </header>
 
 </body>

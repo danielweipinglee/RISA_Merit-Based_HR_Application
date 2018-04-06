@@ -15,10 +15,10 @@
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="admin_View.jsp">View /</a></li>
-    		<li><a href="admin_Update.jsp">Update /</a></li>
-    		<li><a href="admin_Add.jsp">Add Student /</a></li>
-    		<li><a href="admin_Add_HR.jsp">Create Account /</a></li>
+    		<li><a href="admin_View.jsp">View</a></li>
+    		<li><a href="admin_Update.jsp">Update</a></li>
+    		<li><a href="admin_Add.jsp">Add Student</a></li>
+    		<li><a href="admin_Add_HR.jsp">Create Account</a></li>
     		<li><a href="admin_Delete_Student.jsp">Delete Student Account</a></li>
     		<li><a href="admin_Delete_CEOandHRandEmployer.jsp">Delete CEO, HR, or Employer Account</a></li>
     		

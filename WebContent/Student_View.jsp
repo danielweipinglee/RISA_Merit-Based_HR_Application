@@ -14,10 +14,12 @@
     <nav>
     	<ul>
     		<li><a href="Student_View.jsp">View</a></li>
-    		<li><a href="Student_Edit.jsp">Update</a></li>
+    		<li><a href="Student_Update.jsp">Update</a></li>
+    		
     	</ul>
     </nav>
 	</div>		
+	
 </header>
 
 <div class="optionsDiv">

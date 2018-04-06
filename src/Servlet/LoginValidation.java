@@ -53,13 +53,16 @@ public class LoginValidation extends HttpServlet {
 				session.setAttribute("Status", loginIn.getStatus());
 				
 				if(AccountType[0].equals(loginIn.getmAccountType())) {
-					response.sendRedirect("mainpage.jsp");	
+					response.sendRedirect("Student_Main.jsp");	
 				}
-				else if(AccountType[1].equals(loginIn.getmAccountType()) || AccountType[4].equals(loginIn.getmAccountType()) ) {
+				else if(AccountType[1].equals(loginIn.getmAccountType()) ) {
 					//TODO Go to Active CEO page.
 					response.sendRedirect("CEO_Main.jsp");
 				}
 
+				else if(AccountType[4].equals(loginIn.getmAccountType())) {
+					response.sendRedirect("HR_Main.jsp");
+				}
 				else if(AccountType[5].equals(loginIn.getmAccountType())) {
 					response.sendRedirect("mainpage.jsp");
 				} 

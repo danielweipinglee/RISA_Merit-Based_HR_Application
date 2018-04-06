@@ -13,14 +13,16 @@
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="CEO_View.jsp">View </a></li>
-    		<li><a href="CEO_Update.jsp">Update </a></li>
-    		<li><a href="CEO_Add.jsp">Add Student </a></li>
-    		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
+    		<li><a href="HR_View.jsp">View</a></li>
+    		<li><a href="HR_Update.jsp">Update</a></li>
+    		<li><a href="HR_Add.jsp">Add</a></li>
+    		<li><a href="HR_Sort.jsp">Sort</a></li>
+    		<li><a href="HR_Search.jsp">Search</a></li>
+    		
     	</ul>
     </nav>
 	</div>		
-	
 </header>
+
 </body>
 </html>
