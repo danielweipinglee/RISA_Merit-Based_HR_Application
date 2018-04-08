@@ -61,7 +61,6 @@ PrintWriter out = response.getWriter();
             while (rs.next()) {
             	if(rs.getString(8).equals(userid)) {
             		RISACode = rs.getString(1);
-            		System.out.println(RISACode);
             	}
             }
             
