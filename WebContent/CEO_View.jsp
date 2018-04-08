@@ -52,7 +52,7 @@
 
 <div class="SearchOptionsDiv" >
         Search
-        <select id="search" name="search" onchange="location.reload()">
+        <select id="search" name="search" onchange="this.form.submit()">
             <option value="none" selected>None</option>
             <option value="Active_CEO">Active CEO</option>
             <option value="Active">Active</option>
