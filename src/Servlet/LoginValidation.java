@@ -49,7 +49,7 @@ public class LoginValidation extends HttpServlet {
 			loginIn.getInfomation(userName, password);
 			if(loginIn.getFound()) {
 				if(AccountType[0].equals(loginIn.getmAccountType())) {
-					response.sendRedirect("mainpage.jsp");	
+					response.sendRedirect("Student_Main.jsp");	
 				}
 				else if(AccountType[1].equals(loginIn.getmAccountType())) {
 					response.sendRedirect("CEO_Main.jsp");

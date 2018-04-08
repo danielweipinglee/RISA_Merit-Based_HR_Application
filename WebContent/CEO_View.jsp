@@ -8,23 +8,6 @@
 <title>RISA</title>
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
 
-<script language="javascript">
-            function addRow(tableID) {
-                var table = document.getElementById(tableID);
-                var rowCount = table.rows.length;
-                var row = table.insertRow(rowCount); 
-                var cell0 = row.insertCell(0);
-                var element1 = document.createElement("input");
-                element1.type = "text";
-                element1.name = "line"+(rowCount+1);
-                element1.value=""+(rowCount+1);
-                cell0.appendChild(element1);
-                document.getElementById("countofrows").value=table.rows.length;
-            }
-        </script>
-
-
-
 </head>
 <body>
 
@@ -33,12 +16,14 @@
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="CEO_View.jsp">View</a></li>
-    		<li><a href="CEO_Update.jsp">Update</a></li>
-    		<li><a href="CEO_Add.jsp">Add Student</a></li>
+    		<li><a href="CEO_View.jsp">View </a></li>
+    		<li><a href="CEO_Update.jsp">Update </a></li>
+    		<li><a href="CEO_Add.jsp">Add Student </a></li>
+    		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
     	</ul>
     </nav>
 	</div>		
+	
 </header>
 
 
