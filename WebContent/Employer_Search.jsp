@@ -27,7 +27,7 @@
         ResultSet resultset =statement.executeQuery("select Major from major;") ;
 	%>
 	<br>
-    <select name="search">
+    <select name="search" onchange="this.form.submit()">
     <%  while(resultset.next()){ %>
             <option><%= resultset.getString("Major")%></option>
     <% } %>
