@@ -22,14 +22,6 @@
 	
 </header>
 
-<div class="optionsDiv">
-        Sort 
-        <select id="selectField">
-            <option value="Alphabetical" selected>Alphabetical</option>
-            <option value="else">else</option>
-        </select>   
-</div>
-
 <jsp:include page="Student_View"/>
 
 </body>

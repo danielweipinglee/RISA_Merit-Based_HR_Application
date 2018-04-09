@@ -35,16 +35,34 @@ public class CEO_View extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		PrintWriter out = response.getWriter();
-		
 		response.setContentType("text/html");
         try {
+        	
         	connection = DBConnection.getconnectionToDatabase();
         	Statement stmt = connection.createStatement();
         	ResultSet rs = stmt.executeQuery("select * from student s join studentcollege c on s.ID = c.ID join college cl on cl.ID = c.College_ID join degreelevel d on d.ID = c.DegreeLevel_ID join concentration con on con.ID = c.Concentration_ID;");
+        	String selectedField = request.getParameter("selectField");
+        	
+        	if(selectedField.equals("RISACode")) {
+        		System.out.println("RISA Code");
+        		rs = stmt.executeQuery("select * from student s join studentcollege c on s.ID = c.ID join college cl on cl.ID = c.College_ID join degreelevel d on d.ID = c.DegreeLevel_ID join concentration con on con.ID = c.Concentration_ID ORDER BY RISACode;");
+            }else if(selectedField.equals("FieldOfInterest")) {
+            	System.out.println("Interest");
+            	rs = stmt.executeQuery("select * from student s join studentcollege c on s.ID = c.ID join college cl on cl.ID = c.College_ID join degreelevel d on d.ID = c.DegreeLevel_ID join concentration con on con.ID = c.Concentration_ID ORDER BY FieldofInterest;");
+            }else if(selectedField.equals("Degree")) {
+            	System.out.println("Degree");
+            	rs = stmt.executeQuery("select * from student s join studentcollege c on s.ID = c.ID join college cl on cl.ID = c.College_ID join degreelevel d on d.ID = c.DegreeLevel_ID join concentration con on con.ID = c.Concentration_ID ORDER BY DegreeLevel;");
+            }else if(selectedField.equals("GraduateYear")) {
+            	System.out.println("Year");
+            	rs = stmt.executeQuery("select * from student s join studentcollege c on s.ID = c.ID join college cl on cl.ID = c.College_ID join degreelevel d on d.ID = c.DegreeLevel_ID join concentration con on con.ID = c.Concentration_ID ORDER BY GradYear;");
+            }
+        	
         	out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
-        	out.println("<table class=\"w3-table-all\">");
+        	out.println("<script type=\"text/javascript\" src=\"js/jquery-1.10.2.min.js\"></script>");
+        	out.println("<script type=\"text/javascript\" src=\"js/jquery.tablesorter.min.js\"></script>");
+
+        	out.println("<table id=\"keywords\" class=\"w3-table-all\">");
             out.println("<thead><tr class=\"w3-red\">"
             		+ "<th>RISA Code</th>"            		
             		+ "<th>Phone</th>"
@@ -55,6 +73,8 @@ public class CEO_View extends HttpServlet {
             		+ "<th>Graduate Month</th>"
             		+ "<th>Graduate Year</th>"
             		+ "</tr></thead>");
+            
+            
             
             while (rs.next()) {
             	

@@ -39,7 +39,7 @@ public class LoginValidation extends HttpServlet {
 
 		String userName = request.getParameter("username").trim();
 		String password = request.getParameter("password").trim();
-		String AccountType[] = {"Active","Active_CEO","Deleted","admin","Active_Hr", "Active_Employee"};
+		String AccountType[] = {"Active","Active_CEO","Deleted","admin","Active_Hr", "Active_Employer"};
 		DBLoginIn loginIn = new DBLoginIn();
 		
 		HttpSession session = request.getSession();
