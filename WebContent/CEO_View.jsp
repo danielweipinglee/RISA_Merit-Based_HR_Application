@@ -44,9 +44,9 @@
 <form method="get" action="CEO_View">
 <div class="optionsDiv" >
         Sort 
-        <select id="selectField" onchange="location.reload()" >
-            <option value="Alphabetical" selected>Alphabetical</option>
-            <option value="else">else</option>
+        <select id="selectField" onchange="this.form.submit()" >
+        	<option value="None" selected>None</option>
+            <option value="Alphabetical">Alphabetical</option>
         </select>   
 </div>
 
