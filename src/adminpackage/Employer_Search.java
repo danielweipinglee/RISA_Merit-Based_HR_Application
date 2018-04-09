@@ -33,41 +33,24 @@ public class Employer_Search extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String search = null;
-		String query = null;
+		String search = "";
+		String query = "";
 		PrintWriter out = response.getWriter();
 		
-		query = "select * from student;";
 		response.setContentType("text/html");
         try {
         	search = request.getParameter("search");
         	
-        	//Need to change!
         if(search.equals("Default")) {
-        		query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 0;";
+        		query = "SELECT student.LegalFirstName, student.LegalLastName, student.Username, student.Phone, student.FieldofInterest, major.Major \r\n" + 
+        				"FROM student inner join studentcollege on student.ID = studentcollege.Student_ID\r\n" + 
+        				"inner join major on major.ID = studentcollege.Major_ID;";
         	}
-        else if(search.equals("Active")){
-        	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student where AccountStatus_ID = 1;";
+        else{
+        	query = "SELECT student.LegalFirstName, student.LegalLastName, student.Username, student.Phone, student.FieldofInterest, major.Major \r\n" + 
+        			"FROM student inner join studentcollege on student.ID = studentcollege.Student_ID\r\n" + 
+        			"inner join major on major.ID = studentcollege.Major_ID and major = '" + search + "'; ";
         }
-        else if(search.equals("Deleted")){
-        	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student\n" + 
-        			"union\n" + 
-        			"SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student \n" + 
-        			"where AccountStatus_ID = 2;";
-        }
-        else if(search.equals("admin")){
-        	query ="SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 3;";
-        }
-        else if(search.equals("Active_HR")) {
-        	query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 4;";
-        }
-        else if(search.equals("Active_Employer")){
-        	query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 5;";
-        }
-        else if(search.equals("None")){
-        	query = "select LegalFirstName,LegalLastName,Username from student;";
-        }
-        //System.out.print(query);
         	connection = DBConnection.getconnectionToDatabase();
         	Statement stmt = connection.createStatement();
         	ResultSet rs = stmt.executeQuery(query);
@@ -92,45 +75,48 @@ public class Employer_Search extends HttpServlet {
         			"            }\n" + 
         			"        </script>");
         	
-        	out.println("<header>\n" + 
-        			"	<div class=\"container\">\n" + 
-        			"    <img src=\"images/White.png\" alt=\"pic\" class=\"pic\" >\n" + 
-        			"    <nav>\n" + 
-        			"    	<ul>\n" + 
-        			"    		<li><a href=\"CEO_View.jsp\">View</a></li>\n" + 
-        			"    		<li><a href=\"CEO_Update.jsp\">Update</a></li>\n" + 
-        			"    		<li><a href=\"CEO_Add.jsp\">Add Student</a></li>\n" + 
-        			"    	</ul>\n" + 
-        			"    </nav>\n" + 
-        			"	</div>		\n" + 
+        	out.println("<header>\r\n" + 
+        			"	<div class=\"container\">\r\n" + 
+        			"    <img src=\"images/White.png\" alt=\"pic\" class=\"pic\" >\r\n" + 
+        			"    <nav>\r\n" + 
+        			"    	<ul>\r\n" + 
+        			"    		<li><a href=\"Employer_View.jsp\">View</a></li>\r\n" + 
+        			"    		<li><a href=\"Employer_Sort.jsp\">Sort</a></li>\r\n" + 
+        			"    		<li><a href=\"Employer_Search.jsp\">Search</a></li>\r\n" + 
+        			"    	</ul>\r\n" + 
+        			"    </nav>\r\n" + 
+        			"	</div>\r\n" + 
+        			"	<form method=\"get\" action=\"Employer_Search\">	\r\n" + 
+        			"		<%\r\n" + 
+        			"    try{//for the dropdown menu\r\n" + 
+        			"    	Connection conn = DBConnection.getconnectionToDatabase();\r\n" + 
+        			"        Statement statement = conn.createStatement() ;\r\n" + 
+        			"        ResultSet resultset =statement.executeQuery(\"select Major from major;\") ;\r\n" + 
+        			"	%>\r\n" + 
+        			"	<br>\r\n" + 
+        			"    <select name=\"search\" onchange=\"this.form.submit()\">\r\n" + 
+        			"    <%  while(resultset.next()){ %>\r\n" + 
+        			"            <option><%= resultset.getString(\"Major\")%></option>\r\n" + 
+        			"    <% } %>\r\n" + 
+        			"    </select>\r\n" + 
+        			"	<br>\r\n" + 
+        			"	<%\r\n" + 
+        			"       }catch(Exception e){\r\n" + 
+        			"    	   \r\n" + 
+        			"          out.println(e);\r\n" + 
+        			"       }\r\n" + 
+        			"	%>	\r\n" + 
+        			"	</form>\r\n" + 
+        			"	\r\n" + 
         			"</header>");
-        	out.println("<form method=\"get\" action=\"CEO_View\">\n" + 
-        			"<div class=\"optionsDiv\" >\n" + 
-        			"        Sort \n" + 
-        			"        <select id=\"selectField\" onchange=\"location.reload()\" >\n" + 
-        			"            <option value=\"Alphabetical\" selected>Alphabetical</option>\n" + 
-        			"            <option value=\"else\">else</option>\n" + 
-        			"        </select>   \n" + 
-        			"</div>\n" + 
-        			"\n" + 
-        			"<div class=\"SearchOptionsDiv\" >\n" + 
-        			"        Search\n" + 
-        			"        <select id=\"search\" name=\"search\" onchange=\"this.form.submit()\">\n" + 
-        			"            <option value=\"none\" selected>None</option>\n" + 
-        			"            <option value=\"Active_CEO\">Active CEO</option>\n" + 
-        			"            <option value=\"Active\">Active</option>\n" + 
-        			"            <option value=\"Deleted\">Deleted</option>\n" + 
-        			"            <option value=\"Admin\">Admin</option>\n" + 
-        			"            <option value=\"Active_HR\">Active HR</option>\n" + 
-        			"            <option value=\"Active_Employer\">Active Employer</option>\n" + 
-        			"        </select>   \n" + 
-        			"</div>\n" + 
-        			"</form>");
         	out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
         	out.println("<table class=\"w3-table-all\">");
-            out.println("<thead><tr class=\"w3-red\"><th>First Name</th><th>Last Name</th><th>Email</th></tr></thead>");
+            out.println("<thead><tr class=\"w3-red\"><th>First Name</th><th>Last Name</th><th>Username</th><th>Phone</th><th>Field of Interest</th>"
+            		+ "<th>Major</th></tr></thead>");
             while (rs.next()) {
-                out.println("<tr><td>" + rs.getString("LegalFirstName") + "</td><td>" + rs.getString("LegalLastName") + "</td><td>" + rs.getString("Username") + "</td></tr>"); 
+                out.println("<tr><td>" + rs.getString("LegalFirstName") + "</td><td>" + 
+            rs.getString("LegalLastName") + "</td><td>" + rs.getString("Username") + "</td><td>" + rs.getString("Phone") + "</td><td>" +
+                		rs.getString("FieldofInterest") + "</td><td>" + rs.getString("Major") + "</td></tr>"); 
             }
             out.println("</table>");
         	connection.close();
