@@ -51,7 +51,7 @@ public class CEO_View extends HttpServlet {
         	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student where AccountStatus_ID = 1;";
         }
         else if(search.equals("Deleted")){
-        	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student\n" + 
+        	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student where AccountStatus_ID = 2 \n" + 
         			"union\n" + 
         			"SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student \n" + 
         			"where AccountStatus_ID = 2;";
@@ -117,7 +117,7 @@ public class CEO_View extends HttpServlet {
         			"<div class=\"SearchOptionsDiv\" >\n" + 
         			"        Search\n" + 
         			"        <select id=\"search\" name=\"search\" onchange=\"this.form.submit()\">\n" + 
-        			"            <option value=\"none\" selected>None</option>\n" + 
+        			"            <option value=\"none\">None</option>\n" + 
         			"            <option value=\"Active_CEO\">Active CEO</option>\n" + 
         			"            <option value=\"Active\">Active</option>\n" + 
         			"            <option value=\"Deleted\">Deleted</option>\n" + 
