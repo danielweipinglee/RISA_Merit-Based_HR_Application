@@ -42,7 +42,7 @@
       <label>Last Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="risaCode" id="risaCode" required>
-      <label>RIS Code</label></p>
+      <label>RISA Code</label></p>
       
       <button type="submit" class="w3-button w3-red">Add Student</button>
     </form>

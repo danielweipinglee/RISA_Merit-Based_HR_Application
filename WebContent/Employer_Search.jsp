@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="DatabaseDao.DBConnection" import="java.sql.*"%>
+    pageEncoding="ISO-8859-1" import="DatabaseDao.DBConnection" import="java.sql.*" import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -27,9 +27,16 @@
         ResultSet resultset =statement.executeQuery("select Major from major;") ;
 	%>
 	<br>
-    <select name="search">
+    <select name="search" onchange="this.form.submit()">
+    <% java.util.ArrayList<String> major = new java.util.ArrayList<String>(); %>
+
     <%  while(resultset.next()){ %>
-            <option><%= resultset.getString("Major")%></option>
+    <% major.add(resultset.getString(2)); %>
+           
+    <% } %>
+    
+    <% for(String check : major){ %>
+    	<option><%=check %></option>
     <% } %>
     </select>
 	<br>

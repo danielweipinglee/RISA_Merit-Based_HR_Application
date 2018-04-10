@@ -50,7 +50,7 @@ public class HR_Search extends HttpServlet {
         	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student where AccountStatus_ID = 1;";
         }
         else if(search.equals("Deleted")){
-        	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student\n" + 
+        	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student where AccountStatus_ID = 2 \n" + 
         			"union\n" + 
         			"SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student \n" + 
         			"where AccountStatus_ID = 2;";
@@ -92,40 +92,35 @@ public class HR_Search extends HttpServlet {
         			"            }\n" + 
         			"        </script>");
         	
-        	out.println("<header>\n" + 
-        			"	<div class=\"container\">\n" + 
-        			"    <img src=\"images/White.png\" alt=\"pic\" class=\"pic\" >\n" + 
-        			"    <nav>\n" + 
-        			"    	<ul>\n" + 
-        			"    		<li><a href=\"CEO_View.jsp\">View</a></li>\n" + 
-        			"    		<li><a href=\"CEO_Update.jsp\">Update</a></li>\n" + 
-        			"    		<li><a href=\"CEO_Add.jsp\">Add Student</a></li>\n" + 
-        			"    	</ul>\n" + 
-        			"    </nav>\n" + 
-        			"	</div>		\n" + 
-        			"</header>");
-        	out.println("<form method=\"get\" action=\"CEO_View\">\n" + 
-        			"<div class=\"optionsDiv\" >\n" + 
-        			"        Sort \n" + 
-        			"        <select id=\"selectField\" onchange=\"location.reload()\" >\n" + 
-        			"            <option value=\"Alphabetical\" selected>Alphabetical</option>\n" + 
-        			"            <option value=\"else\">else</option>\n" + 
-        			"        </select>   \n" + 
-        			"</div>\n" + 
-        			"\n" + 
-        			"<div class=\"SearchOptionsDiv\" >\n" + 
-        			"        Search\n" + 
-        			"        <select id=\"search\" name=\"search\" onchange=\"this.form.submit()\">\n" + 
-        			"            <option value=\"none\" selected>None</option>\n" + 
-        			"            <option value=\"Active_CEO\">Active CEO</option>\n" + 
-        			"            <option value=\"Active\">Active</option>\n" + 
-        			"            <option value=\"Deleted\">Deleted</option>\n" + 
-        			"            <option value=\"Admin\">Admin</option>\n" + 
-        			"            <option value=\"Active_HR\">Active HR</option>\n" + 
-        			"            <option value=\"Active_Employer\">Active Employer</option>\n" + 
-        			"        </select>   \n" + 
-        			"</div>\n" + 
-        			"</form>");
+        	out.println("<header>\r\n" + 
+        			"	<div class=\"container\">\r\n" + 
+        			"    <img src=\"images/White.png\" alt=\"pic\" class=\"pic\" >\r\n" + 
+        			"    <nav>\r\n" + 
+        			"    	<ul>\r\n" + 
+        			"    		<li><a href=\"HR_View.jsp\">View</a></li>\r\n" + 
+        			"    		<li><a href=\"HR_Update.jsp\">Update</a></li>\r\n" + 
+        			"    		<li><a href=\"HR_Add.jsp\">Add</a></li>\r\n" + 
+        			"    		<li><a href=\"HR_Sort.jsp\">Sort</a></li>\r\n" + 
+        			"    		<li><a href=\"HR_Search.jsp\">Search</a></li>\r\n" + 
+        			"    		\r\n" + 
+        			"    	</ul>\r\n" + 
+        			"    </nav>\r\n" + 
+        			"	</div>	\r\n" + 
+        			"	\r\n" + 
+        			"	<form method=\"get\" action=\"HR_Search\">\r\n" + 
+        			"<div class=\"SearchOptionsDiv\" >\r\n" + 
+        			"        Search\r\n" + 
+        			"        <select id=\"search\" name=\"search\" onchange=\"this.form.submit()\">\r\n" + 
+        			"            <option value=\"none\">None</option>\r\n" + 
+        			"            <option value=\"Active_CEO\">Active CEO</option>\r\n" + 
+        			"            <option value=\"Active\">Active</option>\r\n" + 
+        			"            <option value=\"Deleted\">Deleted</option>\r\n" + 
+        			"            <option value=\"Admin\">Admin</option>\r\n" + 
+        			"            <option value=\"Active_HR\">Active HR</option>\r\n" + 
+        			"            <option value=\"Active_Employer\">Active Employer</option>\r\n" + 
+        			"        </select>   \r\n" + 
+        			"</div>\r\n" + 
+        			"</form>");	
         	out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
         	out.println("<table class=\"w3-table-all\">");
             out.println("<thead><tr class=\"w3-red\"><th>First Name</th><th>Last Name</th><th>Email</th></tr></thead>");

@@ -24,14 +24,6 @@
 	</div>	
 	
 	<form method="get" action="HR_Search">
-<div class="optionsDiv" >
-        Sort 
-        <select id="selectField" onchange="location.reload()" >
-            <option value="Alphabetical" selected>Alphabetical</option>
-            <option value="else">else</option>
-        </select>   
-</div>
-
 <div class="SearchOptionsDiv" >
         Search
         <select id="search" name="search" onchange="this.form.submit()">
