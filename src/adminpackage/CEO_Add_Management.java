@@ -46,12 +46,14 @@ public class CEO_Add_Management extends HttpServlet {
 		String lastName = request.getParameter("legalLastName");
 		String uniqueCode = request.getParameter("risaCode");
 		String status = request.getParameter("Status");
+		System.out.println(status);
 		int statusID = -1;
 
 	
 		CreateDefaultsManagement createAccount = new CreateDefaultsManagement();
+		
 		HttpSession session = request.getSession(false);
-		String statusType = (String) session.getAttribute("Status");
+		String AccountStatus = (String) session.getAttribute("AccountStatus");
 		
 		try {
 			
@@ -69,31 +71,27 @@ public class CEO_Add_Management extends HttpServlet {
 			}
 			createAccount.InputManagement(firstName, lastName, uniqueCode, statusID);
 
-
-			if(statusType.equals("Active_CEO")) {			
-				
-				
+			if(AccountStatus.equals("Active_CEO")) {
 				if(createAccount.isSuccessful()) {
-					request.setAttribute("success", "Successfully Registered.");
-					RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
-			        rd.forward(request, response);
+						request.setAttribute("success", "Successfully Registered");
+						RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
+				        rd.forward(request, response);
 				}
 				else {
-					request.setAttribute("errorMsg", "Error Occured. Please try again later.");
-					request.getRequestDispatcher("/CEO_Add.jsp").forward(request, response);
-					}
-				}	
-			if(status.equals("admin")) {			
-				
-				System.out.println(status);
+						request.setAttribute("errorMsg", "Error Occured. Please try again later.");
+						request.getRequestDispatcher("/CEO_Add_Employer.jsp").forward(request, response);
+				}
+			}
+			
+			if(AccountStatus.equals("admin")) {
 				if(createAccount.isSuccessful()) {
-					request.setAttribute("success", "Successfully Registered.");
-					RequestDispatcher rd = request.getRequestDispatcher("/admin_main.jsp");
-			        rd.forward(request, response);
+						request.setAttribute("success", "Successfully Registered");
+						RequestDispatcher rd = request.getRequestDispatcher("/admin_main.jsp");
+				        rd.forward(request, response);
 				}
 				else {
-					request.setAttribute("errorMsg", "Error Occured. Please try again later.");
-					request.getRequestDispatcher("/admin_Add.jsp").forward(request, response);
+						request.setAttribute("errorMsg", "Error Occured. Please try again later.");
+						request.getRequestDispatcher("/admin_Add_HR.jsp").forward(request, response);
 				}
 			}
 		} catch (Exception e) {

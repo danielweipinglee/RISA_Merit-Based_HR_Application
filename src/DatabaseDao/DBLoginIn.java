@@ -21,9 +21,6 @@ public class DBLoginIn {
 	public boolean getFound() {
 		return mFound;
 	}
-	public String getStatus() {
-		return mAccountType;
-	}
 
 	public DBLoginIn(){
 		mId = -1;
@@ -59,7 +56,7 @@ public class DBLoginIn {
 			while(set.next()) {
 				mPassword = set.getString("UserPassword");
 				mUserName = set.getString("Username");
-				if(mUserName.equals(userName) && mPassword.equals(password)) {
+				if(!mUserName.equals("N/A") && !mPassword.equals("Default") && mUserName.equals(userName) && mPassword.equals(password)) {
 					mId = set.getInt("ID");
 					mAccountType = set.getString("Status");
 					mFound = true;
@@ -72,7 +69,7 @@ public class DBLoginIn {
 				mPassword = set2.getString("UserPassword");
 				mUserName = set2.getString("Username");
 
-				if(mUserName.equals(userName) && mPassword.equals(password)) {
+				if(!mUserName.equals("N/A") && !mPassword.equals("Default") && mUserName.equals(userName) && mPassword.equals(password)) {
 					mId = set2.getInt("ID");
 					mAccountType = set2.getString("Status");			
 					mFound = true;

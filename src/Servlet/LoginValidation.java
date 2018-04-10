@@ -39,41 +39,34 @@ public class LoginValidation extends HttpServlet {
 
 		String userName = request.getParameter("username").trim();
 		String password = request.getParameter("password").trim();
-		String AccountType[] = {"Active","Active_CEO","Deleted","admin","Active_Hr", "Active_Employee"};
+		String AccountType[] = {"Active","Active_CEO","Deleted","admin","Active_HR", "Active_Employer"};
 		DBLoginIn loginIn = new DBLoginIn();
 		
 		HttpSession session = request.getSession();
 		    session.setAttribute("UserName", userName);
-		    
 		
 		try {
 			loginIn.getInfomation(userName, password);
 			if(loginIn.getFound()) {
-				
-				session.setAttribute("Status", loginIn.getStatus());
-				
+				session.setAttribute("AccountStatus", loginIn.getmAccountType());
 				if(AccountType[0].equals(loginIn.getmAccountType())) {
 					response.sendRedirect("Student_Main.jsp");	
 				}
-				else if(AccountType[1].equals(loginIn.getmAccountType()) ) {
-					//TODO Go to Active CEO page.
+				else if(AccountType[1].equals(loginIn.getmAccountType())) {
 					response.sendRedirect("CEO_Main.jsp");
 				}
-
-				else if(AccountType[4].equals(loginIn.getmAccountType())) {
-					response.sendRedirect("HR_Main.jsp");
-				}
-				else if(AccountType[5].equals(loginIn.getmAccountType())) {
-					response.sendRedirect("mainpage.jsp");
-				} 
 				else if(AccountType[2].equals(loginIn.getmAccountType())){
 					response.sendRedirect("index_invalid.jsp");
 				} 
-				
 				else if(AccountType[3].equals(loginIn.getmAccountType())){
-					//TODO Go to Admin Page.
 					response.sendRedirect("admin_main.jsp");
 				}
+				else if( AccountType[4].equals(loginIn.getmAccountType()) ) {
+					response.sendRedirect("HR_Main.jsp");
+				}
+				else if(AccountType[5].equals(loginIn.getmAccountType())) {
+					response.sendRedirect("Employer_Main.jsp");
+				} 
 			}
 			else {
 			response.sendRedirect("index_invalid.jsp");
