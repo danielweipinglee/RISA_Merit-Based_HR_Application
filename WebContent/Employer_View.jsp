@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RISA</title>
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <header>
@@ -14,13 +15,25 @@
     <nav>
     	<ul>
     		<li><a href="Employer_View.jsp">View</a></li>
-    		<li><a href="Employer_Sort.jsp">Sort</a></li>
-    		<li><a href="Employer_Search.jsp">Search</a></li>
     	</ul>
     </nav>
 	</div>		
 	
 </header>
+<h2>Select a category to sort the student file</h2>
+<form>
+<div class="optionsDiv">
+        <select id="selectField" name ="selectField">
+        	<option>select a category</option>
+            <option value="RISACode" >RISA Code</option>
+            <option value="FieldOfInterest" >Field Of Interest</option>
+            <option value="Degree" >Degree</option>
+            <option value="GraduateYear" >Grduate Year</option>
+        </select>   
+        <button type="submit" class="w3-button w3-red">Sort</button> 
+</div>
+</form>
 
+<jsp:include page="Employer_View"/>
 </body>
 </html>

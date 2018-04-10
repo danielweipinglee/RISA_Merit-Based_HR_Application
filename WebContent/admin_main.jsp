@@ -21,7 +21,6 @@
     		<li><a href="admin_Add_HR.jsp">Create Account</a></li>
     		<li><a href="admin_Delete_Student.jsp">Delete Student Account</a></li>
     		<li><a href="admin_Delete_CEOandHRandEmployer.jsp">Delete CEO, HR, or Employer Account</a></li>
-    		
     	</ul>
     </nav>
 	</div>		
