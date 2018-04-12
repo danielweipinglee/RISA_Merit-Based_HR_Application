@@ -46,7 +46,6 @@ public class CEO_Add_Management extends HttpServlet {
 		String lastName = request.getParameter("legalLastName");
 		String uniqueCode = request.getParameter("risaCode");
 		String status = request.getParameter("Status");
-		System.out.println(status);
 		int statusID = -1;
 
 	

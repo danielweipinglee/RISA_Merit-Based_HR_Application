@@ -7,12 +7,11 @@ import java.sql.SQLException;
 
 public class DBLoginIn {
 	
-	private int mId;
+	private String mId;
 	private String mUserName;
 	private String mPassword;
 	private String mAccountType;
 	private boolean mFound;
-
 
 	public String getmAccountType() {
 		return mAccountType;
@@ -21,9 +20,12 @@ public class DBLoginIn {
 	public boolean getFound() {
 		return mFound;
 	}
+	public String getId() {
+		return mId;
+	}
 
 	public DBLoginIn(){
-		mId = -1;
+		mId = "";
 		mUserName = "";
 		mPassword = "";
 		mAccountType = "";
@@ -41,7 +43,8 @@ public class DBLoginIn {
 		try {
 			connection = DBConnection.getconnectionToDatabase();
 			
-			String selectQuery = "SELECT  userpassword.*, student.*, accountstatus.* from student " +
+			String selectQuery = "SELECT student.ID, userpassword.UserPassword, student.Username, " +
+					"accountstatus.Status from student " +
 					"inner Join userpassword on userpassword.ID=student.UserPassword_ID " +
 					"inner join accountstatus on accountstatus.ID = student.AccountStatus_ID";
 			
@@ -57,7 +60,7 @@ public class DBLoginIn {
 				mPassword = set.getString("UserPassword");
 				mUserName = set.getString("Username");
 				if(!mUserName.equals("N/A") && !mPassword.equals("Default") && mUserName.equals(userName) && mPassword.equals(password)) {
-					mId = set.getInt("ID");
+					mId = set.getString("ID");
 					mAccountType = set.getString("Status");
 					mFound = true;
 				}
@@ -70,7 +73,7 @@ public class DBLoginIn {
 				mUserName = set2.getString("Username");
 
 				if(!mUserName.equals("N/A") && !mPassword.equals("Default") && mUserName.equals(userName) && mPassword.equals(password)) {
-					mId = set2.getInt("ID");
+					mId = set2.getString("ID");
 					mAccountType = set2.getString("Status");			
 					mFound = true;
 				}

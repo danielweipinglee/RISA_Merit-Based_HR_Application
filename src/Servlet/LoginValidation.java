@@ -49,6 +49,8 @@ public class LoginValidation extends HttpServlet {
 			loginIn.getInfomation(userName, password);
 			if(loginIn.getFound()) {
 				session.setAttribute("AccountStatus", loginIn.getmAccountType());
+				session.setAttribute("AccountID", loginIn.getId());
+				
 				if(AccountType[0].equals(loginIn.getmAccountType())) {
 					response.sendRedirect("Student_Main.jsp");	
 				}
