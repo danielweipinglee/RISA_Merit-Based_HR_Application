@@ -16,7 +16,8 @@
     	<ul>
     		<li><a href="HR_View.jsp">View</a></li>
     		<li><a href="HR_Update.jsp">Update</a></li>
-    		<li><a href="HR_Add.jsp">Add</a></li>
+    		<li><a href="HR_Add.jsp">Add Student</a></li>
+    		<li><a href="HR_Add_Administrative.jsp"> Create Account</a></li>
     	</ul>
     </nav>
 	</div>		
@@ -33,7 +34,6 @@
         </select>   
         <button type="submit" class="w3-button w3-red">Sort</button> 
 </div>
-</form>
 </form>
 
 <jsp:include page="CEO_View"/>

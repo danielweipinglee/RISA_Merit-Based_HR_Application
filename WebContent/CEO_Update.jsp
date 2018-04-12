@@ -23,5 +23,30 @@
 	</div>		
 	
 </header>
+
+<div class="w3-container">
+  <h2>CEO Account</h2>
+  
+  <div class="w3-card-4">
+    <div class="w3-container w3-red">
+      <h3>Update Student Information</h3>
+    </div>
+
+    <form class="w3-container" method="post" action="StudentUpdateHRCEOServlet">
+      <p>
+      	<input class="w3-input" type="text" name="name" id="studentName" required>
+      	<label>Student Username</label></p>
+      <p>   
+      <p>
+      	<input class="w3-input" type="text" name="phone" id="studentPhone" required>
+      	<label>Phone Number</label></p>
+      <p>           
+          </b><br>
+      
+      <button type="submit" class="w3-button w3-red">Update</button>
+    </form>
+  </div>
+</div>
+
 </body>
 </html>

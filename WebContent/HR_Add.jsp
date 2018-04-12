@@ -16,56 +16,35 @@
     	<ul>
     		<li><a href="HR_View.jsp">View</a></li>
     		<li><a href="HR_Update.jsp">Update</a></li>
-    		<li><a href="HR_Add.jsp">Add</a></li>
+    		<li><a href="HR_Add_Administrative.jsp">Create Account</a></li>
     	</ul>
     </nav>
 	</div>		
 </header>
 
 <div class="w3-container">
-  <h2>Add Account</h2>
+  <h2>HR Account</h2>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-      <h3>Create Account Information</h3>
+      <h3>Create Student Account</h3>
     </div>
 
-    <form class="w3-container" method="post" action="CEO_Add_Management" Id="employer">
+    <form class="w3-container" method="post" action="CEO_Add">
       <p>
-      <input class="w3-input" type="text"name="legalFirstName" id="EmployerlegalFirstName" required>
+      <input class="w3-input" type="text"name="legalFirstName" id="legalFirstName" required>
       <label>First Name</label></p>
       <p>     
-      <input class="w3-input" type="text" name="legalLastName" id="EmployerlegalLastName" required>
+      <input class="w3-input" type="text" name="legalLastName" id="legalLastName" required>
       <label>Last Name</label></p>
       <p>     
-      <input class="w3-input" type="text" name="risaCode" id="EmployerRISACode" required>
-      <label>RIS Code</label></p>
+      <input class="w3-input" type="text" name="risaCode" id="RISACode" required>
+      <label>RISA Code</label></p>
       
-                </b><br>
-	<%
-    try{//for the dropdown menu
-    	Connection conn = DBConnection.getconnectionToDatabase();
-        Statement statement = conn.createStatement() ;
-        ResultSet resultset =statement.executeQuery("SELECT * FROM risa_hr.accountstatus " +
-        		"WHERE Status LIKE 'Active_%' or Status LIKE 'admin';");
-	%>
-	<br>
-    <select name="Status">
-    <%  while(resultset.next()){ %>
-            <option><%= resultset.getString("Status")%></option>
-    <% } %>
-    </select>
-	<br>
-	<%
-       }catch(Exception e){
-          out.println(e);
-       }
-	%>
-	<br>
-      
-      <button type="submit" class="w3-button w3-red">Add Account</button>
+      <button type="submit" class="w3-button w3-red">Add Student</button>
     </form>
   </div>
 </div>
+
 </body>
 </html>

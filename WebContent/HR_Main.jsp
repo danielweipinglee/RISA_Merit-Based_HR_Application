@@ -16,7 +16,8 @@
     	<ul>
     		<li><a href="HR_View.jsp">View</a></li>
     		<li><a href="HR_Update.jsp">Update</a></li>
-    		<li><a href="HR_Add.jsp">Add</a></li>
+    		<li><a href="HR_Add.jsp">Add Student</a></li>
+    		<li><a href="HR_Add_Administrative.jsp"> Create Account</a></li>
     	</ul>
     </nav>
 	</div>		
