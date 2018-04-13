@@ -100,67 +100,6 @@ public class CEO_View extends HttpServlet {
         	connection = DBConnection.getconnectionToDatabase();
         	Statement stmt = connection.createStatement();
         	ResultSet rs = stmt.executeQuery(query);
-        	out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" + 
-        			"<html>\n" + 
-        			"<head>\n" + 
-        			"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n" + 
-        			"<title>RISA</title>");
-        	out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/active_CEO.css\">");
-        	out.println("<script language=\"javascript\">\n" + 
-        			"            function addRow(tableID) {\n" + 
-        			"                var table = document.getElementById(tableID);\n" + 
-        			"                var rowCount = table.rows.length;\n" + 
-        			"                var row = table.insertRow(rowCount); \n" + 
-        			"                var cell0 = row.insertCell(0);\n" + 
-        			"                var element1 = document.createElement(\"input\");\n" + 
-        			"                element1.type = \"text\";\n" + 
-        			"                element1.name = \"line\"+(rowCount+1);\n" + 
-        			"                element1.value=\"\"+(rowCount+1);\n" + 
-        			"                cell0.appendChild(element1);\n" + 
-        			"                document.getElementById(\"countofrows\").value=table.rows.length;\n" + 
-        			"            }\n" + 
-        			"        </script>");
-        	
-        	out.println("<header>\n" + 
-        			"	<div class=\"container\">\n" + 
-        			"    <img src=\"images/White.png\" alt=\"pic\" class=\"pic\" >\n" + 
-        			"    <nav>\n" + 
-        			"    	<ul>\n" + 
-        			"    		<li><a href=\"CEO_View.jsp\">View</a></li>\n" + 
-        			"    		<li><a href=\"CEO_Update.jsp\">Update</a></li>\n" + 
-        			"    		<li><a href=\"CEO_Add.jsp\">Add Student</a></li>\n" + 
-        			"    	</ul>\n" + 
-        			"    </nav>\n" + 
-        			"	</div>		\n" + 
-        			"</header>");
-        	out.println(
-        			"<form method=\"get\" action=\"CEO_View\">\n" + 
-        			"<div class=\"optionsDiv\" >\n" + 
-        			"        Sort Alphabetically: \n" + 
-        			"        <select id=\"sort\" name=\"sort\" onchange=\"this.form.submit()\">\n" + 
-        			"            <option value=\"none\" selected>None</option>\n" + 
-        			"            <option value=\"Active_CEO\">Active CEO</option>\n" + 
-        			"            <option value=\"Active\">Active</option>\n" + 
-        			"            <option value=\"Deleted\">Deleted</option>\n" + 
-        			"            <option value=\"Admin\">Admin</option>\n" + 
-        			"            <option value=\"Active_HR\">Active HR</option>\n" + 
-        			"            <option value=\"Active_Employer\">Active Employer</option>\n" + 
-        			"        </select>   \n" + 
-        			"</div>\n" + 
-        			"\n" + 
-        			"<div class=\"SearchOptionsDiv\" >\n" + 
-        			"        Search\n" + 
-        			"        <select id=\"search\" name=\"search\" onchange=\"this.form.submit()\">\n" + 
-        			"            <option value=\"none\" selected>None</option>\n" + 
-        			"            <option value=\"Active_CEO\">Active CEO</option>\n" + 
-        			"            <option value=\"Active\">Active</option>\n" + 
-        			"            <option value=\"Deleted\">Deleted</option>\n" + 
-        			"            <option value=\"Admin\">Admin</option>\n" + 
-        			"            <option value=\"Active_HR\">Active HR</option>\n" + 
-        			"            <option value=\"Active_Employer\">Active Employer</option>\n" + 
-        			"        </select>   \n" + 
-        			"</div>\n" + 
-        			"</form>");
         	out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
         	out.println("<table class=\"w3-table-all\">");
             out.println("<thead><tr class=\"w3-red\"><th>First Name</th><th>Last Name</th><th>Email</th></tr></thead>");

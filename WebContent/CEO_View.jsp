@@ -7,23 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RISA</title>
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
-
-<script language="javascript">
-            function addRow(tableID) {
-                var table = document.getElementById(tableID);
-                var rowCount = table.rows.length;
-                var row = table.insertRow(rowCount); 
-                var cell0 = row.insertCell(0);
-                var element1 = document.createElement("input");
-                element1.type = "text";
-                element1.name = "line"+(rowCount+1);
-                element1.value=""+(rowCount+1);
-                cell0.appendChild(element1);
-                document.getElementById("countofrows").value=table.rows.length;
-            }
-        </script>
-
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 </head>
 <body>
@@ -33,43 +17,76 @@
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="CEO_View.jsp">View</a></li>
-    		<li><a href="CEO_Update.jsp">Update</a></li>
-    		<li><a href="CEO_Add.jsp">Add Student</a></li>
+    		<li><a href="CEO_View.jsp">View </a></li>
+    		<li><a href="CEO_Update.jsp">Update </a></li>
+    		<li><a href="CEO_Add.jsp">Add Student </a></li>
+    		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
     	</ul>
     </nav>
 	</div>		
+	
 </header>
 
-<form method="get" action="CEO_View">
-<div class="optionsDiv" >
-        Sort Alphabetically: 
-        <select id="sort" name="sort" onchange="this.form.submit()">
-            <option value="none" selected>None</option>
-            <option value="Active_CEO">Active CEO</option>
-            <option value="Active">Active</option>
-            <option value="Deleted">Deleted</option>
-            <option value="Admin">Admin</option>
-            <option value="Active_HR">Active HR</option>
-            <option value="Active_Employer">Active Employer</option>
-        </select>   
-</div>
 
-<div class="SearchOptionsDiv" >
-        Search
-        <select id="search" name="search" onchange="this.form.submit()">
-            <option value="none" selected>None</option>
-            <option value="Active_CEO">Active CEO</option>
-            <option value="Active">Active</option>
-            <option value="Deleted">Deleted</option>
-            <option value="Admin">Admin</option>
-            <option value="Active_HR">Active HR</option>
-            <option value="Active_Employer">Active Employer</option>
+<div style="float:right; float:top; padding-right:15px; padding-top:15px" class="optionsDiv">
+<form>
+<!-- <div style="position:absolute; margin-left:750px; top:200px;" class="optionsDiv">
+ --> 
+
+         <select id="search" name ="search">
+        	<option>select a category</option>
+            <option value="Active_CEO" >Active CEO</option>
+            <option value="Active" >Active</option>
+            <option value="Deleted" >Deleted</option>
+            <option value="admin" >admin</option>
+            <option value="Active_HR" >Active HR</option>
+            <option value="Active_Employer" >Active Employer</option>
         </select>   
-</div>
+        <button type="submit" class="w3-button w3-red">Search</button> 
+
+        <select id="sort" name ="sort">
+        	<option>select a category</option>
+            <option value="Active_CEO" >Active CEO</option>
+            <option value="Active" >Active</option>
+            <option value="Deleted" >Deleted</option>
+            <option value="admin" >admin</option>
+            <option value="Active_HR" >Active HR</option>
+            <option value="Active_Employer" >Active Employer</option>
+        </select>   
+        <button type="submit" class="w3-button w3-red">Sort</button> 
 </form>
+</div>
+<h2>Select a category to sort the student file</h2>
+
+
+<!-- <form> -->
+<!-- <div class="optionsDiv">
+        <select id="sort" name ="sort">
+        	<option>select a category</option>
+            <option value="Active_CEO" >Active CEO</option>
+            <option value="Active" >Active</option>
+            <option value="Deleted" >Deleted</option>
+            <option value="admin" >admin</option>
+            <option value="Active_HR" >Active HR</option>
+            <option value="Active_Employer" >Active Employer</option>
+        </select>   
+        <button type="submit" class="w3-button w3-red">Sort</button>  -->
+<!--         
+         <select id="search" name ="search">
+        	<option>select a category</option>
+            <option value="Active_CEO" >Active CEO</option>
+            <option value="Active" >Active</option>
+            <option value="Deleted" >Deleted</option>
+            <option value="admin" >admin</option>
+            <option value="Active_HR" >Active HR</option>
+            <option value="Active_Employer" >Active Employer</option>
+        </select>   
+        <button type="submit" class="w3-button w3-red">Search</button>  -->
+<!-- </div>
+</form> -->
 
 <jsp:include page="CEO_View"/>
+
 
 </body>
 </html>

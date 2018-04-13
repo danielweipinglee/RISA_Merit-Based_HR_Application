@@ -43,19 +43,6 @@ public class Employer_Search extends HttpServlet {
         try {
         	search = request.getParameter("search");
         	
-        	//for the dropdown list
-        	try{
-    			Connection conn = DBConnection.getconnectionToDatabase();
-    			Statement statement = conn.createStatement() ; 
-    			ResultSet resultset = statement.executeQuery("select Major from major;"); 
-    			while(resultset.next()){
-    				majorsList.add(resultset.getString("Major"));
-    			} 
-    			request.setAttribute("majorsList", majorsList);
-        	}catch(Exception e) {}
-        	
-        	System.out.println(majorsList);
-        	
         if(search.equals("Default")) {
         		query = "SELECT student.LegalFirstName, student.LegalLastName, student.Username, student.Phone, student.FieldofInterest, major.Major \r\n" + 
         				"FROM student inner join studentcollege on student.ID = studentcollege.Student_ID\r\n" + 

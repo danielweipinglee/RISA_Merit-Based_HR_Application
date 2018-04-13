@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RISA</title>
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <header>
@@ -13,12 +14,14 @@
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="CEO_View.jsp">View</a></li>
-    		<li><a href="CEO_Update.jsp">Update</a></li>
-    		<li><a href="CEO_Add.jsp">Add Student</a></li>
+    		<li><a href="CEO_View.jsp">View </a></li>
+    		<li><a href="CEO_Update.jsp">Update </a></li>
+    		<li><a href="CEO_Add.jsp">Add Student </a></li>
+    		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
     	</ul>
     </nav>
 	</div>		
+	
 </header>
 </body>
 </html>

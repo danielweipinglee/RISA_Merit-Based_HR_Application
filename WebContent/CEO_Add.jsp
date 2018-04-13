@@ -15,9 +15,9 @@
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="CEO_View.jsp">View</a></li>
-    		<li><a href="CEO_Update.jsp">Update</a></li>
-    		<li><a href="CEO_Add_HR.jsp">Add HR</a></li>
+    		<li><a href="CEO_View.jsp">View </a></li>
+    		<li><a href="CEO_Update.jsp">Update </a></li>
+    		<li><a href="CEO_Add.jsp">Add Student </a></li>
     		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
     	</ul>
     </nav>
@@ -42,7 +42,7 @@
       <label>Last Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="risaCode" id="risaCode" required>
-      <label>RIS Code</label></p>
+      <label>RISA Code</label></p>
       
       <button type="submit" class="w3-button w3-red">Add Student</button>
     </form>
