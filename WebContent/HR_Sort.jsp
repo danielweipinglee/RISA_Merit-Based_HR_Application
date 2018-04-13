@@ -21,10 +21,10 @@
     		
     	</ul>
     </nav>
-	</div>	
-	
-	<form method="get" action="HR_Search">
-<div class="SearchOptionsDiv" >
+	</div>
+	</header>
+		<form method="get" action="HR_Sort">
+<div class="SortOptionsDiv" >
         Search
         <select id="search" name="search" onchange="this.form.submit()">
             <option value="none" selected>None</option>
@@ -36,7 +36,6 @@
             <option value="Active_Employer">Active Employer</option>
         </select>   
 </div>
-</form>	
-</header>
+</form>			
 </body>
 </html>

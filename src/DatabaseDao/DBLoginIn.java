@@ -41,14 +41,14 @@ public class DBLoginIn {
 		try {
 			connection = DBConnection.getconnectionToDatabase();
 			
-			String selectQuery = "SELECT  student.ID,  userpassword.UserPassword, student.Username, accountstatus.Status from userpassword " + 
-					"Join student on userpassword.ID=student.ID " + 
-					"join accountstatus on accountstatus.ID = student.ID;";
+			String selectQuery = "SELECT  userpassword.*, student.*, accountstatus.* from student " +
+					"inner Join userpassword on userpassword.ID=student.UserPassword_ID " +
+					"inner join accountstatus on accountstatus.ID = student.AccountStatus_ID";
 			
 			String selectQuery2 = "SELECT  admin.ID, admin.Username, " + 
 					"accountstatus.Status, userpassword.UserPassword from admin " + 
-					"join accountstatus on accountstatus.ID = admin.AccountStatus_ID " + 
-					"join userpassword on userpassword.ID = admin.UserPassword_ID";
+					"inner join accountstatus on accountstatus.ID = admin.AccountStatus_ID " + 
+					"inner join userpassword on userpassword.ID = admin.UserPassword_ID";
 					
 			preparedStmt = connection.prepareStatement(selectQuery);
 			ResultSet set = preparedStmt.executeQuery();
@@ -56,7 +56,6 @@ public class DBLoginIn {
 			while(set.next()) {
 				mPassword = set.getString("UserPassword");
 				mUserName = set.getString("Username");
-				
 				if(mUserName.equals(userName) && mPassword.equals(password)) {
 					mId = set.getInt("ID");
 					mAccountType = set.getString("Status");
@@ -67,7 +66,6 @@ public class DBLoginIn {
 			preparedStmt2 = connection.prepareStatement(selectQuery2);
 			ResultSet set2 = preparedStmt2.executeQuery();
 			while(set2.next()) {
-				System.out.println("set");
 				mPassword = set2.getString("UserPassword");
 				mUserName = set2.getString("Username");
 

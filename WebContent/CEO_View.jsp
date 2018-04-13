@@ -43,10 +43,15 @@
 
 <form method="get" action="CEO_View">
 <div class="optionsDiv" >
-        Sort 
-        <select id="selectField" onchange="this.form.submit()" >
-        	<option value="None" selected>None</option>
-            <option value="Alphabetical">Alphabetical</option>
+        Sort Alphabetically: 
+        <select id="sort" name="sort" onchange="this.form.submit()">
+            <option value="none" selected>None</option>
+            <option value="Active_CEO">Active CEO</option>
+            <option value="Active">Active</option>
+            <option value="Deleted">Deleted</option>
+            <option value="Admin">Admin</option>
+            <option value="Active_HR">Active HR</option>
+            <option value="Active_Employer">Active Employer</option>
         </select>   
 </div>
 

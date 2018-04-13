@@ -5,6 +5,8 @@ public class ValidationRegex {
 	
 	private Pattern password;
 	private Pattern email;
+	private Pattern employerEmail;
+	private Pattern year;
 	
 	public ValidationRegex() {
 		/* (?=.{10}) Implies that the password has to be at least 10 char.
@@ -15,7 +17,9 @@ public class ValidationRegex {
 		 * @(ttu)\\.(edu) Implies that the end of the string has to be @ttu.edu
 		 */
 		this.password = Pattern.compile("^(?=.{10})(?=.*\\p{Upper})(?=.*\\p{Lower})(?=.*\\d)\\w+");
-		this.email = Pattern.compile("^\\w+\\.\\w+@(ttu)\\.(edu)");
+		this.email = Pattern.compile("^\\w+\\.?\\w+@(ttu)\\.(edu)");
+		this.employerEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+		this.year = Pattern.compile("^[12][0-9]{3}$");//checks years 1000 to 2999
 	}
 	
 	// password
@@ -25,5 +29,12 @@ public class ValidationRegex {
 	// email
 	public boolean isValidEmail(String Useremail) {
 		return email.matcher(Useremail).matches();
+	}
+	// non ttu email
+	public boolean isValidEmployerEmail(String Useremail) {
+		return employerEmail.matcher(Useremail).matches();
+	}
+	public boolean isYear(String yearEntered) {
+		return year.matcher(yearEntered).matches();
 	}
 }

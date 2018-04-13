@@ -41,7 +41,7 @@ public class Admin_Delete_CEO_HR_Employer extends HttpServlet {
 		int statusId = -1;
 		String firstName = request.getParameter("legalFirstName");
 		String lastName = request.getParameter("legalLastName");
-		String uniqueCode = request.getParameter("RISACode");
+		String uniqueCode = request.getParameter("risaCode");
 		String status = request.getParameter("status");
 		Admin_Delete del = new Admin_Delete();
 			

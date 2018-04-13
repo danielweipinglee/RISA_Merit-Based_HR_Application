@@ -35,7 +35,8 @@ public class CEO_View extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String search = null;
+		String search = "";
+		String sort = "";
 		String query = null;
 		PrintWriter out = response.getWriter();
 		
@@ -43,6 +44,7 @@ public class CEO_View extends HttpServlet {
 		response.setContentType("text/html");
         try {
         	search = request.getParameter("search");
+        	sort = request.getParameter("sort");
         	//System.out.print(search);
         if(search.equals("Active_CEO")) {
         		query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 0;";
@@ -68,7 +70,33 @@ public class CEO_View extends HttpServlet {
         else if(search.equals("None")){
         	query = "select LegalFirstName,LegalLastName,Username from student;";
         }
-        //System.out.print(query);
+        
+        //sort
+        if(sort.equals("Active_CEO")) {
+    		query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 0 order by LegalFirstName,LegalLastName ASC;";
+    	}
+        else if(sort.equals("Active")){
+    	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student where AccountStatus_ID = 1 order by LegalFirstName,LegalLastName ASC;";
+        }
+        else if(sort.equals("Deleted")){
+    	query = "SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student where AccountStatus_ID = 2 \n" + 
+    			"union\n" + 
+    			"SELECT LegalFirstName,LegalLastName,Email as Username FROM risa_hr.student \n" + 
+    			"where AccountStatus_ID = 2 order by LegalFirstName,LegalLastName ASC;";
+        }
+	    else if(sort.equals("admin")){
+	    	query ="SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 3 order by LegalFirstName,LegalLastName ASC;";
+	    }
+	    else if(sort.equals("Active_HR")) {
+	    	query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 4 order by LegalFirstName,LegalLastName ASC;";
+	    }
+	    else if(sort.equals("Active_Employer")){
+	    	query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 5 order by LegalFirstName,LegalLastName ASC;";
+	    }
+	    else if(sort.equals("None")){
+	    	query = "select LegalFirstName,LegalLastName,Username from student order by LegalFirstName,LegalLastName ASC;";
+	    }
+
         	connection = DBConnection.getconnectionToDatabase();
         	Statement stmt = connection.createStatement();
         	ResultSet rs = stmt.executeQuery(query);
@@ -105,19 +133,25 @@ public class CEO_View extends HttpServlet {
         			"    </nav>\n" + 
         			"	</div>		\n" + 
         			"</header>");
-        	out.println("<form method=\"get\" action=\"CEO_View\">\n" + 
+        	out.println(
+        			"<form method=\"get\" action=\"CEO_View\">\n" + 
         			"<div class=\"optionsDiv\" >\n" + 
-        			"        Sort \n" + 
-        			"        <select id=\"selectField\" onchange=\"location.reload()\" >\n" + 
-        			"            <option value=\"Alphabetical\" selected>Alphabetical</option>\n" + 
-        			"            <option value=\"else\">else</option>\n" + 
+        			"        Sort Alphabetically: \n" + 
+        			"        <select id=\"sort\" name=\"sort\" onchange=\"this.form.submit()\">\n" + 
+        			"            <option value=\"none\" selected>None</option>\n" + 
+        			"            <option value=\"Active_CEO\">Active CEO</option>\n" + 
+        			"            <option value=\"Active\">Active</option>\n" + 
+        			"            <option value=\"Deleted\">Deleted</option>\n" + 
+        			"            <option value=\"Admin\">Admin</option>\n" + 
+        			"            <option value=\"Active_HR\">Active HR</option>\n" + 
+        			"            <option value=\"Active_Employer\">Active Employer</option>\n" + 
         			"        </select>   \n" + 
         			"</div>\n" + 
         			"\n" + 
         			"<div class=\"SearchOptionsDiv\" >\n" + 
         			"        Search\n" + 
         			"        <select id=\"search\" name=\"search\" onchange=\"this.form.submit()\">\n" + 
-        			"            <option value=\"none\">None</option>\n" + 
+        			"            <option value=\"none\" selected>None</option>\n" + 
         			"            <option value=\"Active_CEO\">Active CEO</option>\n" + 
         			"            <option value=\"Active\">Active</option>\n" + 
         			"            <option value=\"Deleted\">Deleted</option>\n" + 

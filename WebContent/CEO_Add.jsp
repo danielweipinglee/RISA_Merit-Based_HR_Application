@@ -15,11 +15,10 @@
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="admin_View.jsp">View</a></li>
-    		<li><a href="admin_Update.jsp">Update</a></li>
-    		<li><a href="admin_Add.jsp">Add Student</a></li>
-    		<li><a href="admin_Add_HR.jsp">Create Account</a></li>
-    		<li><a href="admin_Delete_CEOandHRandEmployer.jsp">Delete CEO, HR, or Employer Account</a></li>
+    		<li><a href="CEO_View.jsp">View</a></li>
+    		<li><a href="CEO_Update.jsp">Update</a></li>
+    		<li><a href="CEO_Add_HR.jsp">Add HR</a></li>
+    		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
     	</ul>
     </nav>
 	</div>		
@@ -27,25 +26,25 @@
 </header>
 
 <div class="w3-container">
-  <h2>Delete Student</h2>
+  <h2>Add Student</h2>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
       <h3>Student Information</h3>
     </div>
 
-    <form class="w3-container" method="post" action="Admin_Delete_Student">
+    <form class="w3-container" method="post" action="CEO_Add">
       <p>
-      <input class="w3-input" type="text"name="legalFirstName" id="legalFirstName" required>
-      <label>First Name</label></p>
+      <input class="w3-input" type="text"name="legalFirstName" id="legalFirstName"  required>
+      <label for=Legal>First Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="legalLastName" id="legalLastName" required>
       <label>Last Name</label></p>
       <p>     
-      <input class="w3-input" type="text" name="risaCode" id="RISACode" required>
+      <input class="w3-input" type="text" name="risaCode" id="risaCode" required>
       <label>RIS Code</label></p>
       
-      <button type="submit" class="w3-button w3-red">Delete Student</button>
+      <button type="submit" class="w3-button w3-red">Add Student</button>
     </form>
   </div>
 </div>

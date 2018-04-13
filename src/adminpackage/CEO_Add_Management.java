@@ -1,7 +1,6 @@
 package adminpackage;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import adminpackage.Admin_Delete;
+import DatabaseDao.CreateDefaults;
+import DatabaseDao.CreateDefaultsManagement;
 
 /**
- * Servlet implementation class Admin_Delete_Student
+ * Servlet implementation class CEO_Add_Management
  */
-@WebServlet("/Admin_Delete_Student")
-public class Admin_Delete_Student extends HttpServlet {
+@WebServlet("/CEO_Add_Management")
+public class CEO_Add_Management extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Admin_Delete_Student() {
+    public CEO_Add_Management() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,39 +39,48 @@ public class Admin_Delete_Student extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String exists = null;
+
+		String Status [] = {"Active_CEO", "Active_HR", "admin", "Active_Employer"}; 
 		String firstName = request.getParameter("legalFirstName");
 		String lastName = request.getParameter("legalLastName");
 		String uniqueCode = request.getParameter("risaCode");
-		Admin_Delete del = new Admin_Delete();
-			
+		String status = request.getParameter("Status");
+		System.out.println(status);
+		int statusID = -1;
+
+	
+		CreateDefaultsManagement createAccount = new CreateDefaultsManagement();
+		
 		try {
-			exists = del.AccountExistsStudent(firstName, lastName, uniqueCode);
-			if(exists == null) {
-				request.setAttribute("successDeleteStudent", "");
-				request.setAttribute("errorDeleteStudent", "Error. Could not find student. Try again.");
-				request.getRequestDispatcher("/admin_Delete_Student.jsp").forward(request, response);
-				
-			}else{
 			
-				del.DeleteStudent(firstName, lastName, uniqueCode);
-				
-				if(del.isSuccess()) {
-					request.setAttribute("errorDeleteStudent", "");
-					request.setAttribute("successDeleteStudent", "Successfully Deleted.");
-					RequestDispatcher rd = request.getRequestDispatcher("/admin_Delete_Student.jsp");
-			        rd.forward(request, response);
-				}
-				else {
-					request.setAttribute("successDeleteStudent", "");
-					request.setAttribute("errorDeleteStudent", "Error Occured. Please try again later.");
-					request.getRequestDispatcher("/admin_Delete_Student.jsp").forward(request, response);
-				}
+			if(status.equals("Active_CEO")) {
+				statusID = 0;
 			}
-		}catch (SQLException e){
+			else if(status.equals("admin")) {
+				statusID = 3;
+			}
+			else if(status.equals("Active_HR")) {
+				statusID = 4;
+			}
+			else if(status.equals("Active_Employer")) {
+				statusID = 5;
+			}
+			createAccount.InputManagement(firstName, lastName, uniqueCode, statusID);
+
+
+			if(createAccount.isSuccessful()) {
+					request.setAttribute("success", "Successfully Registered");
+					RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
+			        rd.forward(request, response);
+			}
+			else {
+					request.setAttribute("errorMsg", "Error Occured. Please try again later.");
+					request.getRequestDispatcher("/CEO_Add_Employer.jsp").forward(request, response);
+			}
+			
+		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
-	}
-
+}
 }

@@ -21,22 +21,7 @@
     		
     	</ul>
     </nav>
-	</div>	
-	
-	<form method="get" action="HR_Search">
-<div class="SearchOptionsDiv" >
-        Search
-        <select id="search" name="search" onchange="this.form.submit()">
-            <option value="none" selected>None</option>
-            <option value="Active_CEO">Active CEO</option>
-            <option value="Active">Active</option>
-            <option value="Deleted">Deleted</option>
-            <option value="Admin">Admin</option>
-            <option value="Active_HR">Active HR</option>
-            <option value="Active_Employer">Active Employer</option>
-        </select>   
-</div>
-</form>	
+	</div>		
 </header>
 </body>
 </html>

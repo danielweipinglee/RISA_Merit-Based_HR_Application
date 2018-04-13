@@ -25,7 +25,7 @@ input[type=text], input[type=password] {
 }
 
 button {
-    background-color: #ff0000;
+    background-color: #cc0000;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -50,30 +50,12 @@ img.pic {
     
 }
 
-.container {
-    padding: 30px;
-}
-
-.container-main {
-  width: 400;
-  padding: 10% 0 0;
-  margin: auto;  
-}
-
 .login-form {
 	
 }
 
 .register-form{
 	display: none;
-}
-
-div.changethis{
-	display: none;
-}
-
-.forgot-form{
-	
 }
 
 .message a {

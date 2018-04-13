@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="DatabaseDao.DBConnection" import="java.sql.*" import= "java.util.ArrayList"%>
+    pageEncoding="ISO-8859-1" import="DatabaseDao.DBConnection" import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,18 +17,20 @@
     		<li><a href="Employer_Sort.jsp">Sort</a></li>
     		<li><a href="Employer_Search.jsp">Search</a></li>
     	</ul>
+    	
     </nav>
-	</div>
+	</div>		
+	
+</header>
 	<form method="get" action="Employer_Search">	
 		<%
     try{//for the dropdown menu
     	Connection conn = DBConnection.getconnectionToDatabase();
         Statement statement = conn.createStatement() ;
-        ResultSet resultset =statement.executeQuery("select Major from major;");
-        
+        ResultSet resultset =statement.executeQuery("select Major from major;") ;
 	%>
 	<br>
-    <select name="search" onchange="this.form.submit()">
+    Alphabetical: <select name="search" onchange="this.form.submit()">
     <%  while(resultset.next()){ %>
             <option><%= resultset.getString("Major")%></option>
     <% } %>
@@ -41,8 +43,6 @@
        }
 	%>	
 	</form>
-	
-</header>
 
 </body>
 </html>

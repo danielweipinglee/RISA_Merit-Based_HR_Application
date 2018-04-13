@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,16 +15,17 @@ import javax.servlet.http.HttpServletResponse;
 import DatabaseDao.DBConnection;
 
 /**
- * Servlet implementation class Employer_Search
+ * Servlet implementation class Employer_Sort
  */
-@WebServlet("/Employer_Search")
-public class Employer_Search extends HttpServlet {
+@WebServlet("/Employer_Sort")
+public class Employer_Sort extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection connection = null;
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Employer_Search() {
+    public Employer_Sort() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,34 +37,20 @@ public class Employer_Search extends HttpServlet {
 		String search = "";
 		String query = "";
 		PrintWriter out = response.getWriter();
-		ArrayList<String> majorsList = new ArrayList<String>();
-
+		
 		response.setContentType("text/html");
         try {
         	search = request.getParameter("search");
         	
-        	/*//for the dropdown list
-        	try{
-    			Connection conn = DBConnection.getconnectionToDatabase();
-    			Statement statement = conn.createStatement() ; 
-    			ResultSet resultset = statement.executeQuery("select Major from major;"); 
-    			while(resultset.next()){
-    				majorsList.add(resultset.getString("Major"));
-    			} 
-    			request.setAttribute("majorsList", majorsList);
-        	}catch(Exception e) {}
-        	
-        	System.out.println(majorsList);*/
-        	
         if(search.equals("Default")) {
         		query = "SELECT student.LegalFirstName, student.LegalLastName, student.Username, student.Phone, student.FieldofInterest, major.Major \r\n" + 
         				"FROM student inner join studentcollege on student.ID = studentcollege.Student_ID\r\n" + 
-        				"inner join major on major.ID = studentcollege.Major_ID;";
+        				"inner join major on major.ID = studentcollege.Major_ID order by LegalFirstName, LegalLastName ASC;";
         	}
         else{
         	query = "SELECT student.LegalFirstName, student.LegalLastName, student.Username, student.Phone, student.FieldofInterest, major.Major \r\n" + 
         			"FROM student inner join studentcollege on student.ID = studentcollege.Student_ID\r\n" + 
-        			"inner join major on major.ID = studentcollege.Major_ID and major = '" + search + "'; ";
+        			"inner join major on major.ID = studentcollege.Major_ID and major = '" + search + "' order by LegalFirstName, LegalLastName ASC; ";
         }
         	connection = DBConnection.getconnectionToDatabase();
         	Statement stmt = connection.createStatement();
@@ -75,20 +61,6 @@ public class Employer_Search extends HttpServlet {
         			"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n" + 
         			"<title>RISA</title>");
         	out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/active_CEO.css\">");
-        	out.println("<script language=\"javascript\">\n" + 
-        			"            function addRow(tableID) {\n" + 
-        			"                var table = document.getElementById(tableID);\n" + 
-        			"                var rowCount = table.rows.length;\n" + 
-        			"                var row = table.insertRow(rowCount); \n" + 
-        			"                var cell0 = row.insertCell(0);\n" + 
-        			"                var element1 = document.createElement(\"input\");\n" + 
-        			"                element1.type = \"text\";\n" + 
-        			"                element1.name = \"line\"+(rowCount+1);\n" + 
-        			"                element1.value=\"\"+(rowCount+1);\n" + 
-        			"                cell0.appendChild(element1);\n" + 
-        			"                document.getElementById(\"countofrows\").value=table.rows.length;\n" + 
-        			"            }\n" + 
-        			"        </script>");
         	
         	out.println("<header>\r\n" + 
         			"	<div class=\"container\">\r\n" + 
@@ -99,23 +71,23 @@ public class Employer_Search extends HttpServlet {
         			"    		<li><a href=\"Employer_Sort.jsp\">Sort</a></li>\r\n" + 
         			"    		<li><a href=\"Employer_Search.jsp\">Search</a></li>\r\n" + 
         			"    	</ul>\r\n" + 
+        			"    	\r\n" + 
         			"    </nav>\r\n" + 
-        			"	</div>\r\n" + 
+        			"	</div>		\r\n" + 
+        			"	\r\n" + 
+        			"</header>\r\n" + 
         			"	<form method=\"get\" action=\"Employer_Search\">	\r\n" + 
         			"		<%\r\n" + 
         			"    try{//for the dropdown menu\r\n" + 
-        			"    	ArrayList<String> majorsList = (ArrayList<String>)request.getAttribute(\"majorsList\"); "
-        			+ "Iterator<String> i = majorsList.iterator();"
-        			+ "Connection conn = DBConnection.getconnectionToDatabase();\r\n" + 
+        			"    	Connection conn = DBConnection.getconnectionToDatabase();\r\n" + 
         			"        Statement statement = conn.createStatement() ;\r\n" + 
-        			"        ResultSet resultset =statement.executeQuery(\"select Major from major;\") ; "+
+        			"        ResultSet resultset =statement.executeQuery(\"select Major from major;\") ;\r\n" + 
         			"	%>\r\n" + 
         			"	<br>\r\n" + 
-        			"    <select name=\"search\" onchange=\"this.form.submit()\">\r\n" + 
+        			"    Alphabetical: <select name=\"search\" onchange=\"this.form.submit()\">\r\n" + 
         			"    <%  while(resultset.next()){ %>\r\n" + 
-        			"			while (i.hasNext()) { %>"+
-        			"            <option> <%= i.next()%></option>\r\n" + 
-        			"    <% }} %>\r\n" + 
+        			"            <option><%= resultset.getString(\"Major\")%></option>\r\n" + 
+        			"    <% } %>\r\n" + 
         			"    </select>\r\n" + 
         			"	<br>\r\n" + 
         			"	<%\r\n" + 
@@ -124,9 +96,7 @@ public class Employer_Search extends HttpServlet {
         			"          out.println(e);\r\n" + 
         			"       }\r\n" + 
         			"	%>	\r\n" + 
-        			"	</form>\r\n" + 
-        			"	\r\n" + 
-        			"</header>");
+        			"	</form>");
         	out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
         	out.println("<table class=\"w3-table-all\">");
             out.println("<thead><tr class=\"w3-red\"><th>First Name</th><th>Last Name</th><th>Username</th><th>Phone</th><th>Field of Interest</th>"
@@ -143,6 +113,7 @@ public class Employer_Search extends HttpServlet {
             
         }
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

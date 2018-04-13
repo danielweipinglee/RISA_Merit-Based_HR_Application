@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DatabaseDao.DBLoginIn;
 import Regex.ValidationRegex;
@@ -38,26 +39,33 @@ public class LoginValidation extends HttpServlet {
 
 		String userName = request.getParameter("username").trim();
 		String password = request.getParameter("password").trim();
-		String AccountType[] = {"Active","Active_CEO","Deleted","Admin","Active_Hr", "Active_Employee"};
+		String AccountType[] = {"Active","Active_CEO","Deleted","admin","Active_Hr", "Active_Employee"};
 		DBLoginIn loginIn = new DBLoginIn();
+		
+		HttpSession session = request.getSession();
+		    session.setAttribute("UserName", userName);
 		
 		try {
 			loginIn.getInfomation(userName, password);
 			if(loginIn.getFound()) {
 				if(AccountType[0].equals(loginIn.getmAccountType())) {
-					response.sendRedirect("mainpage.jsp");	
+					response.sendRedirect("Student_Main.jsp");	
 				}
-				else if(AccountType[1].equals(loginIn.getmAccountType()) || AccountType[4].equals(loginIn.getmAccountType()) ) {
-					//TODO Go to Active CEO page.
-					System.out.println("Active_CEO or hr");
+				else if(AccountType[1].equals(loginIn.getmAccountType())) {
+					response.sendRedirect("CEO_Main.jsp");
 				}
-
+				else if(AccountType[2].equals(loginIn.getmAccountType())){
+					response.sendRedirect("index_invalid.jsp");
+				} 
+				else if(AccountType[3].equals(loginIn.getmAccountType())){
+					response.sendRedirect("admin_main.jsp");
+				}
+				else if( AccountType[4].equals(loginIn.getmAccountType()) ) {
+					response.sendRedirect("HR_Main.jsp");
+				}
 				else if(AccountType[5].equals(loginIn.getmAccountType())) {
-					response.sendRedirect("Employee");
-				} else {
-					//TODO Go to Admin Page.
-					System.out.println("Admin");
-				}
+					response.sendRedirect("Employer_Main.jsp");
+				} 
 			}
 			else {
 			response.sendRedirect("index_invalid.jsp");
@@ -84,6 +92,23 @@ public class LoginValidation extends HttpServlet {
 				String risacode = request.getParameter("risacode");
 				String risaposition = request.getParameter("risaposition");
 				String squestion = request.getParameter("securityquestion");
+				String phone = request.getParameter("phonenumber");
+				String interest = request.getParameter("interest");
+				String degree = request.getParameter("degree");
+				String college = request.getParameter("college");
+				String concentration = request.getParameter("concentration");
+				String month = request.getParameter("gradmonth");
+				String year = request.getParameter("gradyear");
+				String major = request.getParameter("major");
+				
+				if(major.equals("other")) {
+					major = request.getParameter("majorother");
+					if(major == null || major == "") {
+						request.setAttribute("errorMsg", "Please enter major.");
+						request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);	
+				    }
+				}
+				
 				
 				ValidationRegex check = new ValidationRegex();
 				RegisterStudent registerStudent = new RegisterStudent();
@@ -100,7 +125,11 @@ public class LoginValidation extends HttpServlet {
 					request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
 	            }
 				else if(check.isValidPassword(password) == false) {
-					request.setAttribute("errorMsg", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 8 characters long.");
+					request.setAttribute("errorMsg", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 10 characters long.");
+					request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
+				}
+				else if(check.isYear(year) == false) {
+					request.setAttribute("errorMsg", "Please enter a valid year.");
 					request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
 				}
 				else if(!password.equals(password2)) {
@@ -115,7 +144,7 @@ public class LoginValidation extends HttpServlet {
 				else {
 
 					registerStudent.insertThenUpdate(fname,lname,email,username,password,answer,
-							risacode,risaposition,squestion,squestionID);
+							risacode,risaposition,squestion,squestionID,phone,interest,college,degree,concentration,year,month,major);
 					
 					if(registerStudent.isSuccess()) {
 						request.setAttribute("success", "Successfully Registered.");
