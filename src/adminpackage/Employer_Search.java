@@ -43,7 +43,7 @@ public class Employer_Search extends HttpServlet {
         try {
         	search = request.getParameter("search");
         	
-        	/*//for the dropdown list
+        	//for the dropdown list
         	try{
     			Connection conn = DBConnection.getconnectionToDatabase();
     			Statement statement = conn.createStatement() ; 
@@ -54,7 +54,7 @@ public class Employer_Search extends HttpServlet {
     			request.setAttribute("majorsList", majorsList);
         	}catch(Exception e) {}
         	
-        	System.out.println(majorsList);*/
+        	System.out.println(majorsList);
         	
         if(search.equals("Default")) {
         		query = "SELECT student.LegalFirstName, student.LegalLastName, student.Username, student.Phone, student.FieldofInterest, major.Major \r\n" + 
@@ -101,31 +101,24 @@ public class Employer_Search extends HttpServlet {
         			"    	</ul>\r\n" + 
         			"    </nav>\r\n" + 
         			"	</div>\r\n" + 
-        			"	<form method=\"get\" action=\"Employer_Search\">	\r\n" + 
-        			"		<%\r\n" + 
-        			"    try{//for the dropdown menu\r\n" + 
-        			"    	ArrayList<String> majorsList = (ArrayList<String>)request.getAttribute(\"majorsList\"); "
-        			+ "Iterator<String> i = majorsList.iterator();"
-        			+ "Connection conn = DBConnection.getconnectionToDatabase();\r\n" + 
-        			"        Statement statement = conn.createStatement() ;\r\n" + 
-        			"        ResultSet resultset =statement.executeQuery(\"select Major from major;\") ; "+
-        			"	%>\r\n" + 
-        			"	<br>\r\n" + 
-        			"    <select name=\"search\" onchange=\"this.form.submit()\">\r\n" + 
-        			"    <%  while(resultset.next()){ %>\r\n" + 
-        			"			while (i.hasNext()) { %>"+
-        			"            <option> <%= i.next()%></option>\r\n" + 
-        			"    <% }} %>\r\n" + 
-        			"    </select>\r\n" + 
-        			"	<br>\r\n" + 
-        			"	<%\r\n" + 
-        			"       }catch(Exception e){\r\n" + 
-        			"    	   \r\n" + 
-        			"          out.println(e);\r\n" + 
-        			"       }\r\n" + 
-        			"	%>	\r\n" + 
-        			"	</form>\r\n" + 
-        			"	\r\n" + 
+        			"	<form method=\"get\" action=\"Employer_Search\">	\r\n");
+        			try {
+        				Connection conn = DBConnection.getconnectionToDatabase();
+        				Statement statement = conn.createStatement() ;
+        		        ResultSet resultset =statement.executeQuery("select Major from major;");
+        				out.println("    <select name=\"search\" onchange=\"this.form.submit()\">\r\n");
+        				while(resultset.next()){ 
+	        			out.println("<option> ");
+	        			String major = resultset.getString("Major");
+	        			out.println(major);
+	        			out.println("</option>\r\n");
+        				}
+	        			out.println("</select>\r\n" + 
+	        			"	<br>\r\n"); 
+        			}catch(Exception e) {
+        				out.println(e);
+        			}
+        			out.println("	</form>\r\n" + 
         			"</header>");
         	out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
         	out.println("<table class=\"w3-table-all\">");
