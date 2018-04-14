@@ -72,25 +72,37 @@ public class CEO_Add_Management extends HttpServlet {
 
 			if(AccountStatus.equals("Active_CEO")) {
 				if(createAccount.isSuccessful()) {
-						request.setAttribute("success", "Successfully Registered");
+						request.setAttribute("success", "Successfully Created Account.");
 						RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
 				        rd.forward(request, response);
 				}
 				else {
-						request.setAttribute("errorMsg", "Error Occured. Please try again later.");
+						request.setAttribute("errorCreate", "Error Occured. Please try again later.");
 						request.getRequestDispatcher("/CEO_Add_Employer.jsp").forward(request, response);
 				}
 			}
 			
 			if(AccountStatus.equals("admin")) {
 				if(createAccount.isSuccessful()) {
-						request.setAttribute("success", "Successfully Registered");
+						request.setAttribute("success", "Successfully Created Account.");
 						RequestDispatcher rd = request.getRequestDispatcher("/admin_main.jsp");
 				        rd.forward(request, response);
 				}
 				else {
-						request.setAttribute("errorMsg", "Error Occured. Please try again later.");
+						request.setAttribute("errorCreate", "Error Occured. Please try again later.");
 						request.getRequestDispatcher("/admin_Add_HR.jsp").forward(request, response);
+				}
+			}
+			
+			if(AccountStatus.equals("Active_HR")) {
+				if(createAccount.isSuccessful()) {
+						request.setAttribute("success", "Successfully Created Account.");
+						RequestDispatcher rd = request.getRequestDispatcher("/HR_Main.jsp");
+				        rd.forward(request, response);
+				}
+				else {
+						request.setAttribute("errorCreate", "Error Occured. Please try again later.");
+						request.getRequestDispatcher("/HR_Add_Administrative.jsp").forward(request, response);
 				}
 			}
 		} catch (Exception e) {

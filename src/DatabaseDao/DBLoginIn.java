@@ -89,6 +89,10 @@ public class DBLoginIn {
 			if (preparedStmt != null) {
 				preparedStmt.close();
 			}
+			
+			if( preparedStmt2 != null) {
+				preparedStmt2.close();
+			}
 
 			if (connection != null) {
 				connection.close();

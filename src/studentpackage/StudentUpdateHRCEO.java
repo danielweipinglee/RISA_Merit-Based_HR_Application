@@ -33,7 +33,7 @@ public class StudentUpdateHRCEO {
 			selectstmt = connection.prepareStatement(selectQuery);
 			selectstmt.setString(1, studentName);
 			ResultSet set = selectstmt.executeQuery();
-			set.next();
+			set.first();
 			String studentID = set.getString("ID");
 	
 			updatestmt = connection.prepareStatement(updateQuery);

@@ -22,12 +22,23 @@ public class CreateDefaultsManagement {
 		PreparedStatement countStmt = null;
 		PreparedStatement countStmt2 = null;
 		PreparedStatement organizationStmt = null;
+		PreparedStatement validStmt = null;
 
 		Connection connection = null;
 		
 
 		try {
 			connection = DBConnection.getconnectionToDatabase();
+			
+			String vaildMemeber = "Select RISACode from risa_hr.admin " +
+					"where RISACode = ?";
+			validStmt = connection.prepareStatement(vaildMemeber);
+			validStmt.setString(1, code);
+
+			ResultSet validSet = validStmt.executeQuery();
+			if(!validSet.first()) {
+	
+
 			String countAdmin = "select count(ID) as CountTotal from risa_hr.admin";
 			String countOrganization = "select count(ID) as CountTotal from risa_hr.organization";
 			String adminQuery = "insert into admin values(?, ?, ?, ?, ?, ?, ?, ?)"; 
@@ -36,12 +47,12 @@ public class CreateDefaultsManagement {
 			
 			countStmt = connection.prepareStatement(countAdmin);
 			ResultSet countSet = countStmt.executeQuery();
-			countSet.next();
+			countSet.first();
 			int adminID = countSet.getInt("CountTotal") + 1;
 
 			countStmt2 = connection.prepareStatement(countOrganization);
 			ResultSet countSet2 = countStmt2.executeQuery();
-			countSet2.next();
+			countSet2.first();
 			int organizationID = countSet2.getInt("CountTotal") + 1;
 
 			adminStmt = connection.prepareStatement(adminQuery);
@@ -61,8 +72,10 @@ public class CreateDefaultsManagement {
 			organizationStmt.executeUpdate();
 			
 			successful = true;
-
-
+			}
+			else {
+			successful = false;
+			}
 		} catch (SQLException e) {
 
 		} finally {
@@ -78,6 +91,9 @@ public class CreateDefaultsManagement {
 			}
 			if (organizationStmt != null) {
 				organizationStmt.close();
+			}
+			if (validStmt != null) {
+				validStmt.close();
 			}
 			if (connection != null) {
 				connection.close();

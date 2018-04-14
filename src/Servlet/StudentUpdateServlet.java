@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DatabaseDao.CreateDefaults;
+import Regex.ValidationRegex;
 import studentpackage.StudentUpdate;
 
 /**
@@ -43,18 +44,26 @@ public class StudentUpdateServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		String phoneNumber = request.getParameter("phone");
+		ValidationRegex validationRegex = new ValidationRegex();
 			
 		try {
 			HttpSession session = request.getSession(false);
 			String AccountID = (String) session.getAttribute("AccountID");
-			String AccountStatus = (String) session.getAttribute("AccountStatus");
 			
-			StudentUpdate studentUpdate = new StudentUpdate();
-			studentUpdate.updateStudent(phoneNumber, AccountID);
+			if(validationRegex.isValidphoneNumber(phoneNumber)) { 
+				StudentUpdate studentUpdate = new StudentUpdate();
+				studentUpdate.updateStudent(phoneNumber, AccountID);
 
-			request.setAttribute("success", "Successfully Update");
-			RequestDispatcher rd = request.getRequestDispatcher("/Student_Main.jsp");
-			rd.forward(request, response);			
+				request.setAttribute("success", "Successfully Updated.");
+				RequestDispatcher rd = request.getRequestDispatcher("/Student_Main.jsp");
+				rd.forward(request, response);
+			}
+			else {
+				request.setAttribute("errorUpdate", "Input was a invalid phone number.");
+				request.getRequestDispatcher("/Student_Update.jsp").forward(request, response);
+			}
+			
+			
 			
 		} catch (Exception e) {
 			

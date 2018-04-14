@@ -55,21 +55,21 @@ public class StudentUpdateHRCEOServlet extends HttpServlet {
 			
 			if(AccountStatus.equals("Active_CEO")) {
 				
-				request.setAttribute("success", "Successfully Update");
+				request.setAttribute("success", "Successfully Updated.");
 				RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
 		        rd.forward(request, response);
 			}
 			
 			else if(AccountStatus.equals("Active_HR")) {
 				
-				request.setAttribute("success", "Successfully Update");
+				request.setAttribute("success", "Successfully Updated.");
 				RequestDispatcher rd = request.getRequestDispatcher("/HR_Main.jsp");
 		        rd.forward(request, response);
 			}
 			
 			else if(AccountStatus.equals("admin")) {
 				
-				request.setAttribute("success", "Successfully Update");
+				request.setAttribute("success", "Successfully Updated.");
 				RequestDispatcher rd = request.getRequestDispatcher("/admin_main.jsp");
 		        rd.forward(request, response);
 			}
