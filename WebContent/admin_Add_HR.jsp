@@ -33,9 +33,11 @@
   <div class="w3-card-4">
     <div class="w3-container w3-red">
       <h3>Create Administrative Account</h3>
+      	
     </div>
 
     <form class="w3-container" method="post" action="CEO_Add_Management">
+    <div style="color: #FF0000;">${errorCreate}</div><br>
       <p>
       <input class="w3-input" type="text"name="legalFirstName" id="HRlegalFirstName" required>
       <label>First Name</label></p>
@@ -68,7 +70,7 @@
 	%>
 	<br>
       
-      <button type="submit" class="w3-button w3-red">Add HR</button>
+      <button type="submit" class="w3-button w3-red">Add Account</button>
     </form>
   </div>
 </div>

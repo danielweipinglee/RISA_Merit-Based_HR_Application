@@ -33,6 +33,7 @@
 
     <form class="w3-container" method="post" action="StudentUpdateHRCEOServlet">
       <p>
+      	<div style="color: #FF0000;">${errorUpdate}</div><br>
       	<input class="w3-input" type="text" name="name" id="studentName" required>
       	<label>Student Username</label></p>
       <p>   

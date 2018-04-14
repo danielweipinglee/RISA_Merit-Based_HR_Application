@@ -25,6 +25,7 @@
 
 <div class="w3-container">
   <h2>Welcome to RISA Merit-Based HR Application</h2>
+    <div style="color: #000000;">${success}</div><br>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">

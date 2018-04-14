@@ -18,7 +18,7 @@
     		<li><a href="CEO_View.jsp">View </a></li>
     		<li><a href="CEO_Update.jsp">Update </a></li>
     		<li><a href="CEO_Add.jsp">Add Student </a></li>
-    		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
+    		<li><a href="CEO_Add_Employer.jsp">Create Account</a></li>
     	</ul>
     </nav>
 	</div>		
@@ -34,6 +34,7 @@
     </div>
 
     <form class="w3-container" method="post" action="CEO_Add_Management" Id="employer">
+        <div style="color: #FF0000;">${errorCreate}</div><br>
       <p>
       <input class="w3-input" type="text"name="legalFirstName" id="EmployerlegalFirstName" required>
       <label>First Name</label></p>
@@ -66,7 +67,7 @@
 	%>
 	<br>
       
-      <button type="submit" class="w3-button w3-red">Add Employer</button>
+      <button type="submit" class="w3-button w3-red">Add Account</button>
     </form>
   </div>
 </div>

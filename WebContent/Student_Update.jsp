@@ -33,6 +33,7 @@
     </div>
 
     <form class="w3-container" method="post" action="StudentUpdateServlet">
+    	<div style="color: #FF0000;">${errorUpdate}</div><br>
       <p>
       <input class="w3-input" type="text" name="phone" id="studentPhone" required>
       <label>Phone Number</label></p>

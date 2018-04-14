@@ -31,6 +31,7 @@
     </div>
 
     <form class="w3-container" method="post" action="CEO_Add">
+        	<div style="color: #FF0000;">${errorCreate}</div><br>
       <p>
       <input class="w3-input" type="text"name="legalFirstName" id="legalFirstName" required>
       <label>First Name</label></p>

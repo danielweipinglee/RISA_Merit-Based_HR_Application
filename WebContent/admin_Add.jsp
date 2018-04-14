@@ -34,6 +34,7 @@
     <div class="w3-container w3-red">
       <h3>Create Student Account</h3>
     </div>
+    	<div style="color: #FF0000;">${errorCreate}</div><br>
 
     <form class="w3-container" method="post" action="CEO_Add">
       <p>
