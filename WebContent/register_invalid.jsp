@@ -42,9 +42,9 @@
     <label for="position"><b>Risa Position</b></label>
     <input type="text" placeholder="Enter Risa position" name="risaposition" id="risaposition" value="<%=request.getParameter("risaposition")!=null?request.getParameter("risaposition"):""%>" required>
     
-      	<label for="phonenumber"><b>Phone Number</b></label>
-    <input type="text" placeholder="Enter phone number" name="phonenumber" id="phonenumber" value="<%=request.getParameter("phonenumber")!=null?request.getParameter("phonenumber"):""%>" required>
-    
+      	<label for="phonenumber" ><b>Phone Number</b></label>
+    <input type="tel" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" 
+    maxlength="12" placeholder="Example: 000-000-0000" name="phonenumber" id="phonenumber" title="000-000-0000" value="<%=request.getParameter("phonenumber")!=null?request.getParameter("phonenumber"):""%>" required>   
          <br>
     <label for="major"><b>Major</b></label><br><br>
     <select id="major" name="major"  onchange="CheckOther(this);" required>
