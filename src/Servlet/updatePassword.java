@@ -43,6 +43,7 @@ public class updatePassword extends HttpServlet {
 		String psw = null;
 		String psw2 = null;
 		String risacode = null;
+		String AdminorStudent = null;
 		try {
 			psw = request.getParameter("psw");
 			psw2 = request.getParameter("psw2");
@@ -59,7 +60,8 @@ public class updatePassword extends HttpServlet {
 				request.getRequestDispatcher("/updatepassword.jsp").forward(request, response);	
 			}
 			else {
-				updatePassword.newPassword(risacode,psw);
+				AdminorStudent = updatePassword.isAdminorStudent(risacode);
+				updatePassword.newPassword(risacode,psw,AdminorStudent);
 				
 				if(updatePassword.isSuccess()) {
 					request.setAttribute("successPassword", "Successfully set new password.");

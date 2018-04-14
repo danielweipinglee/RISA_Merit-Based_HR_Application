@@ -37,16 +37,14 @@ public class Employer_Search extends HttpServlet {
 		String search = "";
 		String query = "";
 		PrintWriter out = response.getWriter();
-		ArrayList<String> majorsList = new ArrayList<String>();
+		
 
 		response.setContentType("text/html");
         try {
         	search = request.getParameter("search");
         	
         if(search.equals("Default")) {
-        		query = "SELECT student.LegalFirstName, student.LegalLastName, student.Username, student.Phone, student.FieldofInterest, major.Major \r\n" + 
-        				"FROM student inner join studentcollege on student.ID = studentcollege.Student_ID\r\n" + 
-        				"inner join major on major.ID = studentcollege.Major_ID;";
+        	response.sendRedirect("Employer_View.jsp");
         	}
         else{
         	query = "SELECT student.LegalFirstName, student.LegalLastName, student.Username, student.Phone, student.FieldofInterest, major.Major \r\n" + 
@@ -56,44 +54,33 @@ public class Employer_Search extends HttpServlet {
         	connection = DBConnection.getconnectionToDatabase();
         	Statement stmt = connection.createStatement();
         	ResultSet rs = stmt.executeQuery(query);
-        	out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" + 
-        			"<html>\n" + 
-        			"<head>\n" + 
-        			"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n" + 
-        			"<title>RISA</title>");
-        	out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/active_CEO.css\">");
-        	out.println("<script language=\"javascript\">\n" + 
-        			"            function addRow(tableID) {\n" + 
-        			"                var table = document.getElementById(tableID);\n" + 
-        			"                var rowCount = table.rows.length;\n" + 
-        			"                var row = table.insertRow(rowCount); \n" + 
-        			"                var cell0 = row.insertCell(0);\n" + 
-        			"                var element1 = document.createElement(\"input\");\n" + 
-        			"                element1.type = \"text\";\n" + 
-        			"                element1.name = \"line\"+(rowCount+1);\n" + 
-        			"                element1.value=\"\"+(rowCount+1);\n" + 
-        			"                cell0.appendChild(element1);\n" + 
-        			"                document.getElementById(\"countofrows\").value=table.rows.length;\n" + 
-        			"            }\n" + 
-        			"        </script>");
-        	
-        	out.println("<header>\r\n" + 
+        	out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n" + 
+        			"<html>\r\n" + 
+        			"<head>\r\n" + 
+        			"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\r\n" + 
+        			"<title>RISA</title>\r\n" + 
+        			"<link rel=\"stylesheet\" type=\"text/css\" href=\"css/active_CEO.css\">\r\n" + 
+        			"<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\r\n" + 
+        			"</head>\r\n" + 
+        			"<body>\r\n" + 
+        			"<header>\r\n" + 
         			"	<div class=\"container\">\r\n" + 
         			"    <img src=\"images/White.png\" alt=\"pic\" class=\"pic\" >\r\n" + 
         			"    <nav>\r\n" + 
         			"    	<ul>\r\n" + 
         			"    		<li><a href=\"Employer_View.jsp\">View</a></li>\r\n" + 
-        			"    		<li><a href=\"Employer_Sort.jsp\">Sort</a></li>\r\n" + 
-        			"    		<li><a href=\"Employer_Search.jsp\">Search</a></li>\r\n" + 
         			"    	</ul>\r\n" + 
         			"    </nav>\r\n" + 
-        			"	</div>\r\n" + 
-        			"	<form method=\"get\" action=\"Employer_Search\">	\r\n");
+        			"	</div>		\r\n" + 
+        			"	\r\n" + 
+        			"</header>\r\n" + 
+        			"<div style=\"float:right; float:top; padding-right:10px; padding-top:15px\" class=\"optionsDiv\">\r\n" + 
+        			"<form action=\"Employer_Search\" method=\"get\">");
         			try {
         				Connection conn = DBConnection.getconnectionToDatabase();
         				Statement statement = conn.createStatement() ;
-        		        ResultSet resultset =statement.executeQuery("select Major from major;");
-        				out.println("    <select name=\"search\" onchange=\"this.form.submit()\">\r\n");
+        		        ResultSet resultset =statement.executeQuery("select DISTINCT Major from major;");
+        				out.println("    <select name=\"search\" id=\"search\">\r\n");
         				while(resultset.next()){ 
 	        			out.println("<option> ");
 	        			String major = resultset.getString("Major");
@@ -105,8 +92,30 @@ public class Employer_Search extends HttpServlet {
         			}catch(Exception e) {
         				out.println(e);
         			}
-        			out.println("	</form>\r\n" + 
-        			"</header>");
+        			out.println("<button type=\"submit\" class=\"w3-button w3-red\">Search</button> </form></div>\r\n" + 
+        					"<div style=\"float:right; float:top; padding-right:10px; padding-top:15px\" class=\"optionsDiv\">\r\n" + 
+        					"<form action=\"Employer_Sort\" method=\"get\">");
+        			try {
+        				Connection conn = DBConnection.getconnectionToDatabase();
+        				Statement statement = conn.createStatement() ;
+        		        ResultSet resultset =statement.executeQuery("select DISTINCT Major from major;");
+        				out.println("    <select name=\"sort\" id=\"sort\">\r\n");
+        				while(resultset.next()){ 
+	        			out.println("<option> ");
+	        			String major = resultset.getString("Major");
+	        			out.println(major);
+	        			out.println("</option>\r\n");
+        				}
+	        			out.println("</select>\r\n" + 
+	        			"	<br>\r\n"); 
+        			}catch(Exception e) {
+        				out.println(e);
+        			}
+        	out.println("<button type=\"submit\" class=\"w3-button w3-red\">Sort</button> \r\n" + 
+        			"</form>\r\n" + 
+        			"</div>\r\n" + 
+        			"<h2>Select a category to search the student file</h2>"
+        			+ "<h3>Searched: " + search + "</h3>");
         	out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
         	out.println("<table class=\"w3-table-all\">");
             out.println("<thead><tr class=\"w3-red\"><th>First Name</th><th>Last Name</th><th>Username</th><th>Phone</th><th>Field of Interest</th>"
@@ -116,7 +125,7 @@ public class Employer_Search extends HttpServlet {
             rs.getString("LegalLastName") + "</td><td>" + rs.getString("Username") + "</td><td>" + rs.getString("Phone") + "</td><td>" +
                 		rs.getString("FieldofInterest") + "</td><td>" + rs.getString("Major") + "</td></tr>"); 
             }
-            out.println("</table>");
+            out.println("</table><br>");
         	connection.close();
            }
             catch (Exception e) {

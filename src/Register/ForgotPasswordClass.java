@@ -46,16 +46,64 @@ public class ForgotPasswordClass {
 			return code;
 		}
 		
+		public String isAdminorStudent(String risacode) {//checks if is an admin or student from risacode
+			String AdminorStudent = null;
+			Connection conn = null;
+			try {
+				String sql = "SELECT student.RISACode FROM risa_hr.student WHERE student.RISACode= ?;";
+				conn = DBConnection.getconnectionToDatabase();
+				PreparedStatement statement = conn.prepareStatement(sql);
+				statement.setString(1, risacode);
+				
+			    ResultSet resultset = statement.executeQuery();
+			    while ( resultset.next() )
+			    {
+			    	AdminorStudent =  resultset.getString("risacode");
+			    }
+			    resultset.close();
+			    statement.close();
+			    
+			    if(AdminorStudent != null) {//student
+			    	return "student";
+			    }else {
+					sql = "SELECT admin.RISACode FROM risa_hr.admin WHERE admin.RISACode = ?;";
+					conn = DBConnection.getconnectionToDatabase();
+					PreparedStatement statement2 = conn.prepareStatement(sql);
+					statement2.setString(1, risacode);
+					
+				    ResultSet resultset2 = statement2.executeQuery();
+				    while ( resultset2.next() )
+				    {
+				    	AdminorStudent =  resultset2.getString("risacode");
+				    }
+				    resultset2.close();
+				    statement2.close();
+			    }
+			    if(AdminorStudent != null) {//admin
+			    	return "admin";
+			    }
+			}catch (SQLException e){
+				
+					e.printStackTrace();
+			} 
+			return "";
+		}
+		
 		public String getSecurityQuestion(String risacode) {//gets security question from risa code
 			String question = null;
 			Connection conn = null;
-		    try{//for the security question
-		    	String sql = "Select SecurityQuestion from risa_hr.securityquestion " +
-		        		"join risa_hr.userpassword on securityquestion.ID = userpassword.SecurityQuestion_ID " +
-		        		"join risa_hr.student on student.UserPassword_ID = userpassword.ID and student.RISACode = ?; ";
+		    try{//for the security question for student or admin 
+		    	String sql = "Select SecurityQuestion from risa_hr.securityquestion \r\n" + 
+		    			"		        		join risa_hr.userpassword on securityquestion.ID = userpassword.SecurityQuestion_ID \r\n" + 
+		    			"		        		join risa_hr.student on student.UserPassword_ID = userpassword.ID and student.RISACode = ?\r\n" + 
+		    			"                        union\r\n" + 
+		    			"                        Select SecurityQuestion from risa_hr.securityquestion \r\n" + 
+		    			"		        		join risa_hr.userpassword on securityquestion.ID = userpassword.SecurityQuestion_ID \r\n" + 
+		    			"		        		join risa_hr.admin on admin.UserPassword_ID = userpassword.ID and admin.RISACode = ?;";
 		    	conn = DBConnection.getconnectionToDatabase();
 				PreparedStatement statement = conn.prepareStatement(sql);
 				statement.setString(1, risacode);
+				statement.setString(2, risacode);
 				ResultSet resultset = statement.executeQuery();
 			    while ( resultset.next() )
 			    {
@@ -107,12 +155,22 @@ public class ForgotPasswordClass {
 			return match;
 		}
 		
-		public void newPassword(String risacode,String psw) throws SQLException{//updates password
+		public void newPassword(String risacode,String psw, String AdminorStudent) throws SQLException{//updates password
 			Connection conn = null;
 			PreparedStatement Stmt = null;
+			String query = null;
 			try {
-				String query = "update risa_hr.userpassword,risa_hr.student set UserPassword = ? "
-						+ "where userpassword.ID = student.UserPassword_ID and student.RISACode = ?;";
+				if(AdminorStudent.equals("")) {//figure out which table to update
+					return;//error 
+				}
+				else if(AdminorStudent.equals("student")) {
+					query = "update risa_hr.userpassword,risa_hr.student set UserPassword = ? "
+							+ "where userpassword.ID = student.UserPassword_ID and student.RISACode = ?;";
+				}
+				else if(AdminorStudent.equals("admin")) {
+					query = "update risa_hr.userpassword,risa_hr.admin set UserPassword = ? " + 
+							"where userpassword.ID = admin.UserPassword_ID and admin.RISACode = ?;";
+				}
 				conn = DBConnection.getconnectionToDatabase();
 				
 				Stmt = conn.prepareStatement(query);

@@ -51,13 +51,8 @@ public class ForgotPassword extends HttpServlet {
 		    else {//found
 				HttpSession session=request.getSession();
 				session.setAttribute("rcode",risacode);  
-				
-		    	//request.setAttribute("risacode", risacode);
-		    	//request.getRequestDispatcher("/forgotpassword2.jsp").forward(request, response);
 		    	RequestDispatcher rd = getServletContext().getRequestDispatcher("/forgotpassword2.jsp?p = " + code);
 		    	rd.forward(request, response);
-		    	
-		    	//response.sendRedirect("forgotpassword2.jsp?risacode=" + risacode);
 		    }
 		}catch (Exception e){
 			

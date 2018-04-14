@@ -68,8 +68,9 @@
     <label for="position"><b>Risa Position</b></label>
     <input type="text" placeholder="Enter Risa position" name="risaposition" id="risaposition" required>
     
-    <label for="phonenumber"><b>Phone Number</b></label>
-    <input type="text" placeholder="Enter phone number" name="phonenumber" id="phonenumber" required>
+    <label for="phonenumber" ><b>Phone Number</b></label>
+    <input type="tel" pattern="(?:\(\d{3}\)|\d{3})[- ]?\d{3}[- ]?\d{4}" 
+    maxlength="12" placeholder="Example: 000-000-0000" name="phonenumber" id="phonenumber" title="000-000-0000" required>
     
      <br>
     <label for="major"><b>Major</b></label><br><br>
@@ -106,10 +107,24 @@
     <input type="text" placeholder="Enter concentration" name="concentration" id="concentration" required>
     
     <label for="gradyear"><b>Graduate Year</b></label>
-    <input type="text" placeholder="Enter graduation year" name="gradyear" id="gradyear" required>
+    <input type="number" min="2018" max="2099" step="1" placeholder="Example: 2020" name="gradyear" id="gradyear" required><br>
     
-    <label for="gradmonth"><b>Graduate Month</b></label>
-    <input type="text" placeholder="Enter graduation month" name="gradmonth" id="gradmonth" required>
+    <label for="gradmonth"><b>Graduate Month</b></label><br>
+    <select name="gradmonth" id="gradmonth" required>
+    <option value="" selected disabled hidden>Default</option>
+    <option value="01">01</option>
+    <option value="02">02</option>
+    <option value="03">03</option>
+    <option value="04">04</option>
+    <option value="05">05</option>
+    <option value="06">06</option>
+    <option value="07">07</option>
+    <option value="08">08</option>
+    <option value="09">09</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    </select><br><br>
     
     <label for="psw"><b>Security question</b></label>
     
