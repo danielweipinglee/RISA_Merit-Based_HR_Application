@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -16,26 +17,40 @@
     	<ul>
     		<li><a href="HR_View.jsp">View</a></li>
     		<li><a href="HR_Update.jsp">Update</a></li>
-    		<li><a href="HR_Add.jsp">Add Student</a></li>
-    		<li><a href="HR_Add_Administrative.jsp"> Create Account</a></li>
+    		<li><a href="HR_Add.jsp">Add</a></li>
     	</ul>
     </nav>
 	</div>		
 </header>
-<h2>Select a category to sort the student file</h2>
-<form>
-<div class="optionsDiv">
-        <select id="selectField" name ="selectField">
-        	<option>select a category</option>
-            <option value="RISACode" >RISA Code</option>
-            <option value="FieldOfInterest" >Field Of Interest</option>
-            <option value="Degree" >Degree</option>
-            <option value="GraduateYear" >Grduate Year</option>
+
+<div style="float:right; float:top; padding-right:100px; padding-top:15px" class="optionsDiv">
+<form action="HR_Search" method="get">
+         <select id="search" name ="search">
+        	<option value="None">select a category</option>
+            <option value="Active_CEO" >Active CEO</option>
+            <option value="Active" >Active</option>
+            <option value="Deleted" >Deleted</option>
+            <option value="admin" >admin</option>
+            <option value="Active_HR" >Active HR</option>
+            <option value="Active_Employer" >Active Employer</option>
+        </select>   
+        <button type="submit" class="w3-button w3-red">Search</button> 
+</form></div>
+<div style="float:right; float:top; padding-right:100px; padding-top:15px" class="optionsDiv">
+<form action="HR_Sort" method="get">
+        <select id="sort" name ="sort">
+        	<option value="None">select a category</option>
+            <option value="Active_CEO" >Active CEO</option>
+            <option value="Active" >Active</option>
+            <option value="Deleted" >Deleted</option>
+            <option value="admin" >admin</option>
+            <option value="Active_HR" >Active HR</option>
+            <option value="Active_Employer" >Active Employer</option>
         </select>   
         <button type="submit" class="w3-button w3-red">Sort</button> 
-</div>
 </form>
-
+</div>
+<h2>Select a category to search the student file</h2>
 <jsp:include page="CEO_View"/>
 
 </body>

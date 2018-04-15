@@ -67,12 +67,12 @@ public class RegisterEmployerServlet extends HttpServlet {
 			request.getRequestDispatcher("/RegisterEmployer.jsp").forward(request, response);	
 	    }
 		
-	    else if(check.isValidEmail(email) == false) {
-			request.setAttribute("EmployerError", "Please enter a valid email address. TTU email should be used.");
+	    else if(check.isValidEmployerEmail(email) == false) {
+			request.setAttribute("EmployerError", "Please enter a valid email address.");
 			request.getRequestDispatcher("/RegisterEmployer.jsp").forward(request, response);
         }
 		else if(check.isValidPassword(password) == false) {
-			request.setAttribute("EmployerError", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 8 characters long.");
+			request.setAttribute("EmployerError", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 10 characters long.");
 			request.getRequestDispatcher("/RegisterEmployer.jsp").forward(request, response);
 		}
 		else if(!password.equals(password2)) {
@@ -91,7 +91,7 @@ public class RegisterEmployerServlet extends HttpServlet {
 					risacode,risaposition,squestion,squestionID,accountstatusid,role,organization);
 			
 			if(registerEmployer.isSuccess()) {
-				request.setAttribute("success", "Successfully Registered. Username is TTU email.");
+				request.setAttribute("success", "Successfully Registered. Username is email.");
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		        rd.forward(request, response);
 			}

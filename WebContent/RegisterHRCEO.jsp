@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Welcome To RISA</title>
 <link rel="stylesheet" type="text/css" href="css/login.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <body background="images/background.png">
@@ -21,7 +20,8 @@
     <input type="text" placeholder="Unique code" name="risacode" id="risacode" value="<%=request.getParameter("risacode")!=null?request.getParameter("risacode"):""%>" required>
     
      <label for="psw"><b>Select Role</b></label><br/>
-     <select name="role" id="role" name="role">
+     <select name="role" id="role" name="role" required>
+     <option value="" selected disabled hidden>Default</option>
 	  <option value="Active_HR">Active_HR</option>
 	  <option value="Active_CEO">Active_CEO</option>
 	</select><br/><br/>
@@ -68,6 +68,7 @@
   	
   	<label for="psw"><b>Enter organization</b></label>
   	<input type="text" placeholder="Enter organization" name="organization" id="organization" value="<%=request.getParameter("organization")!=null?request.getParameter("organization"):""%>" required>
+  	
   	
   	<button type="submit" >Register</button>
   	

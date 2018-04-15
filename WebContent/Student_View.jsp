@@ -6,7 +6,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RISA</title>
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <header>
@@ -22,6 +21,14 @@
 	</div>		
 	
 </header>
+
+<div class="optionsDiv">
+        Sort 
+        <select id="selectField">
+            <option value="Alphabetical" selected>Alphabetical</option>
+            <option value="else">else</option>
+        </select>   
+</div>
 
 <jsp:include page="Student_View"/>
 
