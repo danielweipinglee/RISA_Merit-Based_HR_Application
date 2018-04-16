@@ -65,7 +65,7 @@ public class Admin_Search extends HttpServlet {
         	query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 5;";
         }
         else if(search.equals("None")){
-        	response.sendRedirect("CEO_View.jsp");
+        	response.sendRedirect("admin_View.jsp");
         }
         out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n" + 
         		"<html>\r\n" + 
