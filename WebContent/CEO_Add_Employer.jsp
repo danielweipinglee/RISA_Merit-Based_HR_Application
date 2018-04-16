@@ -18,7 +18,7 @@
     		<li><a href="CEO_View.jsp">View </a></li>
     		<li><a href="CEO_Update.jsp">Update </a></li>
     		<li><a href="CEO_Add.jsp">Add Student </a></li>
-    		<li><a href="CEO_Add_Employer.jsp">Create Account</a></li>
+    		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
     	</ul>
     </nav>
 	</div>		
