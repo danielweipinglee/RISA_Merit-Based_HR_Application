@@ -55,9 +55,6 @@
     
     <label for="uname"><b>Email</b></label>
     <input type="text" placeholder="Enter email address" name="email" id="email" required>
-    
- 	<label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter username" name="username" id="username" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter password" name="password" id="password" required>

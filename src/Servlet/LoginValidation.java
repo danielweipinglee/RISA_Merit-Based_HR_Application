@@ -86,7 +86,6 @@ public class LoginValidation extends HttpServlet {
 			String fname = request.getParameter("fname");
 			String lname = request.getParameter("lname");
 			String email = request.getParameter("email");
-			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String password2 = request.getParameter("password2");
 			String answer = request.getParameter("answer");
@@ -140,7 +139,7 @@ public class LoginValidation extends HttpServlet {
 
 			else {
 
-				registerStudent.insertThenUpdate(fname,lname,email,username,password,answer,
+				registerStudent.insertThenUpdate(fname,lname,email,password,answer,
 						risacode,risaposition,squestion,squestionID,phone,interest,college,degree,concentration,year,month,major);
 				
 				if(registerStudent.isSuccess()) {
