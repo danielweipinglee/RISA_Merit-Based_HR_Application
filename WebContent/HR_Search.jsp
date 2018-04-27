@@ -13,29 +13,19 @@
 padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
 <header>
 	<div class="container">
-	
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="Student_View.jsp">View</a></li>
-    		<li><a href="Student_Update.jsp">Update</a></li>
+    		<li><a href="HR_View.jsp">View</a></li>
+    		<li><a href="HR_Update.jsp">Update</a></li>
+    		<li><a href="HR_Add.jsp">Add Student</a></li>
+    		<li><a href="HR_Add_Administrative.jsp"> Create Account</a></li>
+    		<li><a href="HR_Sort.jsp">Sort</a></li>
+    		<li><a href="HR_Search.jsp">Search</a></li>
     		
     	</ul>
     </nav>
 	</div>		
-	
 </header>
-<div class="w3-container">
-  <h2>Welcome to RISA Merit-Based HR Application</h2>
-   <div style="color: #000000;">${success}</div><br>
-  
-  <div class="w3-card-4">
-    <div class="w3-container w3-red">
-    <h1>Hi, How are you doing?</h1>  
-    Today's date: <%= (new java.util.Date()).toLocaleString()%> 
-    
-  </div>
-  
-</div>
 </body>
 </html>

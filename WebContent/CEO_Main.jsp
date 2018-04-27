@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-
+<a href="index.jsp" style="color: white; text-decoration: none; float: right; 
+padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
 <header>
 	<div class="container">
     <img src="images/White.png" alt="pic" class="pic" >
@@ -27,6 +28,7 @@
 
 <div class="w3-container">
   <h2>Welcome to RISA Merit-Based HR Application</h2>
+    <div style="color: #000000;">${success}</div><br>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">

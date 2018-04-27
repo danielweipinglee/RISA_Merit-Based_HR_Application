@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-
+<a href="index.jsp" style="color: white; text-decoration: none; float: right; 
+padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
 <header>
 	<div class="container">
     <img src="images/White.png" alt="pic" class="pic" >
@@ -28,12 +29,13 @@
 </header>
 
 <div class="w3-container">
-  <h2>Add Student</h2>
+  <h2>Admin Account</h2>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-      <h3>Student Information</h3>
+      <h3>Create Student Account</h3>
     </div>
+    	<div style="color: #FF0000;">${errorCreate}</div><br>
 
     <form class="w3-container" method="post" action="CEO_Add">
       <p>
@@ -44,7 +46,7 @@
       <label>Last Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="risaCode" id="RISACode" required>
-      <label>RIS Code</label></p>
+      <label>RISA Code</label></p>
       
       <button type="submit" class="w3-button w3-red">Add Student</button>
     </form>

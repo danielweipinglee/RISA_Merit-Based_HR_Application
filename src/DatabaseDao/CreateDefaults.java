@@ -25,12 +25,21 @@ public class CreateDefaults {
 		PreparedStatement countStmt3 = null;
 		PreparedStatement collegeStmt = null;
 		PreparedStatement certificationStmt = null;
+		PreparedStatement validStmt = null;
 		
 		Connection connection = null;
 		
 
 		try {
 			connection = DBConnection.getconnectionToDatabase();
+			String vaildMemeber = "Select RISACode from risa_hr.student " +
+									"where RISACode = ?";
+			validStmt = connection.prepareStatement(vaildMemeber);
+			validStmt.setString(1, code);
+
+			ResultSet validSet = validStmt.executeQuery();
+			if(!validSet.first()) {
+			
 			String countStudent = "select count(ID) as CountTotal from risa_hr.student";
 			String countCollege = "select count(ID) as CountTotal from risa_hr.studentcollege";
 			String countCertification = "select count(ID) as CountTotal from risa_hr.studentcertification";
@@ -41,17 +50,17 @@ public class CreateDefaults {
 			
 			countStmt = connection.prepareStatement(countStudent);
 			ResultSet countSet = countStmt.executeQuery();
-			countSet.next();
+			countSet.first();
 			int studentID = countSet.getInt("CountTotal") + 1;
 			
 			countStmt2 = connection.prepareStatement(countCollege);
 			ResultSet countSet2 = countStmt2.executeQuery();
-			countSet2.next();
+			countSet2.first();
 			int collegeID = countSet2.getInt("CountTotal") + 1;
 			
 			countStmt3 = connection.prepareStatement(countCertification);
 			ResultSet countSet3 = countStmt3.executeQuery();
-			countSet3.next();
+			countSet3.first();
 			int certificationID = countSet3.getInt("CountTotal") + 1;
 									
 			studentStmt = connection.prepareStatement(studentQuery);
@@ -89,8 +98,12 @@ public class CreateDefaults {
 			certificationStmt.executeUpdate();
 			
 			successful = true;
+			}
+			else {
+				successful = false;
+			}
+		}
 		
-		}	
 		catch (SQLException e) {
 		
 		}
@@ -113,6 +126,9 @@ public class CreateDefaults {
 			}
 			if (certificationStmt != null) {
 				certificationStmt.close();
+			}
+			if (validStmt != null) {
+				validStmt.close();
 			}
 			if (connection != null) {
 				connection.close();

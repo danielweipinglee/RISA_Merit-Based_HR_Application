@@ -11,28 +11,20 @@
 <body background="images/background.png">
 <div class="container-main">
 
-<form class="login-form" method="post" action="ForgotPassword">
+<form class="login-form" method="post" action="updatePassword">
   <div class="imgcontainer">
     <img src="images/Black.png" alt="pic" class="pic">
   </div>
   <div class="container">
   	
-    <label for="uname"><b>Risa Code: ${rcode}</b></label><br>
-    <label><b>Security Question: </b></label>
-    <br>
-	<%
-		String code = null;
-		String risacode=(String)session.getAttribute("rcode");
-		ForgotPasswordClass forgotPassword = new ForgotPasswordClass();
-		code = forgotPassword.getSecurityQuestion(risacode);
-	%>
-		<br><label name="securityquestion"><b><%=code %></b></label><br>
-
-	<br>
-	<div style="color: #FF0000;">${AnswerError}</div>
+    <label for="uname"><b>Risa Code: ${rcode}</b></label><br><br>
+	<div style="color: #FF0000;">${errorPsw}</div>
 	
-    <input type="password" name = "answer" id="answer" placeholder="Enter Answer Here"  required>
+	<label for="uname" ><b>Enter New Password: </b></label><br>
+    <input type="password" name = "psw" id="psw" placeholder="Enter new password"  required>
     
+     <label for="uname" ><b>Re-enter password: </b></label><br>
+    <input type ="password" name ="psw2" id="psw2" placeholder="Re-enter new password"  required>
 	
 	
     <button type="submit" >Submit</button>

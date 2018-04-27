@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1" import="DatabaseDao.DBConnection" import="java.sql.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
+<a href="index.jsp" style="color: white; text-decoration: none; float: right; 
+padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
 <header>
 	<div class="container">
     <img src="images/White.png" alt="pic" class="pic" >
@@ -20,20 +22,47 @@
 	</div>		
 	
 </header>
-<h2>Select a category to sort the student file</h2>
-<form>
-<div class="optionsDiv">
-        <select id="selectField" name ="selectField">
-        	<option>select a category</option>
-            <option value="RISACode" >RISA Code</option>
-            <option value="FieldOfInterest" >Field Of Interest</option>
-            <option value="Degree" >Degree</option>
-            <option value="GraduateYear" >Grduate Year</option>
-        </select>   
-        <button type="submit" class="w3-button w3-red">Sort</button> 
-</div>
+<div style="float:right; float:top; padding-right:10px; padding-top:15px" class="optionsDiv">
+<form action="Employer_Search" method="get">
+  <%try{//for the dropdown menu
+    	Connection conn = DBConnection.getconnectionToDatabase();
+        Statement statement = conn.createStatement() ;
+        ResultSet resultset =statement.executeQuery("select DISTINCT Major from major;");     
+	%>
+	<br>
+    <select name="search" id="search">
+    <%  while(resultset.next()){ %>
+            <option><%= resultset.getString("Major")%></option>
+    <% } %>
+    </select>
+	<%
+       }catch(Exception e){   
+          out.println(e);
+       }
+	%>	
+   <button type="submit" class="w3-button w3-red">Search</button> </form></div>
+<div style="float:right; float:top; padding-right:10px; padding-top:15px" class="optionsDiv">
+<form action="Employer_Sort" method="get">
+    <%try{//for the dropdown menu
+    	Connection conn = DBConnection.getconnectionToDatabase();
+        Statement statement = conn.createStatement() ;
+        ResultSet resultset =statement.executeQuery("select DISTINCT Major from major;");     
+	%>
+	<br>
+    <select name="sort" id="sort">
+    <%  while(resultset.next()){ %>
+            <option><%= resultset.getString("Major")%></option>
+    <% } %>
+    </select>
+	<%
+       }catch(Exception e){   
+          out.println(e);
+       }
+	%>	
+<button type="submit" class="w3-button w3-red">Sort</button> 
 </form>
-
+</div>
+<h2>Select a category to search the student file</h2>
 <jsp:include page="Employer_View"/>
 </body>
 </html>

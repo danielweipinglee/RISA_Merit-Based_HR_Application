@@ -81,12 +81,6 @@ nav a::before {
 	mergin: 0 auto;
 }
 
-.container-main {
-  width: 400;
-  padding: 10% 0 0;
-  margin: auto;  
-}
-
 .color_text {
     color: #969696;
 }
@@ -103,6 +97,3 @@ nav a::before {
     bottom:0;
 }
 
-btn {
-    float: right;
-}

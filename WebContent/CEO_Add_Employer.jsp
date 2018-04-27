@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-
+<a href="index.jsp" style="color: white; text-decoration: none; float: right; 
+padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
 <header>
 	<div class="container">
     <img src="images/White.png" alt="pic" class="pic" >
@@ -26,14 +27,15 @@
 </header>
 
 <div class="w3-container">
-  <h2>Add Employer</h2>
+  <h2>CEO Account</h2>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-      <h3>Create Account Information</h3>
+      <h3>Create Administrative Account</h3>
     </div>
 
     <form class="w3-container" method="post" action="CEO_Add_Management" Id="employer">
+        <div style="color: #FF0000;">${errorCreate}</div><br>
       <p>
       <input class="w3-input" type="text"name="legalFirstName" id="EmployerlegalFirstName" required>
       <label>First Name</label></p>
@@ -42,7 +44,7 @@
       <label>Last Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="risaCode" id="EmployerRISACode" required>
-      <label>RIS Code</label></p>
+      <label>RISA Code</label></p>
       
                 </b><br>
 	<%
@@ -66,7 +68,7 @@
 	%>
 	<br>
       
-      <button type="submit" class="w3-button w3-red">Add Employer</button>
+      <button type="submit" class="w3-button w3-red">Add Account</button>
     </form>
   </div>
 </div>

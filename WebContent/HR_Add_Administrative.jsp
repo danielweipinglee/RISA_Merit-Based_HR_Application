@@ -16,49 +16,46 @@ padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
     <img src="images/White.png" alt="pic" class="pic" >
     <nav>
     	<ul>
-    		<li><a href="admin_View.jsp">View</a></li>
-    		<li><a href="admin_Update.jsp">Update</a></li>
-    		<li><a href="admin_Add.jsp">Add Student</a></li>
-    		<li><a href="admin_Add_HR.jsp">Create Account</a></li>
-    		<li><a href="admin_Delete_Student.jsp">Delete Student Account</a></li>
-    		<li><a href="admin_Delete_CEOandHRandEmployer.jsp">Delete CEO, HR, or Employer Account</a></li>
+    		<li><a href="HR_View.jsp">View</a></li>
+    		<li><a href="HR_Update.jsp">Update</a></li>
+    		<li><a href="HR_Add.jsp">Add Student</a></li>
     	</ul>
     </nav>
 	</div>		
-	
 </header>
 
 <div class="w3-container">
-  <h2>Delete CEO, HR, or Employer Account</h2>
+  <h2>Add Account</h2>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-      <h3>Account Information</h3>
+      <h3>Create Administrative Account</h3>
     </div>
 
-    <form class="w3-container" method="post" action="Admin_Delete_CEO_HR_Employer">
+    <form class="w3-container" method="post" action="CEO_Add_Management" Id="employer">
+        <div style="color: #FF0000;">${errorCreate}</div><br>
       <p>
-      <input class="w3-input" type="text"name="legalFirstName" id="OfficerlegalFirstName" required>
+      <input class="w3-input" type="text"name="legalFirstName" id="EmployerlegalFirstName" required>
       <label>First Name</label></p>
       <p>     
-      <input class="w3-input" type="text" name="legalLastName" id="OfficerlegalLastName" required>
+      <input class="w3-input" type="text" name="legalLastName" id="EmployerlegalLastName" required>
       <label>Last Name</label></p>
       <p>     
-      <input class="w3-input" type="text" name="risaCode" id="OfficerRISACode" required>
-      <label>RIS Code</label></p>
-          <label for="psw"><b>Current Status</b></label>
-    
-    </b><br>
+      <input class="w3-input" type="text" name="risaCode" id="EmployerRISACode" required>
+      <label>RISA Code</label></p>
+      
+                </b><br>
 	<%
     try{//for the dropdown menu
     	Connection conn = DBConnection.getconnectionToDatabase();
         Statement statement = conn.createStatement() ;
-        ResultSet resultset =statement.executeQuery("select status from admin inner join accountstatus on accountstatus.id = admin.accountstatus_id;") ;
+        ResultSet resultset =statement.executeQuery("SELECT * FROM risa_hr.accountstatus " +
+        		"WHERE Status LIKE 'Active_%' or Status LIKE 'admin';");
 	%>
 	<br>
-    <select name="status">
+    <select name="Status">
     <%  while(resultset.next()){ %>
-            <option><%= resultset.getString("status")%></option>
+            <option><%= resultset.getString("Status")%></option>
     <% } %>
     </select>
 	<br>
@@ -69,16 +66,9 @@ padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
 	%>
 	<br>
       
-      
-      
-      
-      
-      
-      <button type="submit" class="w3-button w3-red">Delete Account</button>
+      <button type="submit" class="w3-button w3-red">Add Account</button>
     </form>
   </div>
 </div>
-
-
 </body>
 </html>
