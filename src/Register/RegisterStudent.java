@@ -67,7 +67,7 @@ public class RegisterStudent {
 
 	
 	// inserts and updates tables needed for student registration
-	public void insertThenUpdate(String fname, String lname,String email,String username,String password,
+	public void insertThenUpdate(String fname, String lname,String email,String password,
 			String answer,String risacode,String risaposition, String squestion, int squestionID, String phone, 
 			String interest, String college, String degree, String concentration, String year, String month, String major) throws SQLException{
 		
@@ -79,7 +79,6 @@ public class RegisterStudent {
 		PreparedStatement majorCountStmt = null;
 		PreparedStatement studentIdStmt = null;
 		PreparedStatement concentrationStmt = null;
-		PreparedStatement studentcollegeStmt = null;
 		PreparedStatement collegeStmt = null;
 		PreparedStatement majorStmt = null;
 		PreparedStatement collegeStmt2 = null;
@@ -106,7 +105,7 @@ public class RegisterStudent {
 			String insertUserpassword = "insert into risa_hr.userpassword values(?,?,?,?);";
 			String insertRisaposition = "insert into risa_hr.risaposition values(?,?);";
 			String insertConcentration = "insert into risa_hr.concentration values(?,?,?);";
-			String insertStudentCollege = "insert into risa_hr.studentcollege values(?,?,?,?,?,?,?,?);";
+
 			String insertCollege = "insert into risa_hr.college values(?,?);";
 			String insertMajor = "insert into risa_hr.major values(?,?,?);";
 			
@@ -133,10 +132,10 @@ public class RegisterStudent {
 			countSet2.next();
 			int risapositionId = countSet2.getInt("CountTotal") + 1;
 			
-			studentcollegeCountStmt = conn.prepareStatement(studentcollegeIdQuery);
+			studentcollegeCountStmt = conn.prepareStatement(studentcollegeIdQuery);//get last id inserted
 			ResultSet countSet3 = studentcollegeCountStmt.executeQuery();
 			countSet3.next();
-			int studentcollegeId = countSet3.getInt("CountTotal") + 1;
+			int studentcollegeId = countSet3.getInt("CountTotal");
 			
 			collegeCountStmt = conn.prepareStatement(collegeIdQuery);
 			ResultSet countSet4 = collegeCountStmt.executeQuery();
@@ -178,17 +177,6 @@ public class RegisterStudent {
 			concentrationStmt.setInt(3, 0);
 			concentrationStmt.executeUpdate();
 			
-			studentcollegeStmt = conn.prepareStatement(insertStudentCollege);
-			studentcollegeStmt.setInt(1, studentcollegeId);
-			studentcollegeStmt.setInt(2, studentId);
-			studentcollegeStmt.setInt(3, 0);
-			studentcollegeStmt.setInt(4, 0);
-			studentcollegeStmt.setInt(5, 0);
-			studentcollegeStmt.setInt(6, 0);
-			studentcollegeStmt.setInt(7, 0);
-			studentcollegeStmt.setInt(8, 0);
-			studentcollegeStmt.executeUpdate();
-			
 			collegeStmt = conn.prepareStatement(insertCollege);
 			collegeStmt.setInt(1, collegeId);
 			collegeStmt.setString(2,"N/A");
@@ -204,7 +192,7 @@ public class RegisterStudent {
 			
 			studentStmt = conn.prepareStatement(updateStudent);
 			studentStmt.setString(1, email);
-			studentStmt.setString(2, username);		
+			studentStmt.setString(2, email);		
 			studentStmt.setString(3, phone);
 			studentStmt.setString(4, interest);
 			studentStmt.setInt(5, userpasswordId);
@@ -257,7 +245,6 @@ public class RegisterStudent {
 			concentrationCountStmt.close();
 			studentIdStmt.close();
 			studentcollegeCountStmt.close();
-			studentcollegeStmt.close();
 			userpasswordCountStmt.close();
 			risapositionCountStmt.close();
 			userpasswordStmt.close();
