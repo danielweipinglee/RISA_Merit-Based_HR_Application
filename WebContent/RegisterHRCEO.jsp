@@ -36,6 +36,7 @@
     <input type="text" placeholder="Enter email address" name="email" id="email" value="<%=request.getParameter("email")!=null?request.getParameter("email"):""%>" required>
 
     <label for="psw"><b>Password</b></label>
+    <h5>Password should have at least one upper and lowercase character. Password should also contain a number and be at least 10 characters long.</h5>
     <input type="password" placeholder="Enter password" name="password" id="password" required>
   	
   	<label for="psw"><b>Re-enter Password</b></label>
