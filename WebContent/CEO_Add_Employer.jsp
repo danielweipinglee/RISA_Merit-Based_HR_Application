@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-
+<a href="index.jsp" style="color: white; text-decoration: none; float: right; 
+padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
 <header>
 	<div class="container">
     <img src="images/White.png" alt="pic" class="pic" >
@@ -18,7 +19,7 @@
     		<li><a href="CEO_View.jsp">View </a></li>
     		<li><a href="CEO_Update.jsp">Update </a></li>
     		<li><a href="CEO_Add.jsp">Add Student </a></li>
-    		<li><a href="CEO_Add_Employer.jsp">Create Account</a></li>
+    		<li><a href="CEO_Add_Employer.jsp">Add Employer</a></li>
     	</ul>
     </nav>
 	</div>		

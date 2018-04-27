@@ -86,7 +86,6 @@ public class LoginValidation extends HttpServlet {
 			String fname = request.getParameter("fname");
 			String lname = request.getParameter("lname");
 			String email = request.getParameter("email");
-			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			String password2 = request.getParameter("password2");
 			String answer = request.getParameter("answer");
@@ -126,7 +125,7 @@ public class LoginValidation extends HttpServlet {
 				request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
             }
 			else if(check.isValidPassword(password) == false) {
-				request.setAttribute("errorMsg", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 10 characters long.");
+				request.setAttribute("errorMsg", "Please enter a valid password. Password should have at least one upper and lowercase character. Password should also contain a number and be at least 10 characters long.");
 				request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
 			}
 			else if(!password.equals(password2)) {
@@ -140,7 +139,7 @@ public class LoginValidation extends HttpServlet {
 
 			else {
 
-				registerStudent.insertThenUpdate(fname,lname,email,username,password,answer,
+				registerStudent.insertThenUpdate(fname,lname,email,password,answer,
 						risacode,risaposition,squestion,squestionID,phone,interest,college,degree,concentration,year,month,major);
 				
 				if(registerStudent.isSuccess()) {

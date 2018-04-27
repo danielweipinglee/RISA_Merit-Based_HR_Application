@@ -67,7 +67,7 @@ public class RegisterStudent {
 
 	
 	// inserts and updates tables needed for student registration
-	public void insertThenUpdate(String fname, String lname,String email,String username,String password,
+	public void insertThenUpdate(String fname, String lname,String email,String password,
 			String answer,String risacode,String risaposition, String squestion, int squestionID, String phone, 
 			String interest, String college, String degree, String concentration, String year, String month, String major) throws SQLException{
 		
@@ -204,7 +204,7 @@ public class RegisterStudent {
 			
 			studentStmt = conn.prepareStatement(updateStudent);
 			studentStmt.setString(1, email);
-			studentStmt.setString(2, username);		
+			studentStmt.setString(2, email);		
 			studentStmt.setString(3, phone);
 			studentStmt.setString(4, interest);
 			studentStmt.setInt(5, userpasswordId);

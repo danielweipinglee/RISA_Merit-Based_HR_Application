@@ -9,7 +9,8 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-
+<a href="index.jsp" style="color: white; text-decoration: none; float: right; 
+padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
 <header>
 	<div class="container">
     <img src="images/White.png" alt="pic" class="pic" >
@@ -25,6 +26,7 @@
 </header>
 
 <div class="w3-container">
+
   <h2>Student Account</h2>
   
   <div class="w3-card-4">

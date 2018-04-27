@@ -17,7 +17,7 @@ public class ValidationRegex {
 		 * \\w+ Implies that the string can have any characters that are in [a-zA-Z_0-9].
 		 * @(ttu)\\.(edu) Implies that the end of the string has to be @ttu.edu
 		 */
-		this.password = Pattern.compile("^(?=.{10})(?=.*\\p{Upper})(?=.*\\p{Lower})(?=.*\\d)(?=.*[@!$#$%^&*()+])[a-zA-Z0-9!$#$%^&*()+]+");
+		this.password = Pattern.compile("^(?=.{10})(?=.*\\p{Upper})(?=.*\\p{Lower})(?=.*\\d)(?=.*[@!#$%^&*()_+])[a-zA-Z0-9!@#$%^&*()_+]+");
 		this.email = Pattern.compile("^\\w+\\.?\\w+@(ttu)\\.(edu)");
 		this.employerEmail = Pattern.compile("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
 		this.phoneNumber = Pattern.compile("^^(?=\\d{10})\\d+");

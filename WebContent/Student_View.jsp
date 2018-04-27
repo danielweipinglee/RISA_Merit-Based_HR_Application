@@ -8,6 +8,10 @@
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
 </head>
 <body>
+
+<a href="index.jsp" style="color: white; text-decoration: none; float: right; 
+padding-top: 15px; font-weight: bold; padding-right: 20px;">Log Out</a>
+
 <header>
 	<div class="container">
     <img src="images/White.png" alt="pic" class="pic" >
@@ -18,19 +22,14 @@
     		
     	</ul>
     </nav>
+    
 	</div>		
 	
 </header>
 
-<div class="optionsDiv">
-        Sort 
-        <select id="selectField">
-            <option value="Alphabetical" selected>Alphabetical</option>
-            <option value="else">else</option>
-        </select>   
-</div>
 
 <jsp:include page="Student_View"/>
+
 
 </body>
 </html>

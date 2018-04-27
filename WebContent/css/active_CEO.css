@@ -102,3 +102,7 @@ nav a::before {
     position: relative;
     bottom:0;
 }
+
+btn {
+    float: right;
+}
