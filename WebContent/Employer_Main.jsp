@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RISA</title>
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <header>
@@ -14,13 +15,20 @@
     <nav>
     	<ul>
     		<li><a href="Employer_View.jsp">View</a></li>
-    		<li><a href="Employer_Sort.jsp">Sort</a></li>
-    		<li><a href="Employer_Search.jsp">Search</a></li>
     	</ul>
     </nav>
 	</div>		
 	
 </header>
-
+<div class="w3-container">
+  <h2>Welcome to RISA Merit-Based HR Application</h2>
+  
+  <div class="w3-card-4">
+    <div class="w3-container w3-red">
+    <h1>You are Employer now, How are you doing?</h1>  
+    Today's date: <%= (new java.util.Date()).toLocaleString()%> 
+    
+  </div>
+</div>
 </body>
 </html>

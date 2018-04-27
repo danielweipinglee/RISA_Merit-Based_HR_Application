@@ -17,6 +17,7 @@
     	<ul>
     		<li><a href="admin_View.jsp">View</a></li>
     		<li><a href="admin_Update.jsp">Update</a></li>
+    		<li><a href="admin_Add.jsp">Add Student</a></li>
     		<li><a href="admin_Add_HR.jsp">Create Account</a></li>
     		<li><a href="admin_Delete_Student.jsp">Delete Student Account</a></li>
     		<li><a href="admin_Delete_CEOandHRandEmployer.jsp">Delete CEO, HR, or Employer Account</a></li>
@@ -27,12 +28,13 @@
 </header>
 
 <div class="w3-container">
-  <h2>Add Student</h2>
+  <h2>Admin Account</h2>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-      <h3>Student Information</h3>
+      <h3>Create Student Account</h3>
     </div>
+    	<div style="color: #FF0000;">${errorCreate}</div><br>
 
     <form class="w3-container" method="post" action="CEO_Add">
       <p>
@@ -43,7 +45,7 @@
       <label>Last Name</label></p>
       <p>     
       <input class="w3-input" type="text" name="risaCode" id="RISACode" required>
-      <label>RIS Code</label></p>
+      <label>RISA Code</label></p>
       
       <button type="submit" class="w3-button w3-red">Add Student</button>
     </form>

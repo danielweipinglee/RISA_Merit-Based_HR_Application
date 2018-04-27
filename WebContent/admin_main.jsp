@@ -21,7 +21,6 @@
     		<li><a href="admin_Add_HR.jsp">Create Account</a></li>
     		<li><a href="admin_Delete_Student.jsp">Delete Student Account</a></li>
     		<li><a href="admin_Delete_CEOandHRandEmployer.jsp">Delete CEO, HR, or Employer Account</a></li>
-    		
     	</ul>
     </nav>
 	</div>		
@@ -30,6 +29,7 @@
 
 <div class="w3-container">
   <h2>Welcome to RISA Merit-Based HR Application</h2>
+  <div style="color: #000000;">${success}</div><br>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">

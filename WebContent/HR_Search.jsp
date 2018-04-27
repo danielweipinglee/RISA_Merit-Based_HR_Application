@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RISA</title>
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <header>
@@ -15,28 +16,14 @@
     	<ul>
     		<li><a href="HR_View.jsp">View</a></li>
     		<li><a href="HR_Update.jsp">Update</a></li>
-    		<li><a href="HR_Add.jsp">Add</a></li>
+    		<li><a href="HR_Add.jsp">Add Student</a></li>
+    		<li><a href="HR_Add_Administrative.jsp"> Create Account</a></li>
     		<li><a href="HR_Sort.jsp">Sort</a></li>
     		<li><a href="HR_Search.jsp">Search</a></li>
     		
     	</ul>
     </nav>
-	</div>	
-	
-	<form method="get" action="HR_Search">
-<div class="SearchOptionsDiv" >
-        Search
-        <select id="search" name="search" onchange="this.form.submit()">
-            <option value="none" selected>None</option>
-            <option value="Active_CEO">Active CEO</option>
-            <option value="Active">Active</option>
-            <option value="Deleted">Deleted</option>
-            <option value="Admin">Admin</option>
-            <option value="Active_HR">Active HR</option>
-            <option value="Active_Employer">Active Employer</option>
-        </select>   
-</div>
-</form>	
+	</div>		
 </header>
 </body>
 </html>

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import Regex.ValidationRegex;
 import Register.RegisterEmployer;
@@ -34,6 +35,7 @@ public class RegisterEmployerServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+
 	}
 
 	/**
@@ -65,12 +67,12 @@ public class RegisterEmployerServlet extends HttpServlet {
 			request.getRequestDispatcher("/RegisterEmployer.jsp").forward(request, response);	
 	    }
 		
-	    else if(check.isValidEmail(email) == false) {
-			request.setAttribute("EmployerError", "Please enter a valid email address. TTU email should be used.");
+	    else if(check.isValidEmployerEmail(email) == false) {
+			request.setAttribute("EmployerError", "Please enter a valid email address.");
 			request.getRequestDispatcher("/RegisterEmployer.jsp").forward(request, response);
         }
 		else if(check.isValidPassword(password) == false) {
-			request.setAttribute("EmployerError", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 8 characters long.");
+			request.setAttribute("EmployerError", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 10 characters long.");
 			request.getRequestDispatcher("/RegisterEmployer.jsp").forward(request, response);
 		}
 		else if(!password.equals(password2)) {
@@ -89,7 +91,7 @@ public class RegisterEmployerServlet extends HttpServlet {
 					risacode,risaposition,squestion,squestionID,accountstatusid,role,organization);
 			
 			if(registerEmployer.isSuccess()) {
-				request.setAttribute("success", "Successfully Registered. Username is TTU email.");
+				request.setAttribute("success", "Successfully Registered. Username is email.");
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
 		        rd.forward(request, response);
 			}

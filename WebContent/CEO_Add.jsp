@@ -26,14 +26,15 @@
 </header>
 
 <div class="w3-container">
-  <h2>Add Student</h2>
+  <h2>CEO Account</h2>
   
   <div class="w3-card-4">
     <div class="w3-container w3-red">
-      <h3>Student Information</h3>
+      <h3>Create Student Account</h3>
     </div>
 
     <form class="w3-container" method="post" action="CEO_Add">
+        	<div style="color: #FF0000;">${errorCreate}</div><br>
       <p>
       <input class="w3-input" type="text"name="legalFirstName" id="legalFirstName"  required>
       <label for=Legal>First Name</label></p>

@@ -25,7 +25,8 @@
   	<div class="container">
   	<center><span class="message">Already Registered? <a href="index.jsp">Login</a></span></center>
   	</div>
-  </form> 
+  </form>
+   
   </div>
 
 </body>

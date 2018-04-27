@@ -42,7 +42,7 @@ public class HR_Search extends HttpServlet {
 		response.setContentType("text/html");
         try {
         	search = request.getParameter("search");
-        	//System.out.print(search);
+
         if(search.equals("Active_CEO")) {
         		query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 0;";
         	}
@@ -65,34 +65,21 @@ public class HR_Search extends HttpServlet {
         	query = "SELECT LegalFirstName,LegalLastName,Username FROM risa_hr.admin where AccountStatus_ID = 5;";
         }
         else if(search.equals("None")){
-        	query = "select LegalFirstName,LegalLastName,Username from student;";
+        	response.sendRedirect("HR_View.jsp");;
         }
-        //System.out.print(query);
         	connection = DBConnection.getconnectionToDatabase();
         	Statement stmt = connection.createStatement();
         	ResultSet rs = stmt.executeQuery(query);
-        	out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n" + 
-        			"<html>\n" + 
-        			"<head>\n" + 
-        			"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\n" + 
-        			"<title>RISA</title>");
-        	out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/active_CEO.css\">");
-        	out.println("<script language=\"javascript\">\n" + 
-        			"            function addRow(tableID) {\n" + 
-        			"                var table = document.getElementById(tableID);\n" + 
-        			"                var rowCount = table.rows.length;\n" + 
-        			"                var row = table.insertRow(rowCount); \n" + 
-        			"                var cell0 = row.insertCell(0);\n" + 
-        			"                var element1 = document.createElement(\"input\");\n" + 
-        			"                element1.type = \"text\";\n" + 
-        			"                element1.name = \"line\"+(rowCount+1);\n" + 
-        			"                element1.value=\"\"+(rowCount+1);\n" + 
-        			"                cell0.appendChild(element1);\n" + 
-        			"                document.getElementById(\"countofrows\").value=table.rows.length;\n" + 
-        			"            }\n" + 
-        			"        </script>");
-        	
-        	out.println("<header>\r\n" + 
+        	out.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\r\n" + 
+        			"<html>\r\n" + 
+        			"<head>\r\n" + 
+        			"<meta http-equiv=\"Content-Type\" content=\"text/html; charset=ISO-8859-1\">\r\n" + 
+        			"<title>RISA</title>\r\n" + 
+        			"<link rel=\"stylesheet\" type=\"text/css\" href=\"css/active_CEO.css\">\r\n" + 
+        			"<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\r\n" + 
+        			"</head>\r\n" + 
+        			"<body>\r\n" + 
+        			"<header>\r\n" + 
         			"	<div class=\"container\">\r\n" + 
         			"    <img src=\"images/White.png\" alt=\"pic\" class=\"pic\" >\r\n" + 
         			"    <nav>\r\n" + 
@@ -100,34 +87,47 @@ public class HR_Search extends HttpServlet {
         			"    		<li><a href=\"HR_View.jsp\">View</a></li>\r\n" + 
         			"    		<li><a href=\"HR_Update.jsp\">Update</a></li>\r\n" + 
         			"    		<li><a href=\"HR_Add.jsp\">Add</a></li>\r\n" + 
-        			"    		<li><a href=\"HR_Sort.jsp\">Sort</a></li>\r\n" + 
-        			"    		<li><a href=\"HR_Search.jsp\">Search</a></li>\r\n" + 
-        			"    		\r\n" + 
         			"    	</ul>\r\n" + 
         			"    </nav>\r\n" + 
-        			"	</div>	\r\n" + 
-        			"	\r\n" + 
-        			"	<form method=\"get\" action=\"HR_Search\">\r\n" + 
-        			"<div class=\"SearchOptionsDiv\" >\r\n" + 
-        			"        Search\r\n" + 
-        			"        <select id=\"search\" name=\"search\" onchange=\"this.form.submit()\">\r\n" + 
-        			"            <option value=\"none\">None</option>\r\n" + 
-        			"            <option value=\"Active_CEO\">Active CEO</option>\r\n" + 
-        			"            <option value=\"Active\">Active</option>\r\n" + 
-        			"            <option value=\"Deleted\">Deleted</option>\r\n" + 
-        			"            <option value=\"Admin\">Admin</option>\r\n" + 
-        			"            <option value=\"Active_HR\">Active HR</option>\r\n" + 
-        			"            <option value=\"Active_Employer\">Active Employer</option>\r\n" + 
+        			"	</div>		\r\n" + 
+        			"</header>\r\n" + 
+        			"\r\n" + 
+        			"<div style=\"float:right; float:top; padding-right:100px; padding-top:15px\" class=\"optionsDiv\">\r\n" + 
+        			"<form action=\"HR_Search\" method=\"get\">\r\n" + 
+        			"         <select id=\"search\" name =\"search\">\r\n" + 
+        			"        	<option value=\"None\">select a category</option>\r\n" + 
+        			"            <option value=\"Active_CEO\" >Active CEO</option>\r\n" + 
+        			"            <option value=\"Active\" >Active</option>\r\n" + 
+        			"            <option value=\"Deleted\" >Deleted</option>\r\n" + 
+        			"            <option value=\"admin\" >admin</option>\r\n" + 
+        			"            <option value=\"Active_HR\" >Active HR</option>\r\n" + 
+        			"            <option value=\"Active_Employer\" >Active Employer</option>\r\n" + 
         			"        </select>   \r\n" + 
+        			"        <button type=\"submit\" class=\"w3-button w3-red\">Search</button> \r\n" + 
+        			"</form></div>\r\n" + 
+        			"<div style=\"float:right; float:top; padding-right:100px; padding-top:15px\" class=\"optionsDiv\">\r\n" + 
+        			"<form action=\"HR_Sort\" method=\"get\">\r\n" + 
+        			"        <select id=\"sort\" name =\"sort\">\r\n" + 
+        			"        	<option value=\"None\">select a category</option>\r\n" + 
+        			"            <option value=\"Active_CEO\" >Active CEO</option>\r\n" + 
+        			"            <option value=\"Active\" >Active</option>\r\n" + 
+        			"            <option value=\"Deleted\" >Deleted</option>\r\n" + 
+        			"            <option value=\"admin\" >admin</option>\r\n" + 
+        			"            <option value=\"Active_HR\" >Active HR</option>\r\n" + 
+        			"            <option value=\"Active_Employer\" >Active Employer</option>\r\n" + 
+        			"        </select>   \r\n" + 
+        			"        <button type=\"submit\" class=\"w3-button w3-red\">Sort</button> \r\n" + 
+        			"</form>\r\n" + 
         			"</div>\r\n" + 
-        			"</form>");	
+        			"<h2>Select a category to search the student file</h2>");	
         	out.println("<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">");
         	out.println("<table class=\"w3-table-all\">");
-            out.println("<thead><tr class=\"w3-red\"><th>First Name</th><th>Last Name</th><th>Email</th></tr></thead>");
+            out.println("<thead><tr class=\"w3-red\"><th>First Name</th><th>Last Name</th><th>Email</th></tr></thead>"
+            		+ "<h3>Searched: " + search + "</h3>");
             while (rs.next()) {
                 out.println("<tr><td>" + rs.getString("LegalFirstName") + "</td><td>" + rs.getString("LegalLastName") + "</td><td>" + rs.getString("Username") + "</td></tr>"); 
             }
-            out.println("</table>");
+            out.println("</table><br>");
         	connection.close();
            }
             catch (Exception e) {

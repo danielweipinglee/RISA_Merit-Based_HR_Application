@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1" import="DatabaseDao.DBConnection" import="java.sql.*" import="java.util.ArrayList"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>RISA</title>
 <link rel="stylesheet" type="text/css" href="css/active_CEO.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
 <header>
@@ -18,35 +19,7 @@
     		<li><a href="Employer_Search.jsp">Search</a></li>
     	</ul>
     </nav>
-	</div>
-	<form method="get" action="Employer_Search">	
-		<%
-    try{//for the dropdown menu
-    	Connection conn = DBConnection.getconnectionToDatabase();
-        Statement statement = conn.createStatement() ;
-        ResultSet resultset =statement.executeQuery("select Major from major;") ;
-	%>
-	<br>
-    <select name="search" onchange="this.form.submit()">
-    <% java.util.ArrayList<String> major = new java.util.ArrayList<String>(); %>
-
-    <%  while(resultset.next()){ %>
-    <% major.add(resultset.getString(2)); %>
-           
-    <% } %>
-    
-    <% for(String check : major){ %>
-    	<option><%=check %></option>
-    <% } %>
-    </select>
-	<br>
-	<%
-       }catch(Exception e){
-    	   
-          out.println(e);
-       }
-	%>	
-	</form>
+	</div>		
 	
 </header>
 

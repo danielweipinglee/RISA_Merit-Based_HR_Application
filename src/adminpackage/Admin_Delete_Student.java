@@ -42,7 +42,7 @@ public class Admin_Delete_Student extends HttpServlet {
 		String exists = null;
 		String firstName = request.getParameter("legalFirstName");
 		String lastName = request.getParameter("legalLastName");
-		String uniqueCode = request.getParameter("RISACode");
+		String uniqueCode = request.getParameter("risaCode");
 		Admin_Delete del = new Admin_Delete();
 			
 		try {

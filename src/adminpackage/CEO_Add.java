@@ -47,38 +47,47 @@ public class CEO_Add extends HttpServlet {
 		
 		CreateDefaults createAccount = new CreateDefaults();
 		
-		HttpSession session = request.getSession(false);
-		String status = (String) session.getAttribute("Status");
-		System.out.println(status);
-		
 		try {
 			createAccount.getInfomation(firstName, lastName, uniqueCode);
-			if(status.equals("Active_CEO")) {			
-			
-			
+			HttpSession session = request.getSession(false);
+			String AccountStatus = (String) session.getAttribute("AccountStatus");
+		
+			if(AccountStatus.equals("Active_CEO")) {
 				if(createAccount.isSuccessful()) {
-					request.setAttribute("success", "Successfully Registered.");
-					RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
-			        rd.forward(request, response);
+						request.setAttribute("success", "Successfully Created Account.");
+						RequestDispatcher rd = request.getRequestDispatcher("/CEO_Main.jsp");
+				        rd.forward(request, response);
 				}
 				else {
-					request.setAttribute("errorMsg", "Error Occured. Please try again later.");
-					request.getRequestDispatcher("/CEO_Add.jsp").forward(request, response);
-					}
-				}	
-			if(status.equals("admin")) {			
-				
-				
-				if(createAccount.isSuccessful()) {
-					request.setAttribute("success", "Successfully Registered.");
-					RequestDispatcher rd = request.getRequestDispatcher("/admin_main.jsp");
-			        rd.forward(request, response);
-				}
-				else {
-					request.setAttribute("errorMsg", "Error Occured. Please try again later.");
-					request.getRequestDispatcher("/admin_Add.jsp").forward(request, response);
+						request.setAttribute("errorCreate", "Error Occured. Please try again later.");
+						request.getRequestDispatcher("/CEO_Add.jsp").forward(request, response);
 				}
 			}
+			
+			else if(AccountStatus.equals("admin")) {
+				if(createAccount.isSuccessful()) {
+						request.setAttribute("success", "Successfully Created Account.");
+						RequestDispatcher rd = request.getRequestDispatcher("/admin_main.jsp");
+				        rd.forward(request, response);
+				}
+				else {
+						request.setAttribute("errorCreate", "Error Occured. Please try again later.");
+						request.getRequestDispatcher("/admin_Add.jsp").forward(request, response);
+				}
+			}
+			
+			else if(AccountStatus.equals("Active_HR")) {
+				if(createAccount.isSuccessful()) {
+						request.setAttribute("success", "Successfully Created Account.");
+						RequestDispatcher rd = request.getRequestDispatcher("/HR_Main.jsp");
+				        rd.forward(request, response);
+				}
+				else {
+						request.setAttribute("errorCreate", "Error Occured. Please try again later.");
+						request.getRequestDispatcher("/HR_Add.jsp").forward(request, response);
+				}
+			}
+		
 			
 		} catch (Exception e) {
 			// TODO: handle exception
