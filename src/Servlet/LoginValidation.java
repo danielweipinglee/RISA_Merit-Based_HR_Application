@@ -125,7 +125,7 @@ public class LoginValidation extends HttpServlet {
 				request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
             }
 			else if(check.isValidPassword(password) == false) {
-				request.setAttribute("errorMsg", "Please enter a valid password. Password should have at lease one upper and lowercase character. Password should also contain a number and be at least 10 characters long.");
+				request.setAttribute("errorMsg", "Please enter a valid password. Password should have at least one upper and lowercase character. Password should also contain a number and be at least 10 characters long.");
 				request.getRequestDispatcher("/register_invalid.jsp").forward(request, response);
 			}
 			else if(!password.equals(password2)) {

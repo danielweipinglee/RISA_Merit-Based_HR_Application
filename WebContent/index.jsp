@@ -18,8 +18,8 @@
   <div class="container">
   	<div>${success}</div><br>
   	<div>${successPassword}</div><br>
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter username" name="username" id="username" required>
+    <label for="uname"><b>Email</b></label>
+    <input type="text" placeholder="Enter email" name="username" id="username" required>
 
     <label for="psw"><b>Password</b></label>
     <input type="password" placeholder="Enter password" name="password" id="password" required>
@@ -56,7 +56,8 @@
     <label for="uname"><b>Email</b></label>
     <input type="text" placeholder="Enter email address" name="email" id="email" required>
 
-    <label for="psw"><b>Password</b></label>
+    <label for="psw"><b>Password </b></label>
+    <h5>Password should have at least one upper and lowercase character. Password should also contain a number and be at least 10 characters long.</h5>
     <input type="password" placeholder="Enter password" name="password" id="password" required>
   	
   	<label for="psw"><b>Re-enter Password</b></label>
